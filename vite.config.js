@@ -25,7 +25,11 @@ export default defineConfig({
     assetsInlineLimit: 0,
   },
   ssr: {
-    optimizeDeps: {
+    ssr: {
+      noExternal: ['swiper/react'],
+    },
+    optimizeDeps
+    : {
       /**
        * Include dependencies here if they throw CJS<>ESM errors.
        * For example, for the following error:

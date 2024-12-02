@@ -19,9 +19,7 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   build: {
-    rollupOptions: {
-      external: ['swiper', 'swiper/css'], // Remove this or add 'swiper/react' as external if required
-    },
+  
     // Allow a strict Content-Security-Policy
     // withtout inlining assets as base64:
     assetsInlineLimit: 0,

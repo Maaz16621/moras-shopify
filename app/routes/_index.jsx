@@ -4,6 +4,7 @@ import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import { Mousewheel, Autoplay, Pagination } from 'swiper/modules';
 import image1 from '../assets/1.png';  // import image1
 import image2 from '../assets/2.png';  // import image2
 import image3 from '../assets/3.png';  // import image3
@@ -65,7 +66,6 @@ function loadDeferredData({context}) {
     recommendedProducts,
   };
 }
-
 export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
@@ -75,46 +75,45 @@ export default function Homepage() {
       <div className="slider-container">
         {/* Full-Screen Horizontal Slider */}
         <Swiper
-          spaceBetween={0}
-          slidesPerView={1}  // Ensure one slide is shown at a time
-          loop={true}
-          autoplay={{ delay: 3000, disableOnInteraction: false }} // Auto-slide every 3 seconds
-          className="first-row-slider"
-        >
-          <SwiperSlide>
-            <div className="slider-item">
-              <img src={image1} alt="1a" />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="slider-item">
-              <img src={image2} alt="2a" />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="slider-item">
-              <img src={image3} alt="3a" />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="slider-item">
-              <img src={image4} alt="4a" />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="slider-item">
-              <img src={image5} alt="5a" />
-            </div>
-          </SwiperSlide>
-        </Swiper>
+        className="mySwiper swiper-h"
+      
+        spaceBetween={0}
+        slidesPerView={1}  // One horizontal slide at a time
+        loop={true}
+        autoplay={{ delay: 3000, disableOnInteraction: false }} // Auto-slide every 3 seconds
+      
+      >
+        <SwiperSlide><img src={image1} alt="1a" /></SwiperSlide>
+        <SwiperSlide>
+          <Swiper
+            className="mySwiper2 swiper-v"
+            direction={'vertical'}
+            spaceBetween={50}
+            pagination={{
+              clickable: true,
+            }}
+            autoplay={{ delay: 3000, disableOnInteraction: false }} // Auto-slide every 3 seconds
+            modules={[Pagination]}
+          >
+            <SwiperSlide>   <img src={image2} alt="2b" /></SwiperSlide>
+            <SwiperSlide> <img src={image3} alt="3b" /></SwiperSlide>
+            <SwiperSlide>Vertical Slide 3</SwiperSlide>
+            <SwiperSlide>Vertical Slide 4</SwiperSlide>
+            <SwiperSlide>Vertical Slide 5</SwiperSlide>
+          </Swiper>
+        </SwiperSlide>
+        <SwiperSlide>Horizontal Slide 3</SwiperSlide>
+        <SwiperSlide>Horizontal Slide 4</SwiperSlide>
+      </Swiper>
+     
       </div>
 
+      {/* Additional components like FeaturedCollection and RecommendedProducts */}
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
     </div>
   );
 }
-
 /**
  * @param {{
  *   collection: FeaturedCollectionFragment;

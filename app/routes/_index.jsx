@@ -2,6 +2,13 @@ import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import image1 from '../assets/1.png';  // import image1
+import image2 from '../assets/2.png';  // import image2
+import image3 from '../assets/3.png';  // import image3
+import image4 from '../assets/4.png';  // import image4
+import image5 from '../assets/5.png';  // import image5
 
 /**
  * @type {MetaFunction}
@@ -62,8 +69,46 @@ function loadDeferredData({context}) {
 export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
+
   return (
     <div className="home">
+      <div className="slider-container">
+        {/* Full-Screen Horizontal Slider */}
+        <Swiper
+          spaceBetween={0}
+          slidesPerView={1}  // Ensure one slide is shown at a time
+          loop={true}
+          autoplay={{ delay: 3000, disableOnInteraction: false }} // Auto-slide every 3 seconds
+          className="first-row-slider"
+        >
+          <SwiperSlide>
+            <div className="slider-item">
+              <img src={image1} alt="1a" />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="slider-item">
+              <img src={image2} alt="2a" />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="slider-item">
+              <img src={image3} alt="3a" />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="slider-item">
+              <img src={image4} alt="4a" />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="slider-item">
+              <img src={image5} alt="5a" />
+            </div>
+          </SwiperSlide>
+        </Swiper>
+      </div>
+
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
     </div>

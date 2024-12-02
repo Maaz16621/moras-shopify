@@ -2,7 +2,7 @@ import {Suspense} from 'react';
 import {Await, NavLink, useAsyncValue} from '@remix-run/react';
 import {useAnalytics, useOptimisticCart} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside';
-
+import { useState } from 'react';
 /**
  * @param {HeaderProps}
  */
@@ -10,16 +10,19 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   const {shop, menu} = header;
   return (
     <header className="header">
-      <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <strong>{shop.name}</strong>
-      </NavLink>
       <HeaderMenu
         menu={menu}
         viewport="desktop"
-        primaryDomainUrl={header.shop.primaryDomain.url}
         publicStoreDomain={publicStoreDomain}
-      />
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+        primaryDomainUrl={header.shop.primaryDomain.url}
+        isLoggedIn={isLoggedIn}
+        cart={cart}
+      >
+        {/* No need to include HeaderCtas here anymore */}
+      </HeaderMenu>
+      <NavLink prefetch="intent" to="/" className="store-name" style={activeLinkStyle} end>
+        <h1><strong>{shop.name}</strong></h1>
+      </NavLink>
     </header>
   );
 }
@@ -30,55 +33,63 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
  *   primaryDomainUrl: HeaderProps['header']['shop']['primaryDomain']['url'];
  *   viewport: Viewport;
  *   publicStoreDomain: HeaderProps['publicStoreDomain'];
+ *   isLoggedIn: boolean;
+ *   cart: any; 
  * }}
  */
-export function HeaderMenu({
-  menu,
-  primaryDomainUrl,
-  viewport,
-  publicStoreDomain,
-}) {
-  const className = `header-menu-${viewport}`;
-  const {close} = useAside();
+export function HeaderMenu({ menu, primaryDomainUrl, publicStoreDomain, isLoggedIn, cart }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Track if the menu is open
+  const { close } = useAside();
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen); // Toggle menu visibility
+  };
 
   return (
-    <nav className={className} role="navigation">
-      {viewport === 'mobile' && (
-        <NavLink
-          end
-          onClick={close}
-          prefetch="intent"
-          style={activeLinkStyle}
-          to="/"
-        >
-          Home
-        </NavLink>
-      )}
-      {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
-        if (!item.url) return null;
+    <>
+      <button
+        className="header-menu-mobile-toggle reset"
+        onClick={toggleMenu}
+      >
+        <p style={{ color: isMenuOpen ? 'black' : '' }}>
+          {isMenuOpen ? '✖' : '☰'} {/* Change icon based on menu state */}
+        </p>
+      </button>
 
-        // if the url is internal, we strip the domain
-        const url =
-          item.url.includes('myshopify.com') ||
-          item.url.includes(publicStoreDomain) ||
-          item.url.includes(primaryDomainUrl)
-            ? new URL(item.url).pathname
-            : item.url;
-        return (
-          <NavLink
-            className="header-menu-item"
-            end
-            key={item.id}
-            onClick={close}
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={url}
-          >
-            {item.title}
-          </NavLink>
-        );
-      })}
-    </nav>
+      <nav className={`header-menu-mobile ${isMenuOpen ? 'open' : ''}`} role="navigation">
+        
+        {/* Menu Items */}
+        {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
+          if (!item.url) return null;
+
+          // if the url is internal, we strip the domain
+          const url =
+            item.url.includes('myshopify.com') ||
+            item.url.includes(publicStoreDomain) ||
+            item.url.includes(primaryDomainUrl)
+              ? new URL(item.url).pathname
+              : item.url;
+
+          return (
+            <div key={item.id} className="header-menu-item">
+              <NavLink
+                end
+                onClick={close}
+                prefetch="intent"
+                style={activeLinkStyle}
+                to={url}
+              >
+                {item.title}
+              </NavLink>
+            </div>
+          );
+        })}
+         <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+      </nav>
+
+      {/* Move HeaderCtas here inside HeaderMenu */}
+     
+    </>
   );
 }
 
@@ -87,20 +98,19 @@ export function HeaderMenu({
  */
 function HeaderCtas({isLoggedIn, cart}) {
   return (
-    <nav className="header-ctas" role="navigation">
-      <HeaderMenuMobileToggle />
+   <>
+    <div className="header-menu-item">
       <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
-        <Suspense fallback="Sign in">
-          <Await resolve={isLoggedIn} errorElement="Sign in">
-            {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
-          </Await>
-        </Suspense>
+        {isLoggedIn ? 'Account' : 'Sign in'}
       </NavLink>
+      </div>
       <SearchToggle />
       <CartToggle cart={cart} />
-    </nav>
+    
+   </>
   );
 }
+
 
 function HeaderMenuMobileToggle() {
   const {open} = useAside();
@@ -117,9 +127,11 @@ function HeaderMenuMobileToggle() {
 function SearchToggle() {
   const {open} = useAside();
   return (
+    <div className="header-menu-item">
     <button className="reset" onClick={() => open('search')}>
       Search
     </button>
+    </div>
   );
 }
 
@@ -154,9 +166,12 @@ function CartBadge({count}) {
  */
 function CartToggle({cart}) {
   return (
+    
     <Suspense fallback={<CartBadge count={null} />}>
       <Await resolve={cart}>
+      <div className="header-menu-item">
         <CartBanner />
+        </div>
       </Await>
     </Suspense>
   );

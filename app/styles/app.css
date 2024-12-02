@@ -74,7 +74,12 @@ aside p:last-child {
 aside li {
   margin-bottom: 0.125rem;
 }
-
+.store-name{
+  position: relative;
+  z-index: 1000;
+  margin-left: 10px;
+  font-size: 18px;
+}
 .overlay {
   background: rgba(0, 0, 0, 0.2);
   bottom: 0;
@@ -147,49 +152,82 @@ button.reset:hover:not(:has(> *)) {
 * components/Header
 * --------------------------------------------------
 */
+/* For the header toggle button */
+
 .header {
-  align-items: center;
-  background: #fff;
+  padding: 20px;
+  background: transparent !important;
+  margin-left:1rem;
   display: flex;
-  height: var(--header-height);
-  padding: 0 1rem;
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  align-items: center;
+  position: absolute;
 }
 
 .header-menu-mobile-toggle {
-  @media (min-width: 48em) {
-    display: none;
-  }
-}
-
-.header-menu-mobile {
-  display: flex;
-  flex-direction: column;
-  grid-gap: 1rem;
-}
-
-.header-menu-desktop {
-  display: none;
-  grid-gap: 1rem;
-  @media (min-width: 45em) {
-    display: flex;
-    grid-gap: 1rem;
-    margin-left: 3rem;
-  }
-}
-
-.header-menu-item {
+  background: none;
+  border: none;
+  font-size: 2rem;
   cursor: pointer;
+  position: relative;
+  z-index: 1000;
 }
 
-.header-ctas {
-  align-items: center;
-  display: flex;
-  grid-gap: 1rem;
-  margin-left: auto;
+/* Navigation Menu */
+.header-menu-mobile {
+  position: fixed;
+  top: 0;
+  left: -100%; /* Initially hidden off the screen */
+  width: 250px; /* Width of the sliding menu */
+  height: 100%;
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: left 1s ease-in-out; /* Smooth sliding transition */
+  z-index: 999;
+  padding-top: 60px; /* Adjust as needed for spacing */
 }
+
+/* When the menu is open */
+.header-menu-mobile.open {
+  left: 0; /* Slide in the menu */
+}
+
+/* Menu Items */
+.header-menu-mobile .header-menu-item {
+  display: block;
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-menu-item a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  display: block;
+}
+
+.header-menu-item button {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  display: block;
+  padding: none !important;
+}
+
+.header-menu-mobile .header-menu-item a:hover {
+  color: #0070f3; /* Highlight color */
+}
+/* Example of additional CSS */
+.header-menu-mobile-toggle h3 {
+  font-size: 30px; /* Adjust size */
+  transition: color 0.3s ease; /* Smooth transition */
+}
+
+.header-menu-mobile-toggle h3:hover {
+  color: #333; /* Optional hover effect */
+}
+
+
 
 /*
 * --------------------------------------------------
@@ -483,4 +521,52 @@ button.reset:hover:not(:has(> *)) {
 
 .account-logout {
   display: inline-block;
+}
+/* Fullscreen container */
+
+.home {
+ 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+/* Make the slider container full screen */
+.slider-container {
+  width: 100%; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+  position: relative;
+  overflow: hidden; /* Hide overflow */
+}
+
+/* Full-width horizontal slider */
+.first-row-slider {
+  width: 100%; /* Full width of the viewport */
+  height: 100%; /* Full height of the viewport */
+  overflow: hidden; /* Hide anything that exceeds the container */
+}
+
+/* Ensure each image fills the entire screen and maintains aspect ratio */
+.slider-item img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover; /* Ensures the image covers the entire area */
+}
+
+/* Optional: Prevent spacing between slides */
+.swiper-slide {
+  width: 100%;
+  height: 100%;
+}
+
+/* Second and Third Rows with fixed images */
+.second-row, .third-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.row-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }

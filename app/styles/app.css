@@ -155,7 +155,7 @@ button.reset:hover:not(:has(> *)) {
 /* For the header toggle button */
 
 .header {
-  padding: 20px;
+  padding: 10px;
   background: transparent !important;
   margin-left:1rem;
   display: flex;

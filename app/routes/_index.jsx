@@ -5,12 +5,12 @@ import {Image, Money} from '@shopify/hydrogen';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Mousewheel, Autoplay, Pagination } from 'swiper/modules';
-import image1 from '../assets/1.png';  // import image1
-import image2 from '../assets/2.png';  // import image2
-import image3 from '../assets/3.png';  // import image3
-import image4 from '../assets/4.png';  // import image4
-import image5 from '../assets/5.png';  // import image5
-
+import image1 from '../assets/hero1.jpg';  // import image1
+import image2 from '../assets/hero2.jpg';  // import image2
+import image3 from '../assets/outfiter.webp';
+import video1 from '../assets/video1.mp4';
+import video2 from '../assets/video2.mp4';
+import video3 from '../assets/video3.mp4';
 /**
  * @type {MetaFunction}
  */
@@ -66,6 +66,7 @@ function loadDeferredData({context}) {
     recommendedProducts,
   };
 }
+
 export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
@@ -75,37 +76,62 @@ export default function Homepage() {
       <div className="slider-container">
         {/* Full-Screen Horizontal Slider */}
         <Swiper
-        className="mySwiper swiper-h"
-      
-        spaceBetween={0}
-        slidesPerView={1}  // One horizontal slide at a time
-        loop={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }} // Auto-slide every 3 seconds
-      
-      >
-        <SwiperSlide><img src={image1} alt="1a" /></SwiperSlide>
-        <SwiperSlide>
-          <Swiper
-            className="mySwiper2 swiper-v"
-            direction={'vertical'}
-            spaceBetween={50}
-            pagination={{
-              clickable: true,
-            }}
-            autoplay={{ delay: 3000, disableOnInteraction: false }} // Auto-slide every 3 seconds
-            modules={[Pagination]}
-          >
-            <SwiperSlide>   <img src={image2} alt="2b" /></SwiperSlide>
-            <SwiperSlide> <img src={image3} alt="3b" /></SwiperSlide>
-            <SwiperSlide>Vertical Slide 3</SwiperSlide>
-            <SwiperSlide>Vertical Slide 4</SwiperSlide>
-            <SwiperSlide>Vertical Slide 5</SwiperSlide>
-          </Swiper>
-        </SwiperSlide>
-        <SwiperSlide>Horizontal Slide 3</SwiperSlide>
-        <SwiperSlide>Horizontal Slide 4</SwiperSlide>
-      </Swiper>
-     
+          className="mySwiper swiper-h"
+          spaceBetween={0}
+          slidesPerView={1}  // One horizontal slide at a time
+          loop={true}
+          autoplay={{ delay: 3000, disableOnInteraction: false }} // Auto-slide every 3 seconds
+        >
+          <SwiperSlide>
+            <img src={image1} alt="Slide 1" />
+          </SwiperSlide>
+
+          <SwiperSlide>
+            <Swiper
+              className="mySwiper2 swiper-v"
+              direction={'vertical'}
+              spaceBetween={50}
+              pagination={{
+                clickable: true,
+              }}
+              autoplay={{ delay: 3000, disableOnInteraction: false }} // Auto-slide every 3 seconds
+              modules={[Pagination]}
+            >
+              <SwiperSlide>
+                <img src={image2} alt="Slide 2" />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <div className="video-slide">
+                  <video autoPlay muted loop className="video-background">
+                    <source src={video1} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <div className="video-slide">
+                  <video autoPlay muted loop className="video-background">
+                    <source src={video2} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <div className="video-slide">
+                  <video autoPlay muted loop className="video-background">
+                    <source src={video3} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+          </SwiperSlide>
+
+          <SwiperSlide><img src={image3} alt="Slide 2" /></SwiperSlide>
+        </Swiper>
       </div>
 
       {/* Additional components like FeaturedCollection and RecommendedProducts */}

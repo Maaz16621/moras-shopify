@@ -20,7 +20,7 @@ export default defineConfig({
   ],
   build: {
     rollupOptions: {
-      external: ['swiper/react', 'swiper/css'], // Remove this or add 'swiper/react' as external if required
+      external: ['swiper', 'swiper/css'], // Remove this or add 'swiper/react' as external if required
     },
     // Allow a strict Content-Security-Policy
     // withtout inlining assets as base64:

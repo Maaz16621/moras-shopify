@@ -4,13 +4,21 @@ import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { Mousewheel, Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css/mousewheel';
+import 'swiper/css/effect-creative';
+
+
+// import required modules
+import { EffectCreative } from 'swiper/modules';
+
+import {   Mousewheel, Autoplay, Pagination } from 'swiper/modules';
 import image1 from '../assets/hero1.jpg';  // import image1
 import image2 from '../assets/hero2.jpg';  // import image2
 import image3 from '../assets/outfiter.webp';
 import video1 from '../assets/video1.mp4';
 import video2 from '../assets/video2.mp4';
 import video3 from '../assets/video3.mp4';
+import { Footer } from '~/components/Footer';
 /**
  * @type {MetaFunction}
  */
@@ -68,7 +76,6 @@ function loadDeferredData({context}) {
 }
 
 export default function Homepage() {
-  /** @type {LoaderReturnData} */
   const data = useLoaderData();
 
   return (
@@ -78,24 +85,96 @@ export default function Homepage() {
         <Swiper
           className="mySwiper swiper-h"
           spaceBetween={0}
-          slidesPerView={1}  // One horizontal slide at a time
-          loop={true}
-          autoplay={{ delay: 3000, disableOnInteraction: false }} // Auto-slide every 3 seconds
+          slidesPerView={1}
+          navigation={true}
+          loop={true} // Looping enabled for horizontal slider
+          modules={[EffectCreative]}
+          effect={'creative'}
+          creativeEffect={{
+            prev: {
+              shadow: true,
+              translate: [0, 0, -400],
+            },
+            next: {
+              translate: ['100%', 0, 0],
+            },
+          }}
         >
           <SwiperSlide>
-            <img src={image1} alt="Slide 1" />
+            <Swiper
+              className="mySwiper2 swiper-v"
+              direction={'vertical'}
+              spaceBetween={50} // Adjust space between slides as needed
+              mousewheel={true}
+              loop={false} // Disable looping for vertical slides
+              modules={[Mousewheel, EffectCreative]}
+              effect={'creative'}
+              creativeEffect={{
+                prev: {
+                  shadow: true,
+                  translate: [0, 0, -400],
+                },
+                next: {
+                  translate: [0, '100%', 0],
+                },
+              }}
+            >
+              <SwiperSlide>
+                <img src={image1} alt="Slide 1" />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <div className="video-slide">
+                  <video autoPlay muted loop className="video-background">
+                    <source src={video1} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <div className="video-slide">
+                  <video autoPlay muted loop className="video-background">
+                    <source src={video2} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <div className="video-slide">
+                  <video autoPlay muted loop className="video-background">
+                    <source src={video3} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </SwiperSlide>
+
+              {/* Last slide: Footer */}
+              <SwiperSlide className="footer-slide">
+                <Footer footer={data.footer} header={data.header} publicStoreDomain={data.publicStoreDomain} />
+              </SwiperSlide>
+            </Swiper>
           </SwiperSlide>
 
           <SwiperSlide>
             <Swiper
               className="mySwiper2 swiper-v"
               direction={'vertical'}
-              spaceBetween={50}
-              pagination={{
-                clickable: true,
+              spaceBetween={50}  // Adjust space between slides as needed
+              mousewheel={true}
+              loop={false} // Disable looping for vertical slides
+              effect={'creative'}
+              creativeEffect={{
+                prev: {
+                  shadow: true,
+                  translate: [0, 0, -400],
+                },
+                next: {
+                  translate: [0, '100%', 0],
+                },
               }}
-              autoplay={{ delay: 3000, disableOnInteraction: false }} // Auto-slide every 3 seconds
-              modules={[Pagination]}
+              modules={[Mousewheel, EffectCreative]}
             >
               <SwiperSlide>
                 <img src={image2} alt="Slide 2" />
@@ -127,20 +206,52 @@ export default function Homepage() {
                   </video>
                 </div>
               </SwiperSlide>
+
+              {/* Last slide: Footer */}
+              <SwiperSlide className="footer-slide">
+                <Footer footer={data.footer} header={data.header} publicStoreDomain={data.publicStoreDomain} />
+              </SwiperSlide>
             </Swiper>
           </SwiperSlide>
 
-          <SwiperSlide><img src={image3} alt="Slide 2" /></SwiperSlide>
+          <SwiperSlide>
+            <Swiper
+              className="mySwiper2 swiper-v"
+              direction={'vertical'}
+              spaceBetween={50} // Adjust space between slides as needed
+              mousewheel={true}
+              loop={false} // Disable looping for vertical slides
+              modules={[Mousewheel, EffectCreative]}
+              effect={'creative'}
+              creativeEffect={{
+                prev: {
+                  shadow: true,
+                  translate: [0, 0, -400],
+                },
+                next: {
+                  translate: [0, '100%', 0],
+                },
+              }}
+            >
+              <SwiperSlide><img src={image3} alt="Slide 3" /></SwiperSlide>
+              {/* Last slide: Footer */}
+              <SwiperSlide className="footer-slide">
+                <Footer footer={data.footer} header={data.header} publicStoreDomain={data.publicStoreDomain} />
+              </SwiperSlide>
+            </Swiper>
+          </SwiperSlide>
         </Swiper>
       </div>
-
-      {/* Additional components like FeaturedCollection and RecommendedProducts */}
-      <FeaturedCollection collection={data.featuredCollection} />
-      <RecommendedProducts products={data.recommendedProducts} />
     </div>
   );
 }
+
+
+
 /**
+ * 
+      <FeaturedCollection collection={data.featuredCollection} />
+      <RecommendedProducts products={data.recommendedProducts} />
  * @param {{
  *   collection: FeaturedCollectionFragment;
  * }}

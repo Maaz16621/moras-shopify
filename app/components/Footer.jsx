@@ -9,20 +9,120 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
     <Suspense>
       <Await resolve={footerPromise}>
         {(footer) => (
-          <footer className="footer">
-            {footer?.menu && header.shop.primaryDomain?.url && (
-              <FooterMenu
-                menu={footer.menu}
-                primaryDomainUrl={header.shop.primaryDomain.url}
-                publicStoreDomain={publicStoreDomain}
-              />
-            )}
+          <footer className="new-footer-container">
+            <div className="footer__wrap">
+            <div className="footer-top-container">
+  <div className="footer-newsletter">
+    <h3>Get the latest trends first</h3>
+    <div className="slider-newsletter">
+      <form method="post" action="/contact#ContactFooter" id="ContactFooter" accept-charset="UTF-8" className="footer__newsletter newsletter-form">
+        <div className="newsletter-form__field-wrapper">
+          <div className="field">
+            <input
+              id="NewsletterForm--template--17615854469311__category_slider_izGV6z"
+              type="email"
+              name="contact[email]"
+              className="field__input"
+              placeholder="Enter your email"
+              required
+            />
+            <button type="submit" className="newsletter-form__button field__button">
+              <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div className="slider-social-icon">
+    <ul className="list-unstyled list-social" role="list">
+      <li className="list-social__item">
+        <a href="https://www.facebook.com/outfitterspk" className="link list-social__link">Facebook</a>
+      </li>
+      <li className="list-social__item">
+        <a href="https://www.instagram.com/outfitters_pk/" className="link list-social__link">Instagram</a>
+      </li>
+      <li className="list-social__item">
+        <a href="https://www.youtube.com/OutfittersOfficial" className="link list-social__link">YouTube</a>
+      </li>
+      <li className="list-social__item">
+        <a href="https://www.tiktok.com/@outfitterspk" className="link list-social__link">TikTok</a>
+      </li>
+      <li className="list-social__item">
+        <a href="https://www.pinterest.com/OutfittersPK/" className="link list-social__link">Pinterest</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+              <div className="footer-bottom-container">
+  <div className="footer-bottom-wrapper">
+    <div className="left-footer-list">
+      <ul className="footer_menu_list-ul">
+        <li className="ft-menu-li">
+          <a className="ft-menu-link" href="/pages/shopping-guide#link-faqs">FAQ'S</a>
+        </li>
+        <li className="ft-menu-li">
+          <a className="ft-menu-link" href="https://outfitters.com.pk/account/login">Log In/Sign Up</a>
+        </li>
+        <li className="ft-menu-li">
+          <a className="ft-menu-link" href="/pages/shopping-guide#link-how-to-buy">How To Buy</a>
+        </li>
+        <li className="ft-menu-li">
+          <a className="ft-menu-link" href="/pages/shopping-guide#link-payment">Payment</a>
+        </li>
+        <li className="ft-menu-li">
+          <a className="ft-menu-link" href="/pages/shopping-guide#link-shipping-deliveries">Shipping & Deliveries</a>
+        </li>
+        <li className="ft-menu-li">
+          <a className="ft-menu-link" href="/pages/shopping-guide#link-exchange-returns">Exchange & Returns</a>
+        </li>
+      </ul>
+    </div>
+
+    <div className="footer-logo-container">
+      <div className="footer-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="230" height="90" viewBox="0 0 615 209" fill="none">
+          <path d="M272.777 44.8033V30.9121C272.777 30.132 273.327 29.4619 274.097 29.3119L297.1 24.9215C298.1 24.7315 299.03 25.5016 299.03 26.5217V44.8033C299.03 45.7034 298.3 46.4335 297.4 46.4335H274.397C273.507 46.4335 272.777 45.7034 272.777 44.8033Z" fill="white"></path>
+        </svg>
+      </div>
+    </div>
+
+    <div className="right-footer-list">
+      <ul className="footer_menu_list-ul">
+        <li className="ft-menu-li">
+          <a className="ft-menu-link" href="/pages/shopping-guide#link-faqs">FAQ'S</a>
+        </li>
+        <li className="ft-menu-li">
+          <a className="ft-menu-link" href="https://outfitters.com.pk/account/login">Log In/Sign Up</a>
+        </li>
+        <li className="ft-menu-li">
+          <a className="ft-menu-link" href="/pages/shopping-guide#link-how-to-buy">How To Buy</a>
+        </li>
+        <li className="ft-menu-li">
+          <a className="ft-menu-link" href="/pages/shopping-guide#link-payment">Payment</a>
+        </li>
+        <li className="ft-menu-li">
+          <a className="ft-menu-link" href="/pages/shopping-guide#link-shipping-deliveries">Shipping & Deliveries</a>
+        </li>
+        <li className="ft-menu-li">
+          <a className="ft-menu-link" href="/pages/shopping-guide#link-exchange-returns">Exchange & Returns</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+            </div>
           </footer>
         )}
       </Await>
     </Suspense>
   );
 }
+
 
 /**
  * @param {{
@@ -31,12 +131,12 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
  *   publicStoreDomain: string;
  * }}
  */
+
 function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
   return (
     <nav className="footer-menu" role="navigation">
       {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
         if (!item.url) return null;
-        // if the url is internal, we strip the domain
         const url =
           item.url.includes('myshopify.com') ||
           item.url.includes(publicStoreDomain) ||
@@ -63,7 +163,6 @@ function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
     </nav>
   );
 }
-
 const FALLBACK_FOOTER_MENU = {
   id: 'gid://shopify/Menu/199655620664',
   items: [

@@ -3,13 +3,17 @@ import {Await, NavLink, useAsyncValue} from '@remix-run/react';
 import {useAnalytics, useOptimisticCart} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside';
 import { useState } from 'react';
+import { FaUser, FaSearch, FaShoppingCart } from 'react-icons/fa'; // Import icons from react-icons
+
 /**
  * @param {HeaderProps}
  */
+
 export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   const {shop, menu} = header;
   return (
     <header className="header">
+      <div style={{display:'flex', marginLeft:'20px'}}>
       <HeaderMenu
         menu={menu}
         viewport="desktop"
@@ -23,6 +27,9 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
       <NavLink prefetch="intent" to="/" className="store-name" style={activeLinkStyle} end>
         <h1><strong>{shop.name}</strong></h1>
       </NavLink>
+      </div>
+      
+      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
     </header>
   );
 }
@@ -84,11 +91,10 @@ export function HeaderMenu({ menu, primaryDomainUrl, publicStoreDomain, isLogged
             </div>
           );
         })}
-         <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+        
       </nav>
 
-      {/* Move HeaderCtas here inside HeaderMenu */}
-     
+      
     </>
   );
 }
@@ -96,20 +102,6 @@ export function HeaderMenu({ menu, primaryDomainUrl, publicStoreDomain, isLogged
 /**
  * @param {Pick<HeaderProps, 'isLoggedIn' | 'cart'>}
  */
-function HeaderCtas({isLoggedIn, cart}) {
-  return (
-   <>
-    <div className="header-menu-item">
-      <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
-        {isLoggedIn ? 'Account' : 'Sign in'}
-      </NavLink>
-      </div>
-      <SearchToggle />
-      <CartToggle cart={cart} />
-    
-   </>
-  );
-}
 
 
 function HeaderMenuMobileToggle() {
@@ -124,23 +116,38 @@ function HeaderMenuMobileToggle() {
   );
 }
 
-function SearchToggle() {
-  const {open} = useAside();
+function HeaderCtas({ isLoggedIn, cart }) {
   return (
-    <div className="header-menu-item">
-    <button className="reset" onClick={() => open('search')}>
-      Search
-    </button>
+    <div className='header-left'>
+      <div className="header-menu-item">
+        <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
+          {isLoggedIn ? <FaUser size={20} /> : <FaUser size={20} />} {/* User Icon for Account/Sign In */}
+        </NavLink>
+      </div>
+      <SearchToggle /> {/* Assuming SearchToggle will also handle displaying an icon */}
+      <CartToggle cart={cart} /> {/* Cart Toggle, using icons inside this component */}
     </div>
   );
 }
 
+
+function SearchToggle() {
+  const { open } = useAside();
+  
+  return (
+    <div className="header-menu-item">
+      <button className="reset" onClick={() => open('search')}>
+        <FaSearch size={20} /> {/* Search Icon */}
+      </button>
+    </div>
+  );
+}
 /**
  * @param {{count: number | null}}
  */
-function CartBadge({count}) {
-  const {open} = useAside();
-  const {publish, shop, cart, prevCart} = useAnalytics();
+function CartBadge({ count }) {
+  const { open } = useAside();
+  const { publish, shop, cart, prevCart } = useAnalytics();
 
   return (
     <a
@@ -156,7 +163,10 @@ function CartBadge({count}) {
         });
       }}
     >
-      Cart {count === null ? <span>&nbsp;</span> : count}
+      <FaShoppingCart size={20} /> {/* Cart Icon */}
+      {count !== null && count > 0 && (
+        <span className="cart-count">{count}</span> // Show count if available
+      )}
     </a>
   );
 }

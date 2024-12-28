@@ -4,6 +4,7 @@ import {Aside} from '~/components/Aside';
 import {Footer} from '~/components/Footer';
 import {Header, HeaderMenu} from '~/components/Header';
 import {CartMain} from '~/components/CartMain';
+import { useLocation } from "react-router-dom";
 import {
   SEARCH_ENDPOINT,
   SearchFormPredictive,
@@ -12,8 +13,7 @@ import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
 
 /**
  * @param {PageLayoutProps}
- */
-export function PageLayout({
+ */export function PageLayout({
   cart,
   children = null,
   footer,
@@ -21,6 +21,9 @@ export function PageLayout({
   isLoggedIn,
   publicStoreDomain,
 }) {
+  const location = useLocation();
+  const isIndexPage = location.pathname === "/";
+
   return (
     <Aside.Provider>
       <CartAside cart={cart} />
@@ -35,7 +38,7 @@ export function PageLayout({
         />
       )}
       <main>{children}</main>
-    
+      {!isIndexPage && <Footer />}
     </Aside.Provider>
   );
 }
@@ -62,7 +65,7 @@ function SearchAside() {
   return (
     <Aside type="search" heading="SEARCH">
       <div className="predictive-search">
-        <br />
+       
         <SearchFormPredictive>
           {({fetchResults, goToSearch, inputRef}) => (
             <>
@@ -76,7 +79,7 @@ function SearchAside() {
                 list={queriesDatalistId}
               />
               &nbsp;
-              <button onClick={goToSearch}>Search</button>
+             
             </>
           )}
         </SearchFormPredictive>

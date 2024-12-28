@@ -10,7 +10,8 @@ import {getVariantUrl} from '~/lib/variants';
 import {ProductPrice} from '~/components/ProductPrice';
 import {ProductImage} from '~/components/ProductImage';
 import {ProductForm} from '~/components/ProductForm';
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 /**
  * @type {MetaFunction<typeof loader>}
  */
@@ -129,24 +130,71 @@ function redirectToFirstVariant({product, request}) {
 
 export default function Product() {
   /** @type {LoaderReturnData} */
-  const {product, variants} = useLoaderData();
+  const { product, variants } = useLoaderData();
   const selectedVariant = useOptimisticVariant(
     product.selectedVariant,
     variants,
   );
-
-  const {title, descriptionHtml} = product;
-
+  console.log(product);
+  const { title, descriptionHtml } = product;
+  const variantImages = product.variants.nodes.map((variant) => variant.image);
   return (
-    <div className="product">
-      <ProductImage image={selectedVariant?.image} />
-      <div className="product-main">
-        <h1>{title}</h1>
+    <div
+      className="product"
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        gap: '20px',
+        padding: '20px',
+        maxWidth: '1200px',
+        margin: '100px auto',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        borderRadius: '10px',
+        backgroundColor: '#fff',
+      }}
+    >
+      {/* Left: Product Image */}
+      <div
+        style={{
+          flex: '1',
+          display: 'flex',
+          justifyContent: 'center',  // Centers the image horizontally
+          padding: '0 20px',  // Adds space on the left and right side
+        }}
+        className="product-image-container"
+      >
+       {product.media.edges.map((edge) => (
+  <ProductImage
+    key={edge.node.id}
+    image={{
+      url: edge.node.previewImage.url,
+    }}
+    style={{
+      width: '100%',
+      maxHeight: '500px',
+      objectFit: 'cover',
+      borderRadius: '10px',
+    }}
+  />
+))}
+      </div>
+
+      {/* Right: Product Details */}
+      <div
+        className="product-main"
+        style={{
+          flex: '2',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+        }}
+      >
+        <h1 style={{ fontSize: '2.5rem', margin: '0' }}>{title}</h1>
         <ProductPrice
           price={selectedVariant?.price}
           compareAtPrice={selectedVariant?.compareAtPrice}
         />
-        <br />
         <Suspense
           fallback={
             <ProductForm
@@ -169,15 +217,19 @@ export default function Product() {
             )}
           </Await>
         </Suspense>
-        <br />
-        <br />
-        <p>
-          <strong>Description</strong>
-        </p>
-        <br />
-        <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
-        <br />
+        <div>
+          <p style={{ fontWeight: 'bold', marginBottom: '10px' }}>Description</p>
+          <div
+            dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+            style={{
+              textAlign: 'justify',
+              lineHeight: '1.8',
+            }}
+          />
+        </div>
       </div>
+
+      {/* Analytics */}
       <Analytics.ProductView
         data={{
           products: [
@@ -197,6 +249,9 @@ export default function Product() {
   );
 }
 
+
+
+
 const PRODUCT_VARIANT_FRAGMENT = `#graphql
   fragment ProductVariant on ProductVariant {
     availableForSale
@@ -205,7 +260,7 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
       currencyCode
     }
     id
-    image {
+    image  {
       __typename
       id
       url
@@ -242,10 +297,24 @@ const PRODUCT_FRAGMENT = `#graphql
     handle
     descriptionHtml
     description
+    
     options {
       name
       optionValues {
         name
+      }
+    }
+      media(first: 10) {
+      edges {
+        node {
+          ... on MediaImage {
+            id
+            previewImage{
+            url
+            }
+           
+          }
+        }
       }
     }
     selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {

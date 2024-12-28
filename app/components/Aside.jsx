@@ -4,7 +4,7 @@ import {createContext, useContext, useEffect, useState} from 'react';
  * A side bar component with Overlay
  * @example
  * ```jsx
- * <Aside type="search" heading="SEARCH">
+ * <Aside type="search" heading="SEARCH PRoduct">
  *  <input type="search" />
  *  ...
  * </Aside>
@@ -46,9 +46,25 @@ export function Aside({children, heading, type}) {
       <aside>
         <header>
           <h3>{heading}</h3>
-          <button className="close reset" onClick={close}>
-            &times;
-          </button>
+          <button
+  className="close reset"
+  onClick={close}
+  style={{
+    fontSize: '2rem', // Increase the font size
+    padding: '10px 15px', // Add padding for better accessibility
+    backgroundColor: 'transparent', // Keep the background transparent
+    color: '#333', // Use a visible color
+    border: 'none', // Remove border
+    borderRadius: '50%', // Add rounded corners for aesthetic
+    cursor: 'pointer', // Change cursor to pointer on hover
+    position: 'absolute', // Ensure the button can be positioned properly
+    top: '15px', // Adjust vertical position
+    right: '15px', // Adjust horizontal position
+  }}
+>
+  &times;
+</button>
+
         </header>
         <main>{children}</main>
       </aside>

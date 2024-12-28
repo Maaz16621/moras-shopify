@@ -2,48 +2,56 @@ import {Suspense} from 'react';
 import {Await, NavLink, useAsyncValue} from '@remix-run/react';
 import {useAnalytics, useOptimisticCart} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaUser, FaSearch, FaShoppingCart } from 'react-icons/fa'; // Import icons from react-icons
 
 /**
  * @param {HeaderProps}
  */
-
-export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
+export function HeaderFull({header, isLoggedIn, cart, publicStoreDomain}) {
   const {shop, menu} = header;
+  const [isSticky, setIsSticky] = useState(false); // Track if the navbar is sticky
+
+  // Detect scroll to add/remove sticky class
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="header">
-      <div style={{display:'flex', marginLeft:'20px'}}>
-      <HeaderMenu
-        menu={menu}
-        viewport="desktop"
-        publicStoreDomain={publicStoreDomain}
-        primaryDomainUrl={header.shop.primaryDomain.url}
-        isLoggedIn={isLoggedIn}
-        cart={cart}
-      >
-        {/* No need to include HeaderCtas here anymore */}
-      </HeaderMenu>
-      <NavLink prefetch="intent" to="/" className="store-name" style={activeLinkStyle} end>
-        <h1><strong>{shop.name}</strong></h1>
-      </NavLink>
+    <header className={`header-full ${isSticky ? 'sticky' : ''}`}>
+      <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', padding: '10px 20px'}}>
+        <div className="logo">
+          <NavLink prefetch="intent" to="/" className="store-name" style={activeLinkStyle} end>
+            <h1><strong>{shop.name}</strong></h1>
+          </NavLink>
+        </div>
+
+        {/* Header Menu for Desktop */}
+        <HeaderMenu
+          menu={menu}
+          viewport="desktop"
+          publicStoreDomain={publicStoreDomain}
+          primaryDomainUrl={header.shop.primaryDomain.url}
+          isLoggedIn={isLoggedIn}
+          cart={cart}
+        />
+
+        {/* Header CTAs for Cart and Login */}
+        <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
       </div>
-      
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
     </header>
   );
 }
 
-/**
- * @param {{
- *   menu: HeaderProps['header']['menu'];
- *   primaryDomainUrl: HeaderProps['header']['shop']['primaryDomain']['url'];
- *   viewport: Viewport;
- *   publicStoreDomain: HeaderProps['publicStoreDomain'];
- *   isLoggedIn: boolean;
- *   cart: any; 
- * }}
- */
 export function HeaderMenu({ menu, primaryDomainUrl, publicStoreDomain, isLoggedIn, cart }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Track if the menu is open
   const { close } = useAside();
@@ -54,22 +62,16 @@ export function HeaderMenu({ menu, primaryDomainUrl, publicStoreDomain, isLogged
 
   return (
     <>
-      <button
-        className="header-menu-mobile-toggle reset"
-        onClick={toggleMenu}
-      >
-        <p style={{ color: isMenuOpen ? 'black' : '' }}>
-          {isMenuOpen ? '✖' : '☰'} {/* Change icon based on menu state */}
-        </p>
+      {/* Mobile Menu Toggle Button */}
+      <button className="header-menu-mobile-toggle reset" onClick={toggleMenu}>
+        <p>{isMenuOpen ? '✖' : '☰'}</p>
       </button>
 
+      {/* Mobile Menu */}
       <nav className={`header-menu-mobile ${isMenuOpen ? 'open' : ''}`} role="navigation">
-        
-        {/* Menu Items */}
         {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
           if (!item.url) return null;
 
-          // if the url is internal, we strip the domain
           const url =
             item.url.includes('myshopify.com') ||
             item.url.includes(publicStoreDomain) ||
@@ -79,57 +81,47 @@ export function HeaderMenu({ menu, primaryDomainUrl, publicStoreDomain, isLogged
 
           return (
             <div key={item.id} className="header-menu-item">
-              <NavLink
-                end
-                onClick={close}
-                prefetch="intent"
-                style={activeLinkStyle}
-                to={url}
-              >
+              <NavLink end onClick={close} prefetch="intent" style={activeLinkStyle} to={url}>
                 {item.title}
               </NavLink>
             </div>
           );
         })}
-        
       </nav>
 
-      
+      {/* Desktop Menu */}
+      <nav className="header-menu-desktop">
+        {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
+          if (!item.url) return null;
+
+          const url =
+            item.url.includes('myshopify.com') ||
+            item.url.includes(publicStoreDomain) ||
+            item.url.includes(primaryDomainUrl)
+              ? new URL(item.url).pathname
+              : item.url;
+
+          return (
+            <div key={item.id} className="header-menu-item">
+              <NavLink end prefetch="intent" style={activeLinkStyle} to={url}>
+                {item.title}
+              </NavLink>
+            </div>
+          );
+        })}
+      </nav>
     </>
-  );
-}
-
-/**
- * @param {Pick<HeaderProps, 'isLoggedIn' | 'cart'>}
- */
-
-
-function HeaderMenuMobileToggle() {
-  const {open} = useAside();
-  return (
-    <button
-      className="header-menu-mobile-toggle reset"
-      onClick={() => open('mobile')}
-    >
-      <h3>☰</h3>
-    </button>
   );
 }
 
 function HeaderCtas({ isLoggedIn, cart }) {
   return (
     <div className='header-left'>
-      {/* <div className="header-menu-item">
-        <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
-          {isLoggedIn ? <FaUser size={16} /> : <FaUser size={16} />} 
-        </NavLink>
-      </div> */}
-      <SearchToggle /> {/* Assuming SearchToggle will also handle displaying an icon */}
-      <CartToggle cart={cart} /> {/* Cart Toggle, using icons inside this component */}
+      <SearchToggle />
+      <CartToggle cart={cart} />
     </div>
   );
 }
-
 
 function SearchToggle() {
   const { open } = useAside();

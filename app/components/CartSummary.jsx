@@ -4,6 +4,7 @@ import {useRef} from 'react';
 /**
  * @param {CartSummaryProps}
  */
+
 export function CartSummary({cart, layout}) {
   const className =
     layout === 'page' ? 'cart-summary-page' : 'cart-summary-aside';

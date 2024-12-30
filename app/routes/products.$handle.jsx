@@ -1,6 +1,8 @@
-import {Suspense} from 'react';
+import {Suspense, useState} from 'react';
 import {defer, redirect} from '@shopify/remix-oxygen';
 import {Await, useLoaderData} from '@remix-run/react';
+import { CartForm } from '@shopify/hydrogen';
+import { AddToCartButton } from '~/components/AddToCartButton';
 import {
   getSelectedProductOptions,
   Analytics,
@@ -129,128 +131,239 @@ function redirectToFirstVariant({product, request}) {
 }
 
 export default function Product() {
-  /** @type {LoaderReturnData} */
   const { product, variants } = useLoaderData();
-  const selectedVariant = useOptimisticVariant(
-    product.selectedVariant,
-    variants,
-  );
-  console.log(product);
+  const selectedVariant = product.selectedVariant;
   const { title, descriptionHtml } = product;
-  const variantImages = product.variants.nodes.map((variant) => variant.image);
-  return (
-    <div
-      className="product"
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        gap: '20px',
-        padding: '20px',
-        maxWidth: '1200px',
-        margin: '100px auto',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-        borderRadius: '10px',
-        backgroundColor: '#fff',
-      }}
-    >
-      {/* Left: Product Image */}
-      <div
-        style={{
-          flex: '1',
-          display: 'flex',
-          justifyContent: 'center',  // Centers the image horizontally
-          padding: '0 20px',  // Adds space on the left and right side
-        }}
-        className="product-image-container"
-      >
-       {product.media.edges.map((edge) => (
-  <ProductImage
-    key={edge.node.id}
-    image={{
-      url: edge.node.previewImage.url,
-    }}
-    style={{
-      width: '100%',
-      maxHeight: '500px',
-      objectFit: 'cover',
-      borderRadius: '10px',
-    }}
-  />
-))}
-      </div>
+  
+  const [mainImage, setMainImage] = useState(
+    product.media.edges[0]?.node.previewImage.url
+  );
+  const [quantity, setQuantity] = useState(1);
+  const variantImages = product.media.edges.map((edge) => edge.node.previewImage);
 
-      {/* Right: Product Details */}
+  // Handle increase and decrease of quantity
+  const handleQuantityChange = (type) => {
+    setQuantity((prev) => (type === "increase" ? prev + 1 : Math.max(1, prev - 1)));
+  };
+
+  // Handle add to cart action
+  const handleAddToCart = () => {
+    console.log("Adding to cart:", {
+      productId: product.id,
+      quantity,
+      variantId: selectedVariant.id,
+    });
+    alert("Product added to cart!");
+  };
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "1200px", margin: "100px auto" }}>
+      {/* Main Product Section */}
       <div
-        className="product-main"
         style={{
-          flex: '2',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '20px',
+          display: "grid",
+          gridTemplateColumns: "1fr 2fr",
+          gap: "40px",
+          backgroundColor: "#fff",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          borderRadius: "10px",
+          padding: "20px",
         }}
       >
-        <h1 style={{ fontSize: '2.5rem', margin: '0' }}>{title}</h1>
+        {/* Left Section: Product Images */}
+        <div>
+          {/* Main Image */}
+          <div
+            style={{
+              width: "100%",
+              height: "500px",
+              borderRadius: "10px",
+              overflow: "hidden",
+              marginBottom: "20px",
+            }}
+          >
+            <img
+              src={mainImage}
+              alt={title}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "10px",
+              }}
+            />
+          </div>
+
+          {/* Variant Images */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(60px, 1fr))",
+              gap: "10px",
+            }}
+          >
+            {variantImages.map((image, index) => (
+              <img
+                key={index}
+                src={image.url}
+                alt={image.altText || `Image ${index + 1}`}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                  border: mainImage === image.url ? "2px solid #007bff" : "1px solid #ddd",
+                  cursor: "pointer",
+                }}
+                onClick={() => setMainImage(image.url)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Right Section: Product Details */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        <h1 style={{ fontSize: "2.5rem", margin: 0 }}>{title}</h1>
         <ProductPrice
           price={selectedVariant?.price}
           compareAtPrice={selectedVariant?.compareAtPrice}
         />
-        <Suspense
-          fallback={
-            <ProductForm
-              product={product}
-              selectedVariant={selectedVariant}
-              variants={[]}
-            />
-          }
+
+        {/* Quantity Selector */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            border: "1px solid #ddd",
+            borderRadius: "10px",
+            padding: "10px",
+          }}
         >
-          <Await
-            errorElement="There was a problem loading product variants"
-            resolve={variants}
-          >
-            {(data) => (
-              <ProductForm
-                product={product}
-                selectedVariant={selectedVariant}
-                variants={data?.product?.variants.nodes || []}
-              />
-            )}
-          </Await>
-        </Suspense>
+          <span>Quantity:</span>
+          <div style={{ display: "flex", gap: "5px" }}>
+            <button
+              onClick={() => handleQuantityChange("decrease")}
+              style={{
+                width: "30px",
+                height: "30px",
+                backgroundColor: "#007bff",
+                color: "#fff",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
+            >
+              -
+            </button>
+            <input
+              type="number"
+              value={quantity}
+              readOnly
+              style={{
+                width: "50px",
+                textAlign: "center",
+                border: "1px solid #ddd",
+                borderRadius: "5px",
+              }}
+            />
+            <button
+              onClick={() => handleQuantityChange("increase")}
+              style={{
+                width: "30px",
+                height: "30px",
+                backgroundColor: "#007bff",
+                color: "#fff",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        {/* Add to Cart Button */}
+      <AddToCartButton
+             disabled={!selectedVariant || !selectedVariant.availableForSale}
+         
+             lines={
+               selectedVariant
+                 ? [
+                     {
+                       merchandiseId: selectedVariant.id,
+                       quantity: quantity,
+                       selectedVariant,
+                     },
+                   ]
+                 : []
+             }
+           >
+             {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
+           </AddToCartButton>
+
+        {/* Description */}
         <div>
-          <p style={{ fontWeight: 'bold', marginBottom: '10px' }}>Description</p>
+          <h3>Description</h3>
           <div
             dangerouslySetInnerHTML={{ __html: descriptionHtml }}
-            style={{
-              textAlign: 'justify',
-              lineHeight: '1.8',
-            }}
+            style={{ textAlign: "justify", lineHeight: "1.8" }}
           />
         </div>
       </div>
-
-      {/* Analytics */}
-      <Analytics.ProductView
-        data={{
-          products: [
-            {
-              id: product.id,
-              title: product.title,
-              price: selectedVariant?.price.amount || '0',
-              vendor: product.vendor,
-              variantId: selectedVariant?.id || '',
-              variantTitle: selectedVariant?.title || '',
-              quantity: 1,
-            },
-          ],
-        }}
-      />
+    </div>
+      {/* Related Products Section */}
+      <div style={{ marginTop: "50px" }}>
+        <h2 style={{ marginBottom: "20px" }}>Related Products</h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: "20px",
+          }}
+        >
+          {[1, 2, 3, 4].map((product) => (
+            <div
+              key={product}
+              style={{
+                backgroundColor: "#fff",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                borderRadius: "10px",
+                padding: "10px",
+                textAlign: "center",
+              }}
+            >
+              <img
+                src={`https://via.placeholder.com/150?text=Product+${product}`}
+                alt={`Product ${product}`}
+                style={{
+                  width: "100%",
+                  height: "150px",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                }}
+              />
+              <h4>Product {product}</h4>
+              <p>$99.99</p>
+              <button
+                style={{
+                  padding: "10px",
+                  borderRadius: "5px",
+                  backgroundColor: "#007bff",
+                  color: "#fff",
+                  cursor: "pointer",
+                }}
+              >
+                View Product
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
-
-
-
 
 const PRODUCT_VARIANT_FRAGMENT = `#graphql
   fragment ProductVariant on ProductVariant {

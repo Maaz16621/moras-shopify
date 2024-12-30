@@ -58,6 +58,14 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
 </div>
 
               <div className="footer-bottom-container">
+              <div className="footer-logo-container">
+      <div className="footer-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="230" height="90" viewBox="0 0 615 209" fill="none">
+          <path d="M272.777 44.8033V30.9121C272.777 30.132 273.327 29.4619 274.097 29.3119L297.1 24.9215C298.1 24.7315 299.03 25.5016 299.03 26.5217V44.8033C299.03 45.7034 298.3 46.4335 297.4 46.4335H274.397C273.507 46.4335 272.777 45.7034 272.777 44.8033Z" fill="white"></path>
+        </svg>
+      </div>
+    </div>
+
   <div className="footer-bottom-wrapper">
     <div className="left-footer-list">
       <ul className="footer_menu_list-ul">
@@ -82,13 +90,6 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
       </ul>
     </div>
 
-    <div className="footer-logo-container">
-      <div className="footer-logo">
-        <svg xmlns="http://www.w3.org/2000/svg" width="230" height="90" viewBox="0 0 615 209" fill="none">
-          <path d="M272.777 44.8033V30.9121C272.777 30.132 273.327 29.4619 274.097 29.3119L297.1 24.9215C298.1 24.7315 299.03 25.5016 299.03 26.5217V44.8033C299.03 45.7034 298.3 46.4335 297.4 46.4335H274.397C273.507 46.4335 272.777 45.7034 272.777 44.8033Z" fill="white"></path>
-        </svg>
-      </div>
-    </div>
 
     <div className="right-footer-list">
       <ul className="footer_menu_list-ul">

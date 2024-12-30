@@ -12,6 +12,7 @@ import {useAside} from './Aside';
  *   line: CartLine;
  * }}
  */
+
 export function CartLineItem({layout, line}) {
   const {id, merchandise} = line;
   const {product, title, image, selectedOptions} = merchandise;
@@ -67,6 +68,7 @@ export function CartLineItem({layout, line}) {
  * hasn't yet responded that it was successfully added to the cart.
  * @param {{line: CartLine}}
  */
+
 function CartLineQuantity({line}) {
   if (!line || typeof line?.quantity === 'undefined') return null;
   const {id: lineId, quantity, isOptimistic} = line;

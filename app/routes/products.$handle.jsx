@@ -1,5 +1,6 @@
 import {Suspense, useState} from 'react';
 import {defer, redirect} from '@shopify/remix-oxygen';
+import { Link } from '@remix-run/react';
 import {Await, useLoaderData} from '@remix-run/react';
 import { CartForm } from '@shopify/hydrogen';
 import { AddToCartButton } from '~/components/AddToCartButton';
@@ -39,46 +40,50 @@ export async function loader(args) {
  * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
  * @param {LoaderFunctionArgs}
  */
-async function loadCriticalData({context, params, request}) {
-  const {handle} = params;
-  const {storefront} = context;
+async function loadCriticalData({ context, params, request }) {
+  const { handle } = params;
+  const { storefront } = context;
 
   if (!handle) {
     throw new Error('Expected product handle to be defined');
   }
 
-  const [{product}] = await Promise.all([
+  const [{ product }, { products }] = await Promise.all([
     storefront.query(PRODUCT_QUERY, {
-      variables: {handle, selectedOptions: getSelectedProductOptions(request)},
+      variables: { handle, selectedOptions: getSelectedProductOptions(request) },
     }),
-    // Add other queries here, so that they are loaded in parallel
+    storefront.query(RELATED_PRODUCTS_QUERY, {
+      variables: { handle },
+    }),
   ]);
 
   if (!product?.id) {
-    throw new Response(null, {status: 404});
+    throw new Response(null, { status: 404 });
   }
 
   const firstVariant = product.variants.nodes[0];
   const firstVariantIsDefault = Boolean(
     firstVariant.selectedOptions.find(
-      (option) => option.name === 'Title' && option.value === 'Default Title',
-    ),
+      (option) => option.name === 'Title' && option.value === 'Default Title'
+    )
   );
 
   if (firstVariantIsDefault) {
     product.selectedVariant = firstVariant;
   } else {
-    // if no selected variant was returned from the selected options,
-    // we redirect to the first variant's url with it's selected options applied
     if (!product.selectedVariant) {
-      throw redirectToFirstVariant({product, request});
+      throw redirectToFirstVariant({ product, request });
     }
   }
+  const relatedProducts = products;
 
+  // Ensure relatedProducts is passed correctly
   return {
     product,
+    relatedProducts: relatedProducts.edges.map((edge) => edge.node),
   };
 }
+
 
 /**
  * Load data for rendering content below the fold. This data is deferred and will be
@@ -131,7 +136,8 @@ function redirectToFirstVariant({product, request}) {
 }
 
 export default function Product() {
-  const { product, variants } = useLoaderData();
+  const { product, relatedProducts, variants} = useLoaderData();
+  console.log(useLoaderData());
   const selectedVariant = product.selectedVariant;
   const { title, descriptionHtml } = product;
   
@@ -145,7 +151,8 @@ export default function Product() {
   const handleQuantityChange = (type) => {
     setQuantity((prev) => (type === "increase" ? prev + 1 : Math.max(1, prev - 1)));
   };
-
+  const sizeOption = product.options.find(option => option.name === 'Size');
+  const sizes = sizeOption ? sizeOption.optionValues.map(size => size.name) : [];
   // Handle add to cart action
   const handleAddToCart = () => {
     console.log("Adding to cart:", {
@@ -157,7 +164,13 @@ export default function Product() {
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "1200px", margin: "100px auto" }}>
+    <div
+      style={{
+        padding: "20px",
+        maxWidth: "1200px",
+        margin: "100px auto",
+      }}
+    >
       {/* Main Product Section */}
       <div
         style={{
@@ -168,37 +181,22 @@ export default function Product() {
           boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
           borderRadius: "10px",
           padding: "20px",
+          color: "#333",
         }}
       >
         {/* Left Section: Product Images */}
-        <div>
-          {/* Main Image */}
-          <div
-            style={{
-              width: "100%",
-              height: "500px",
-              borderRadius: "10px",
-              overflow: "hidden",
-              marginBottom: "20px",
-            }}
-          >
-            <img
-              src={mainImage}
-              alt={title}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                borderRadius: "10px",
-              }}
-            />
-          </div>
-
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: "20px",
+          }}
+        >
           {/* Variant Images */}
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(60px, 1fr))",
+              display: "flex",
+              flexDirection: "column",
               gap: "10px",
             }}
           >
@@ -210,160 +208,282 @@ export default function Product() {
                 style={{
                   width: "60px",
                   height: "60px",
-                  objectFit: "cover",
+                  objectFit: "contain",
                   borderRadius: "8px",
-                  border: mainImage === image.url ? "2px solid #007bff" : "1px solid #ddd",
+                  border: mainImage === image.url ? "2px solid #000" : "1px solid #ccc",
                   cursor: "pointer",
                 }}
                 onClick={() => setMainImage(image.url)}
               />
             ))}
           </div>
+  
+          {/* Main Image */}
+          <div
+            style={{
+              width: "100%",
+              height: "500px",
+              borderRadius: "10px",
+              overflow: "hidden",
+            }}
+          >
+            <img
+              src={mainImage}
+              alt={title}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                borderRadius: "10px",
+              }}
+            />
+          </div>
         </div>
-
+  
         {/* Right Section: Product Details */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-        <h1 style={{ fontSize: "2.5rem", margin: 0 }}>{title}</h1>
-        <ProductPrice
-          price={selectedVariant?.price}
-          compareAtPrice={selectedVariant?.compareAtPrice}
-        />
-
-        {/* Quantity Selector */}
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            border: "1px solid #ddd",
-            borderRadius: "10px",
-            padding: "10px",
+            flexDirection: "column",
           }}
         >
-          <span>Quantity:</span>
-          <div style={{ display: "flex", gap: "5px" }}>
-            <button
-              onClick={() => handleQuantityChange("decrease")}
-              style={{
-                width: "30px",
-                height: "30px",
-                backgroundColor: "#007bff",
-                color: "#fff",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-              }}
-            >
-              -
-            </button>
-            <input
-              type="number"
-              value={quantity}
-              readOnly
-              style={{
-                width: "50px",
-                textAlign: "center",
-                border: "1px solid #ddd",
-                borderRadius: "5px",
-              }}
-            />
-            <button
-              onClick={() => handleQuantityChange("increase")}
-              style={{
-                width: "30px",
-                height: "30px",
-                backgroundColor: "#007bff",
-                color: "#fff",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-              }}
-            >
-              +
-            </button>
-          </div>
-        </div>
-
-        {/* Add to Cart Button */}
-      <AddToCartButton
-             disabled={!selectedVariant || !selectedVariant.availableForSale}
-         
-             lines={
-               selectedVariant
-                 ? [
-                     {
-                       merchandiseId: selectedVariant.id,
-                       quantity: quantity,
-                       selectedVariant,
-                     },
-                   ]
-                 : []
-             }
-           >
-             {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
-           </AddToCartButton>
-
-        {/* Description */}
-        <div>
+          <h1
+            style={{
+              fontSize: "2.5rem",
+              margin: 0,
+            }}
+          >
+            {title}
+          </h1>
+          <ProductPrice
+            price={selectedVariant?.price}
+            compareAtPrice={selectedVariant?.compareAtPrice}
+          />
           <h3>Description</h3>
           <div
             dangerouslySetInnerHTML={{ __html: descriptionHtml }}
-            style={{ textAlign: "justify", lineHeight: "1.8" }}
+            style={{
+              textAlign: "justify",
+            }}
           />
-        </div>
-      </div>
-    </div>
-      {/* Related Products Section */}
-      <div style={{ marginTop: "50px" }}>
-        <h2 style={{ marginBottom: "20px" }}>Related Products</h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "20px",
-          }}
-        >
-          {[1, 2, 3, 4].map((product) => (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              marginBottom: "20px",
+            }}
+          >
+            {sizes.length > 0 && (
+              <div>
+                <span>Size:</span>
+                {sizes.map((size, index) => (
+                  <button
+                    key={index}
+                    style={{
+                      padding: "10px",
+                      borderRadius: "5px",
+                      backgroundColor: selectedSize === size ? "#000" : "#fff",
+                      color: selectedSize === size ? "#fff" : "#333",
+                      border: "1px solid #ccc",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setSelectedSize(size)}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+  
+          {/* Quantity Selector */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <span>Quantity:</span>
             <div
-              key={product}
               style={{
-                backgroundColor: "#fff",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                borderRadius: "10px",
-                padding: "10px",
-                textAlign: "center",
+                display: "flex",
+                gap: "5px",
+                alignItems: "center",
               }}
             >
-              <img
-                src={`https://via.placeholder.com/150?text=Product+${product}`}
-                alt={`Product ${product}`}
-                style={{
-                  width: "100%",
-                  height: "150px",
-                  objectFit: "cover",
-                  borderRadius: "8px",
-                }}
-              />
-              <h4>Product {product}</h4>
-              <p>$99.99</p>
               <button
+                onClick={() => handleQuantityChange("decrease")}
                 style={{
-                  padding: "10px",
-                  borderRadius: "5px",
-                  backgroundColor: "#007bff",
+                  width: "30px",
+                  height: "30px",
+                  backgroundColor: "#000",
                   color: "#fff",
+                  border: "1px solid #000",
+                  borderRadius: "5px",
                   cursor: "pointer",
                 }}
               >
-                View Product
+                -
+              </button>
+              <input
+                type="number"
+                value={quantity}
+                readOnly
+                style={{
+                  width: "50px",
+                  backgroundColor: "#f9f9f9",
+                  color: "#333",
+                }}
+              />
+              <button
+                onClick={() => handleQuantityChange("increase")}
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  backgroundColor: "#000",
+                  color: "#fff",
+                  border: "1px solid #000",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                +
               </button>
             </div>
-          ))}
+          </div>
+  
+          {/* Add to Cart Button */}
+          <AddToCartButton
+            disabled={!selectedVariant || !selectedVariant.availableForSale}
+            lines={
+              selectedVariant
+                ? [
+                    {
+                      merchandiseId: selectedVariant.id,
+                      quantity: quantity,
+                      selectedVariant,
+                    },
+                  ]
+                : []
+            }
+          >
+            {selectedVariant?.availableForSale ? "Add to cart" : "Sold out"}
+          </AddToCartButton>
         </div>
       </div>
+      <RelatedProducts relatedProducts={relatedProducts} />
+      {/* Related Products Section */}
+     
+    </div>
+  );
+  
+         
+  
+}
+
+
+export function RelatedProducts({ relatedProducts }) {
+  console.log('relatedProducts:', relatedProducts);
+
+  return (
+    <div style={{ marginTop: '50px' }}>
+      <h2 style={{ marginBottom: '20px' }}>Related Products</h2>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)', // 4 cards for desktop
+          gap: '20px',
+          transition: 'grid-template-columns 0.3s ease',
+        }}
+      >
+        {relatedProducts && relatedProducts.length > 0 ? (
+          relatedProducts.map((product) => (
+            <div
+              key={product.id}
+              style={{
+                backgroundColor: '#fff',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                borderRadius: '10px',
+                padding: '10px',
+                textAlign: 'center',
+                color: '#333',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease', // Animation for hover
+              }}
+              className="product-card"
+            >
+              <img
+                src={product.images.edges[0]?.node?.url || 'https://via.placeholder.com/150'}
+                alt={product.title}
+                style={{
+                  width: '100%',
+                  height: '150px',
+                  objectFit: 'cover',
+                  borderRadius: '8px',
+                  transition: 'transform 0.3s ease', // Image hover animation
+                }}
+              />
+              <h4>
+                <Link to={`/products/${product.handle}`}>{product.title}</Link>
+              </h4>
+              <p>
+                PKR {product.priceRange?.minVariantPrice.amount} 
+              </p>
+              <button
+                style={{
+                  padding: '10px',
+                  borderRadius: '5px',
+                  backgroundColor: '#000',
+                  color: '#fff',
+                  cursor: 'pointer',
+                  border: '1px solid #000',
+                  transition: 'background-color 0.3s ease',
+                }}
+              >
+                <Link
+                  to={`/products/${product.handle}`}
+                  style={{ color: 'inherit', textDecoration: 'none' }}
+                >
+                  View Product
+                </Link>
+              </button>
+            </div>
+          ))
+        ) : (
+          <p>No related products found.</p>
+        )}
+      </div>
+      <style>
+        {`
+          .product-card:hover {
+            transform: translateY(-10px); /* Move card up on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+          }
+
+          .product-card:hover img {
+            transform: scale(1.05); /* Scale image on hover */
+          }
+
+          @media (max-width: 1024px) {
+            .product-card {
+              grid-template-columns: repeat(2, 1fr); /* 2 cards for tablets */
+            }
+          }
+
+          @media (max-width: 600px) {
+            .product-card {
+              grid-template-columns: 1fr; /* 1 card for mobile */
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }
+
+
+
 
 const PRODUCT_VARIANT_FRAGMENT = `#graphql
   fragment ProductVariant on ProductVariant {
@@ -483,6 +603,50 @@ const VARIANTS_QUERY = `#graphql
     }
   }
 `;
+const RELATED_PRODUCTS_QUERY = `#graphql
+query RelatedProducts($handle: String!) {
+  product(handle: $handle) {
+    id
+    title
+    handle
+    images(first: 1) {
+      edges {
+        node {
+          url
+        }
+      }
+    }
+    
+  }
+  products(first: 4, query: $handle) {
+    edges {
+      node {
+        id
+        title
+        handle
+        priceRange{
+          minVariantPrice{
+            amount
+          }
+           maxVariantPrice{
+            amount
+          }
+        }
+        images(first: 1) {
+          edges {
+            node {
+              url
+            }
+          }
+        }
+        
+      }
+    }
+  }
+}
+`;
+
+
 
 /** @typedef {import('@shopify/remix-oxygen').LoaderFunctionArgs} LoaderFunctionArgs */
 /** @template T @typedef {import('@remix-run/react').MetaFunction<T>} MetaFunction */

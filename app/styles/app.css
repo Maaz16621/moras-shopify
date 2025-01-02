@@ -800,7 +800,6 @@ header .cta-icons > * {
   color: white;
   height: 100vh;
   width: 100%;
-  font-family: Arial, sans-serif;
 }
 
 /* Footer wrap */
@@ -950,10 +949,14 @@ header .cta-icons > * {
 
 /* Footer logo (40% width) */
 .footer-logo-container {
-  text-align: center;
   position: absolute;
+  font-size: 48px;
+  font-family:'Helvetica Neue' !important;
 }
 
+.footer-logo-container  h1{
+  font-size: 48px;
+}
 /* Right footer menu (30% width) */
 .right-footer-list {
   flex: 0 0 30%; /* 30% width */
@@ -1208,4 +1211,65 @@ button.close-outside {
   font-size: 0.9rem;
   font-weight: 600;
   color: #007bff;
+}
+.collection {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.product-item {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.product-image {
+  position: relative;
+  overflow: hidden;
+  width: 300px;
+  height: 300px;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-image::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s ease;
+}
+
+.product-image:hover::after {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.product-info {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.product-info h4 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.product-info small {
+  font-size: 14px;
+  color: #999;
 }

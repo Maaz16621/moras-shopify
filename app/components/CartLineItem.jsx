@@ -68,7 +68,6 @@ export function CartLineItem({layout, line}) {
  * hasn't yet responded that it was successfully added to the cart.
  * @param {{line: CartLine}}
  */
-
 function CartLineQuantity({line}) {
   if (!line || typeof line?.quantity === 'undefined') return null;
   const {id: lineId, quantity, isOptimistic} = line;
@@ -84,6 +83,14 @@ function CartLineQuantity({line}) {
           disabled={quantity <= 1 || !!isOptimistic}
           name="decrease-quantity"
           value={prevQuantity}
+          style={{
+            backgroundColor: 'black',
+            color: 'white',
+            border: 'none',
+            padding: '5px 10px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+          }}
         >
           <span>&#8722; </span>
         </button>
@@ -95,6 +102,14 @@ function CartLineQuantity({line}) {
           name="increase-quantity"
           value={nextQuantity}
           disabled={!!isOptimistic}
+          style={{
+            backgroundColor: 'black',
+            color: 'white',
+            border: 'none',
+            padding: '5px 10px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+          }}
         >
           <span>&#43;</span>
         </button>
@@ -121,7 +136,14 @@ function CartLineRemoveButton({lineIds, disabled}) {
       action={CartForm.ACTIONS.LinesRemove}
       inputs={{lineIds}}
     >
-      <button disabled={disabled} type="submit">
+      <button   style={{
+            backgroundColor: 'black',
+            color: 'white',
+            border: 'none',
+            padding: '5px 10px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+          }} disabled={disabled} type="submit">
         Remove
       </button>
     </CartForm>

@@ -15,6 +15,7 @@ import {   Mousewheel, Autoplay, Pagination } from 'swiper/modules';
 import image1 from '../assets/hero1.jpg';  // import image1
 import image2 from '../assets/hero2.jpg';  // import image2
 import image3 from '../assets/outfiter.webp';
+import image4 from '../assets/hero3.webp';
 import video1 from '../assets/video1.mp4';
 import video2 from '../assets/video2.mp4';
 import video3 from '../assets/video3.mp4';
@@ -119,36 +120,16 @@ export default function Homepage() {
                 },
               }}
             >
-              <SwiperSlide>
-                <img src={image1} alt="Slide 1" />
+            <SwiperSlide>
+              <img src={image4} alt="Slide 2" />
               </SwiperSlide>
 
               <SwiperSlide>
-                <div className="video-slide">
-                  <video autoPlay muted loop className="video-background">
-                    <source src={video1} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
+                <img src={image1} alt="Slide 2" />
               </SwiperSlide>
 
-              <SwiperSlide>
-                <div className="video-slide">
-                  <video autoPlay muted loop className="video-background">
-                    <source src={video2} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </SwiperSlide>
 
-              <SwiperSlide>
-                <div className="video-slide">
-                  <video autoPlay muted loop className="video-background">
-                    <source src={video3} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </SwiperSlide>
+           
 
               {/* Last slide: Footer */}
               <SwiperSlide className="footer-slide">
@@ -157,7 +138,7 @@ export default function Homepage() {
             </Swiper>
           </SwiperSlide>
 
-          <SwiperSlide>
+          {/* <SwiperSlide>
             <Swiper
               className="mySwiper2 swiper-v"
               direction={'vertical'}
@@ -181,38 +162,15 @@ export default function Homepage() {
               </SwiperSlide>
 
               <SwiperSlide>
-                <div className="video-slide">
-                  <video autoPlay muted loop className="video-background">
-                    <source src={video1} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
+              <img src={image4} alt="Slide 2" />
               </SwiperSlide>
 
-              <SwiperSlide>
-                <div className="video-slide">
-                  <video autoPlay muted loop className="video-background">
-                    <source src={video2} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <div className="video-slide">
-                  <video autoPlay muted loop className="video-background">
-                    <source src={video3} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </SwiperSlide>
-
-              {/* Last slide: Footer */}
+           
               <SwiperSlide className="footer-slide">
                 <Footer footer={data.footer} header={data.header} publicStoreDomain={data.publicStoreDomain} />
               </SwiperSlide>
             </Swiper>
-          </SwiperSlide>
+          </SwiperSlide> */}
 
           <SwiperSlide>
             <Swiper

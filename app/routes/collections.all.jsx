@@ -53,26 +53,26 @@ async function loadCriticalData({context, request}) {
 function loadDeferredData({context}) {
   return {};
 }
-
 export default function Collection() {
   /** @type {LoaderReturnData} */
   const {products} = useLoaderData();
 
   return (
     <div className="collection">
-      <h1>Products</h1>
-      <PaginatedResourceSection
-        connection={products}
-        resourcesClassName="products-grid"
-      >
-        {({node: product, index}) => (
-          <ProductItem
-            key={product.id}
-            product={product}
-            loading={index < 8 ? 'eager' : undefined}
-          />
-        )}
-      </PaginatedResourceSection>
+    
+        <PaginatedResourceSection
+          connection={products}
+          resourcesClassName="products-grid"
+        >
+          {({node: product, index}) => (
+            <ProductItem
+              key={product.id}
+              product={product}
+              loading={index < 8 ? 'eager' : undefined}
+            />
+          )}
+        </PaginatedResourceSection>
+
     </div>
   );
 }
@@ -82,31 +82,36 @@ export default function Collection() {
  *   product: ProductItemFragment;
  *   loading?: 'eager' | 'lazy';
  * }}
- */
-function ProductItem({product, loading}) {
+ */function ProductItem({product, loading}) {
   const variant = product.variants.nodes[0];
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
   return (
-    <Link
-      className="product-item"
-      key={product.id}
-      prefetch="intent"
-      to={variantUrl}
-    >
-      {product.featuredImage && (
-        <Image
-          alt={product.featuredImage.altText || product.title}
-          aspectRatio="1/1"
-          data={product.featuredImage}
-          loading={loading}
-          sizes="(min-width: 45em) 400px, 100vw"
-        />
-      )}
-      <h4>{product.title}</h4>
-      <small>
-        <Money data={product.priceRange.minVariantPrice} />
-      </small>
-    </Link>
+    <div className="product-item">
+      <Link
+        className="product-link"
+        key={product.id}
+        prefetch="intent"
+        to={variantUrl}
+      >
+        {product.featuredImage && (
+          <div className="product-image">
+            <Image
+              alt={product.featuredImage.altText || product.title}
+              aspectRatio="1/1"
+              data={product.featuredImage}
+              loading={loading}
+              sizes="(min-width: 45em) 400px, 100vw"
+            />
+          </div>
+        )}
+      </Link>
+      <div className="product-info">
+        <h4>{product.title}</h4>
+        <small>
+          <Money data={product.priceRange.minVariantPrice} />
+        </small>
+      </div>
+    </div>
   );
 }
 

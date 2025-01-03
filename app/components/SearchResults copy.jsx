@@ -86,7 +86,8 @@ function SearchResultsPages({term, pages}) {
 
 /**
  * @param {PartialSearchResult<'products'>}
- */function SearchResultsProducts({ term, products }) {
+ */
+function SearchResultsProducts({term, products}) {
   if (!products?.nodes.length) {
     return null;
   }
@@ -94,7 +95,7 @@ function SearchResultsPages({term, pages}) {
   return (
     <div className="search-result">
       <Pagination connection={products}>
-        {({ nodes, isLoading, NextLink, PreviousLink }) => {
+        {({nodes, isLoading, NextLink, PreviousLink}) => {
           const ItemsMarkup = nodes.map((product) => {
             const productUrl = urlWithTrackingParams({
               baseUrl: `/products/${product.handle}`,
@@ -103,24 +104,22 @@ function SearchResultsPages({term, pages}) {
             });
 
             return (
-              <div className="product-item" key={product.id}>
-                <Link prefetch="intent" to={productUrl} className="product-link">
+              <div className="search-results-item" key={product.id}>
+                <Link prefetch="intent" to={productUrl}>
                   {product.variants.nodes[0].image && (
-                    <div className="product-image">
-                      <Image
-                        data={product.variants.nodes[0].image}
-                        alt={product.title}
-                        aspectRatio="1/1"
-                      />
-                    </div>
+                    <Image
+                      data={product.variants.nodes[0].image}
+                      alt={product.title}
+                      width={50}
+                    />
                   )}
+                  <div>
+                    <p>{product.title}</p>
+                    <small>
+                      <Money data={product.variants.nodes[0].price} />
+                    </small>
+                  </div>
                 </Link>
-                <div className="product-info">
-                  <h4>{product.title}</h4>
-                  <small>
-                    <Money data={product.variants.nodes[0].price} />
-                  </small>
-                </div>
               </div>
             );
           });
@@ -132,7 +131,10 @@ function SearchResultsPages({term, pages}) {
                   {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
                 </PreviousLink>
               </div>
-              <div className="product-list">{ItemsMarkup}</div>
+              <div>
+                {ItemsMarkup}
+                <br />
+              </div>
               <div>
                 <NextLink>
                   {isLoading ? 'Loading...' : <span>Load more ↓</span>}
@@ -146,7 +148,6 @@ function SearchResultsPages({term, pages}) {
     </div>
   );
 }
-
 
 function SearchResultsEmpty() {
   return <p>No results, try a different search.</p>;

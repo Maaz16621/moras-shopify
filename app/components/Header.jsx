@@ -22,6 +22,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
         isLoggedIn={isLoggedIn}
         cart={cart}
       >
+        
         {/* No need to include HeaderCtas here anymore */}
       </HeaderMenu>
       <NavLink prefetch="intent" to="/" className="store-name" style={activeLinkStyle} end>
@@ -89,8 +90,20 @@ export function HeaderMenu({ menu, primaryDomainUrl, publicStoreDomain, isLogged
                 {item.title}
               </NavLink>
             </div>
+            
           );
         })}
+          <div  className="header-menu-item">
+          <NavLink
+                end
+                onClick={close}
+                prefetch="intent"
+                style={activeLinkStyle}
+                to={'search'}
+              >
+              Search
+              </NavLink>
+            </div>
         
       </nav>
 

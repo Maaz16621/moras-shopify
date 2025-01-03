@@ -35,46 +35,61 @@ export async function loader({request, context}) {
  */
 export default function SearchPage() {
   /** @type {LoaderReturnData} */
-  const {type, term, result, error} = useLoaderData();
+  const { type, term, result, error } = useLoaderData();
   if (type === 'predictive') return null;
 
   return (
-    <div className="search">
-      <h1>Search</h1>
-      <SearchForm>
-        {({inputRef}) => (
-          <>
-            <input
-              defaultValue={term}
-              name="q"
-              placeholder="Search…"
-              ref={inputRef}
-              type="search"
-            />
-            &nbsp;
-            <button type="submit">Search</button>
-          </>
-        )}
-      </SearchForm>
-      {error && <p style={{color: 'red'}}>{error}</p>}
+    <div className="search-page-container">
+      <h1 className="search-page-title">Search</h1>
+
+      <div className="search-form-container">
+        <SearchForm>
+          {({ inputRef }) => (
+            <div className="search-input-wrapper">
+              <input
+                defaultValue={term}
+                name="q"
+                placeholder="Search…"
+                ref={inputRef}
+                type="search"
+                className="search-input"
+              />
+              <span className="search-icon">&#128269;</span>
+            </div>
+          )}
+        </SearchForm>
+      </div>
+
+      {error && <p className="error-message">{error}</p>}
+
       {!term || !result?.total ? (
         <SearchResults.Empty />
       ) : (
-        <SearchResults result={result} term={term}>
-          {({articles, pages, products, term}) => (
-            <div>
-              <SearchResults.Products products={products} term={term} />
-              <SearchResults.Pages pages={pages} term={term} />
-              <SearchResults.Articles articles={articles} term={term} />
-            </div>
-          )}
-        </SearchResults>
+        <div className="search-results-container">
+          <SearchResults result={result} term={term}>
+            {({ products }) => (
+              <div>
+                <SearchResults.Products products={products} term={term} />
+              </div>
+            )}
+          </SearchResults>
+        </div>
       )}
-      <Analytics.SearchView data={{searchTerm: term, searchResults: result}} />
+
+      <Analytics.SearchView data={{ searchTerm: term, searchResults: result }} />
     </div>
   );
 }
 
+{/* <SearchResults result={result} term={term}>
+            {({ articles, pages, products, term }) => (
+              <div>
+                <SearchResults.Products products={products} term={term} />
+                <SearchResults.Pages pages={pages} term={term} />
+                <SearchResults.Articles articles={articles} term={term} />
+              </div>
+            )}
+          </SearchResults> */}
 /**
  * Regular search query and fragments
  * (adjust as needed)

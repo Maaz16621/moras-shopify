@@ -39,19 +39,19 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
   <div className="slider-social-icon">
     <ul className="list-unstyled list-social" role="list">
       <li className="list-social__item">
-        <a href="https://www.facebook.com/outfitterspk" className="link list-social__link">Facebook</a>
+        <a href="#" className="link list-social__link">Facebook</a>
       </li>
       <li className="list-social__item">
-        <a href="https://www.instagram.com/outfitters_pk/" className="link list-social__link">Instagram</a>
+        <a href="#" className="link list-social__link">Instagram</a>
       </li>
       <li className="list-social__item">
-        <a href="https://www.youtube.com/OutfittersOfficial" className="link list-social__link">YouTube</a>
+        <a href="#" className="link list-social__link">YouTube</a>
       </li>
       <li className="list-social__item">
-        <a href="https://www.tiktok.com/@outfitterspk" className="link list-social__link">TikTok</a>
+        <a href="#" className="link list-social__link">TikTok</a>
       </li>
       <li className="list-social__item">
-        <a href="https://www.pinterest.com/OutfittersPK/" className="link list-social__link">Pinterest</a>
+        <a href="#" className="link list-social__link">Pinterest</a>
       </li>
     </ul>
   </div>
@@ -71,7 +71,7 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
           <a className="ft-menu-link" href="/pages/shopping-guide#link-faqs">FAQ'S</a>
         </li>
         <li className="ft-menu-li">
-          <a className="ft-menu-link" href="https://outfitters.com.pk/account/login">Log In/Sign Up</a>
+          <a className="ft-menu-link" href="#">Log In/Sign Up</a>
         </li>
         <li className="ft-menu-li">
           <a className="ft-menu-link" href="/pages/shopping-guide#link-how-to-buy">How To Buy</a>
@@ -95,7 +95,7 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
           <a className="ft-menu-link" href="/pages/shopping-guide#link-faqs">FAQ'S</a>
         </li>
         <li className="ft-menu-li">
-          <a className="ft-menu-link" href="https://outfitters.com.pk/account/login">Log In/Sign Up</a>
+          <a className="ft-menu-link" href="#">Log In/Sign Up</a>
         </li>
         <li className="ft-menu-li">
           <a className="ft-menu-link" href="/pages/shopping-guide#link-how-to-buy">How To Buy</a>

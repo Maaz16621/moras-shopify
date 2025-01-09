@@ -155,7 +155,7 @@ button.reset:hover:not(:has(> *)) {
   z-index: 3;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Ensure store name is on the left, and icons on the right */
+  justify-content: center; /* Ensure store name is on the left, and icons on the right */
   position: absolute;
   width: 100%;
   top: 0;
@@ -204,7 +204,7 @@ header .cta-icons > * {
 .header-menu-mobile-toggle {
   background: none;
   border: none;
-  font-size: 2rem;
+  font-size: 1rem;
   cursor: pointer;
   position: relative;
   z-index: 1000;
@@ -214,13 +214,13 @@ header .cta-icons > * {
 .header-menu-mobile {
   position: fixed;
   top: 0;
-  left: -100%; /* Initially hidden off the screen */
+  right: -100%; /* Initially hidden off the screen */
   width: 250px; /* Width of the sliding menu */
   height: 100%;
   background-color: white;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transition: left 1s ease-in-out; /* Smooth sliding transition */
-  z-index: 999;
+  z-index: 10000;
   padding-top: 60px; /* Adjust as needed for spacing */
 }
 
@@ -239,8 +239,7 @@ header .cta-icons > * {
 
 .header-menu-item a {
   text-decoration: none;
-  color: black;
-  font-weight: bold;
+  color: rgb(255, 255, 255);
   display: block;
 }
 
@@ -251,13 +250,17 @@ header .cta-icons > * {
   display: block;
   padding: none !important;
 }
-
-.header-menu-mobile .header-menu-item a:hover {
+.header-menu-mobile {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 1rem;
+}
+.header-menu-mobile a:hover {
   color: #0070f3; /* Highlight color */
 }
 /* Example of additional CSS */
 .header-menu-mobile-toggle h3 {
-  font-size: 30px; /* Adjust size */
+  font-size: 20px; /* Adjust size */
   transition: color 0.3s ease; /* Smooth transition */
 }
 
@@ -265,120 +268,90 @@ header .cta-icons > * {
   color: #333; /* Optional hover effect */
 }
 
+@media only screen and (max-width: 768px) {
+ 
 
-/* Full Header for Mobile */
-.header-full {
-  background: transparent !important;
-  z-index: 3;
+
+
+
+  .header-menu-item {
+    margin-right: 0;
+    color: #000 !important;
+  }  .header-menu-desktop {
+    display: none;
+   
+  }
+
+  .header-menu-item a {
+    color: #000 !important;
+  }
+  .header-left {
+    margin-top: 10px;
+  }
+}
+.header-menu-mobile-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  
+
+  
+  .header-menu-mobile-toggle {
+    display: block; /* Show the mobile toggle button on small screens */
+  }
+}
+
+.header-menu {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  position: fixed; /* Fixed position for sticky effect on mobile */
-  top: 0;
-  width: 100%;
-  padding: 15px 20px; /* Add padding for better spacing on mobile */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  align-items: center;
+  width: 80%;
+  padding-top: 1rem;
+  border-bottom: 1px solid #fff;
 }
 
-.header-left-full {
+.header-menu-items {
+  font-size: 22px;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+}
+.header-menu-mobile .header-menu-items {
+  flex-direction: column;
+ 
+}
+.header-menu-item {
+  margin-right: 20px;
+}
+
+.header-menu-item a {
+  color: #fff !important;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out; /* add transition effect */
+}
+
+.header-menu-item a:hover {
+  color: #000 !important; /* change text color to black on hover */
+  font-weight: bold !important;
+}
+
+.header-left {
   display: flex;
   align-items: center;
-  gap: 15px;
-  flex-grow: 1; /* Take available space */
 }
 
-.store-name-full {
-  font-size: 1.5rem; /* Increase size on mobile */
-  font-weight: bold;
+
+.header-left .header-menu-item {
+  margin-right: 10px;
 }
 
-.header-cta-full {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 15px; /* Add space between CTA items */
+/* Icon styles */
+.header-left svg {
+  fill: #fff;
 }
-
-.cta-icons-full {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-
-.cta-icon-full {
-  text-decoration: none;
-  color: black;
-  font-size: 1.2rem;
-}
-
-.cta-icon-full:hover {
-  cursor: pointer;
-  color: #0070f3; /* Highlight on hover */
-}
-
-/* Mobile Menu */
-.header-menu-mobile-toggle-full {
-  background: none;
-  border: none;
-  font-size: 2.5rem; /* Larger toggle button */
-  cursor: pointer;
-  z-index: 1000;
-}
-
-/* Full Navigation Menu */
-.header-menu-mobile-full {
-  position: fixed;
-  top: 0;
-  left: -100%;
-  width: 80%; /* Adjust width for mobile */
-  height: 100%;
-  background-color: white;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  transition: left 1s ease-in-out;
-  z-index: 999;
-  padding-top: 80px; /* Adjust for full header height */
-}
-
-/* When the menu is open */
-.header-menu-mobile-full.open {
-  left: 0; /* Slide in the menu */
-}
-
-/* Menu Items */
-.header-menu-mobile-full .header-menu-item {
-  display: block;
-  padding: 20px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.header-menu-item-full a {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  display: block;
-}
-
-.header-menu-item-full button {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  display: block;
-}
-
-.header-menu-mobile-full .header-menu-item a:hover {
-  color: #0070f3; /* Highlight color */
-}
-
-.header-menu-mobile-toggle-full h3 {
-  font-size: 30px; /* Adjust size */
-  transition: color 0.3s ease; /* Smooth transition */
-}
-
-.header-menu-mobile-toggle-full h3:hover {
-  color: #333; /* Optional hover effect */
-}
-
 /*
 * --------------------------------------------------
 * components/Footer
@@ -1374,4 +1347,21 @@ button.close-outside {
 
 .product-info small {
   color: #555;
+}
+.morus-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000; /* default color */
+}
+
+.morus-title span {
+  color: inherit; /* inherit color from parent */
+}
+
+.morus-title span:nth-child(odd) {
+  color: #000; /* black color for odd child elements */
+}
+
+.morus-title span:nth-child(even) {
+  color: #A6A6A6; /* #A6A6A6 color for even child elements */
 }

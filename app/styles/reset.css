@@ -5,6 +5,8 @@ body {
    ;
   margin: 0;
   padding: 0;
+  background: radial-gradient(50% 50% at 50% 50%, #727272 0%, #353535 100%);
+
 }
 
 h1,

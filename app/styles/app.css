@@ -1,5 +1,5 @@
 :root {
-  --aside-width: 400px;
+  --aside-width: 300px;
   --cart-aside-summary-height-with-discount: 300px;
   --cart-aside-summary-height: 250px;
   --grid-item-width: 355px;
@@ -212,16 +212,14 @@ header .cta-icons > * {
 
 /* Navigation Menu */
 .header-menu-mobile {
-  position: fixed;
+  /* position: fixed; */
   top: 0;
-  right: -100%; /* Initially hidden off the screen */
-  width: 250px; /* Width of the sliding menu */
+  right: -100%;
+  width: 100%;
   height: 100%;
-  background-color: white;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  transition: left 1s ease-in-out; /* Smooth sliding transition */
-  z-index: 10000;
-  padding-top: 60px; /* Adjust as needed for spacing */
+  /* background-color: white; */
+  /* box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); */
+  transition: left 1s ease-in-out;
 }
 
 /* When the menu is open */
@@ -235,6 +233,11 @@ header .cta-icons > * {
   padding: 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  color: black !important;
+}
+
+.header-menu-mobile .header-menu-item  a {
+  color: black !important;
 }
 
 .header-menu-item a {
@@ -321,6 +324,7 @@ header .cta-icons > * {
 }
 .header-menu-mobile .header-menu-items {
   flex-direction: column;
+  color: black !important; 
  
 }
 .header-menu-item {

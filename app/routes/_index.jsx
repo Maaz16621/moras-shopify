@@ -101,25 +101,6 @@ export default function Homepage() {
             },
           }}
         >
-          <SwiperSlide>
-            <Swiper
-              className="mySwiper2 swiper-v"
-              direction={'vertical'}
-              spaceBetween={50} // Adjust space between slides as needed
-              mousewheel={true}
-              loop={false} // Disable looping for vertical slides
-              modules={[Mousewheel, EffectCreative]}
-              effect={'creative'}
-              creativeEffect={{
-                prev: {
-                  shadow: true,
-                  translate: [0, 0, -400],
-                },
-                next: {
-                  translate: [0, '100%', 0],
-                },
-              }}
-            >
             <SwiperSlide>
               <img src={image4} alt="Slide 2" />
               </SwiperSlide>
@@ -128,78 +109,145 @@ export default function Homepage() {
                 <img src={image1} alt="Slide 2" />
               </SwiperSlide>
 
+          
+        
 
-           
-
-              {/* Last slide: Footer */}
-              <SwiperSlide className="footer-slide">
-                <Footer footer={data.footer} header={data.header} publicStoreDomain={data.publicStoreDomain} />
-              </SwiperSlide>
-            </Swiper>
-          </SwiperSlide>
-
-          {/* <SwiperSlide>
-            <Swiper
-              className="mySwiper2 swiper-v"
-              direction={'vertical'}
-              spaceBetween={50}  // Adjust space between slides as needed
-              mousewheel={true}
-              loop={false} // Disable looping for vertical slides
-              effect={'creative'}
-              creativeEffect={{
-                prev: {
-                  shadow: true,
-                  translate: [0, 0, -400],
-                },
-                next: {
-                  translate: [0, '100%', 0],
-                },
-              }}
-              modules={[Mousewheel, EffectCreative]}
-            >
-              <SwiperSlide>
-                <img src={image2} alt="Slide 2" />
-              </SwiperSlide>
-
-              <SwiperSlide>
-              <img src={image4} alt="Slide 2" />
-              </SwiperSlide>
-
-           
-              <SwiperSlide className="footer-slide">
-                <Footer footer={data.footer} header={data.header} publicStoreDomain={data.publicStoreDomain} />
-              </SwiperSlide>
-            </Swiper>
-          </SwiperSlide> */}
-
-          <SwiperSlide>
-            <Swiper
-              className="mySwiper2 swiper-v"
-              direction={'vertical'}
-              spaceBetween={50} // Adjust space between slides as needed
-              mousewheel={true}
-              loop={false} // Disable looping for vertical slides
-              modules={[Mousewheel, EffectCreative]}
-              effect={'creative'}
-              creativeEffect={{
-                prev: {
-                  shadow: true,
-                  translate: [0, 0, -400],
-                },
-                next: {
-                  translate: [0, '100%', 0],
-                },
-              }}
-            >
-              <SwiperSlide><img src={image3} alt="Slide 3" /></SwiperSlide>
-              {/* Last slide: Footer */}
-              <SwiperSlide className="footer-slide">
-                <Footer footer={data.footer} header={data.header} publicStoreDomain={data.publicStoreDomain} />
-              </SwiperSlide>
-            </Swiper>
-          </SwiperSlide>
+         
         </Swiper>
       </div>
+      <div className="section mt-6">
+  <div className="container mx-auto p-4 flex justify-center items-center">
+    <div className="flex w-3/4 justify-between gap-6">
+      <div className="flex flex-col w-2/10">
+        <div className="flex items-end">
+        <div className="bg-purple-500 w-1 h-full mr-1"></div>
+<div className="bg-purple-500 w-1 h-3/4 mr-1"></div>
+<div className="bg-purple-500 w-1 h-1/3 mr-1"></div>
+
+          <h2 className="text-3xl font-bold leading-none flex flex-col">
+            <span>Best</span>
+            <span>Selling</span>
+            <span>Product</span>
+          </h2>
+        </div>
+      </div>
+      <div className="parallelogram bg-white mt-4 w-full">
+        <h2 className="text-center text-2xl underline decoration-gray-500">What our customer think about us?</h2>
+      </div>
+    </div>
+    
+  </div>
+  <div className="container mx-auto p-4 flex justify-center items-center">
+  <div className="grid grid-cols-[40%_60%] gap-4 w-3/4">
+  <div className="flex justify-center h-full items-center rounded-lg shadow-lg">
+    <img src={image1} className="h-full object-cover rounded-lg" alt="Dummy Image" />
+  </div>
+  <div className="grid grid-rows-[auto_1fr] gap-4 h-full">
+    <div className="flex justify-center items-center p-4 h-fit rounded-lg shadow-lg" style={{ backgroundColor: '#1D1C1C96' }}>
+      <p className="text-white">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      </p>
+    </div>
+    <div className="grid grid-cols-2 gap-4 flex-grow min-h-0">
+      <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
+        <img src={image2} className="rounded-lg" alt="Dummy Image" />
+      </div>
+      <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
+        <img src={image2} className="rounded-lg" alt="Dummy Image" />
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<div className="container mx-auto p-4 flex flex-col md:flex-row justify-between items-center w-3/4 mt-6">
+
+  <div className="text-left mb-8 md:mb-0">
+    <h2 className="text-3xl md:text-5xl font-bold text-white">Shop by Category</h2>
+  </div>
+  
+  <div className="flex flex-wrap justify-center md:justify-end gap-4  w-full md:w-auto">
+    <button className="border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition duration-300 ease-in-out hover:shadow-lg hover:bg-gray-900">
+      Electronics
+    </button>
+    <button className="border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition duration-300 ease-in-out hover:shadow-lg hover:bg-gray-900">
+      Fashion
+    </button>
+    <button className="border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition duration-300 ease-in-out hover:shadow-lg hover:bg-gray-900">
+      Home & Garden
+    </button>
+    <button className="border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition duration-300 ease-in-out hover:shadow-lg hover:bg-gray-900">
+      Sports
+    </button>
+    <a href="#" className="text-blue-500 hover:underline mt-2 md:mt-0">See all</a>
+  </div>
+</div>
+
+<div className="container mx-auto p-4  justify-center w-3/4 mt-6 ">
+  <h2 className="text-3xl font-bold text-center mb-8">New Arrivals</h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-white ">
+    
+ 
+  <div className="group rounded-lg overflow-hidden">
+  <div className="relative">
+    <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
+
+    <div className="absolute top-0  rounded-lg left-0 w-full h-full bg-transparent group-hover:bg-black group-hover:opacity-50 transition-all duration-300">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <p className="text-2xl font-semibold">View</p>
+      </div>
+    </div>
+  </div>
+
+   <div className="flex justify-between items-center">
+    <h3 className="text-sm">Product Name</h3>
+    <p className="text-md">PKR3000/-</p>
+  </div>
+  <div className="flex justify-between items-center">
+    <h3 className="text-lg font-semibold">Product Name</h3>
+    <p className="text-xs text-blue-500 text-right ">Stock Available</p>
+  </div>
+</div>
+<div className="rounded-lg ">
+  <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
+  <div className="flex justify-between items-center">
+    <h3 className="text-sm">Product Name</h3>
+    <p className="text-md">PKR3000/-</p>
+  </div>
+  <div className="flex justify-between items-center">
+    <h3 className="text-lg font-semibold">Product Name</h3>
+    <p className="text-xs text-blue-500 text-right ">Stock Available</p>
+  </div>
+</div>
+<div className="rounded-lg ">
+  <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
+  <div className="flex justify-between items-center">
+    <h3 className="text-sm">Product Name</h3>
+    <p className="text-md">PKR3000/-</p>
+  </div>
+  <div className="flex justify-between items-center">
+    <h3 className="text-lg font-semibold">Product Name</h3>
+    <p className="text-xs text-blue-500 text-right ">Stock Available</p>
+  </div>
+</div>
+<div className="rounded-lg ">
+  <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
+  <div className="flex justify-between items-center">
+    <h3 className="text-sm">Product Name</h3>
+    <p className="text-md">PKR3000/-</p>
+  </div>
+  <div className="flex justify-between items-center">
+    <h3 className="text-lg font-semibold">Product Name</h3>
+    <p className="text-xs text-blue-500 text-right ">Stock Available</p>
+  </div>
+</div>
+  </div>
+</div>
+
+</div>
+
+
+      <Footer footer={data.footer} header={data.header} publicStoreDomain={data.publicStoreDomain} />
     </div>
   );
 }

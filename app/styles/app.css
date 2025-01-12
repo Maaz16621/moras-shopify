@@ -1383,7 +1383,7 @@ button.close-outside {
 }
 
 .parallelogram {
-  @apply bg-white mt-4 relative;
+  @apply bg-white  relative;
   transform: skewX(-10deg);
   padding: 20px;
 }
@@ -1568,4 +1568,15 @@ border-bottom-right-radius: 12px;
 
 .card:hover .card__info-hover {
     opacity: 1;
+}
+.gradient-text {
+  background: linear-gradient(to bottom, #FFDADA 34.4%, rgba(0, 0, 0, 0.31) 84.4%);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  
+  font-family: serif;
+  line-height: 1;
+
 }

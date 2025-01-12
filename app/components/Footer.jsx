@@ -1,127 +1,39 @@
 import {Suspense} from 'react';
 import {Await, NavLink} from '@remix-run/react';
+import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Import icons from react-icons
 
 /**
  * @param {FooterProps}
- */
-export function Footer({footer: footerPromise, header, publicStoreDomain}) {
+ */export function Footer({menu, footer: footerPromise, header, publicStoreDomain}) {
   return (
     <Suspense>
       <Await resolve={footerPromise}>
         {(footer) => (
-          <footer className="new-footer-container">
-            <div className="footer__wrap">
-            <div className="footer-top-container">
-  <div className="footer-newsletter">
-    <h3>Get the latest trends first</h3>
-    <div className="slider-newsletter">
-      <form method="post" action="/contact#ContactFooter" id="ContactFooter" accept-charset="UTF-8" className="footer__newsletter newsletter-form">
-        <div className="newsletter-form__field-wrapper">
-          <div className="field">
-            <input
-              id="NewsletterForm--template--17615854469311__category_slider_izGV6z"
-              type="email"
-              name="contact[email]"
-              className="field__input"
-              placeholder="Enter your email"
-              required
-            />
-            <button type="submit" className="newsletter-form__button field__button">
-              <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-  <div className="slider-social-icon">
-    <ul className="list-unstyled list-social" role="list">
-      <li className="list-social__item">
-        <a href="#" className="link list-social__link">Facebook</a>
-      </li>
-      <li className="list-social__item">
-        <a href="#" className="link list-social__link">Instagram</a>
-      </li>
-      <li className="list-social__item">
-        <a href="#" className="link list-social__link">YouTube</a>
-      </li>
-      <li className="list-social__item">
-        <a href="#" className="link list-social__link">TikTok</a>
-      </li>
-      <li className="list-social__item">
-        <a href="#" className="link list-social__link">Pinterest</a>
-      </li>
-    </ul>
-  </div>
-</div>
+          <footer
+            className="
+              bg-[#A80202]
+              w-full
+              text-white
+              p-8
+              text-center
+            "
+            style={{ minHeight: '16rem' }}
+          >
+    <h2 className="
+  text-[4rem] md:text-[12rem] lg:text-[16rem] xl:text-[18rem]
+  font-bold
+  gradient-text
+">
+  MORUS
+</h2>
 
-              <div className="footer-bottom-container">
-              <div className="footer-logo-container">
-      <div className="footer-logo">
-        <h1>MORUS</h1>
-      </div>
-    </div>
-
-  <div className="footer-bottom-wrapper">
-    <div className="left-footer-list">
-      <ul className="footer_menu_list-ul">
-        <li className="ft-menu-li">
-          <a className="ft-menu-link" href="/pages/shopping-guide#link-faqs">FAQ'S</a>
-        </li>
-        <li className="ft-menu-li">
-          <a className="ft-menu-link" href="#">Log In/Sign Up</a>
-        </li>
-        <li className="ft-menu-li">
-          <a className="ft-menu-link" href="/pages/shopping-guide#link-how-to-buy">How To Buy</a>
-        </li>
-        <li className="ft-menu-li">
-          <a className="ft-menu-link" href="/pages/shopping-guide#link-payment">Payment</a>
-        </li>
-        <li className="ft-menu-li">
-          <a className="ft-menu-link" href="/pages/shopping-guide#link-shipping-deliveries">Shipping & Deliveries</a>
-        </li>
-        <li className="ft-menu-li">
-          <a className="ft-menu-link" href="/pages/shopping-guide#link-exchange-returns">Exchange & Returns</a>
-        </li>
-      </ul>
-    </div>
-
-
-    <div className="right-footer-list">
-      <ul className="footer_menu_list-ul">
-        <li className="ft-menu-li">
-          <a className="ft-menu-link" href="/pages/shopping-guide#link-faqs">FAQ'S</a>
-        </li>
-        <li className="ft-menu-li">
-          <a className="ft-menu-link" href="#">Log In/Sign Up</a>
-        </li>
-        <li className="ft-menu-li">
-          <a className="ft-menu-link" href="/pages/shopping-guide#link-how-to-buy">How To Buy</a>
-        </li>
-        <li className="ft-menu-li">
-          <a className="ft-menu-link" href="/pages/shopping-guide#link-payment">Payment</a>
-        </li>
-        <li className="ft-menu-li">
-          <a className="ft-menu-link" href="/pages/shopping-guide#link-shipping-deliveries">Shipping & Deliveries</a>
-        </li>
-        <li className="ft-menu-li">
-          <a className="ft-menu-link" href="/pages/shopping-guide#link-exchange-returns">Exchange & Returns</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-            </div>
+            <FooterMenu menu={menu}  />
           </footer>
         )}
       </Await>
     </Suspense>
   );
 }
-
 
 /**
  * @param {{
@@ -131,37 +43,56 @@ export function Footer({footer: footerPromise, header, publicStoreDomain}) {
  * }}
  */
 
-function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
+function FooterMenu({ menu, primaryDomainUrl, publicStoreDomain }) {
   return (
-    <nav className="footer-menu" role="navigation">
-      {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
-        if (!item.url) return null;
-        const url =
-          item.url.includes('myshopify.com') ||
-          item.url.includes(publicStoreDomain) ||
-          item.url.includes(primaryDomainUrl)
-            ? new URL(item.url).pathname
-            : item.url;
-        const isExternal = !url.startsWith('/');
-        return isExternal ? (
-          <a href={url} key={item.id} rel="noopener noreferrer" target="_blank">
-            {item.title}
-          </a>
-        ) : (
-          <NavLink
-            end
-            key={item.id}
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={url}
-          >
-            {item.title}
-          </NavLink>
-        );
-      })}
-    </nav>
+    <div className="footer-menu border-t border-b border-white py-4 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+      <nav className="menu-items flex flex-wrap justify-center md:justify-start space-x-4">
+        {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
+          if (!item.url) return null;
+          const url =
+            item.url.includes('myshopify.com') ||
+            item.url.includes(publicStoreDomain) ||
+            item.url.includes(primaryDomainUrl)
+              ? new URL(item.url).pathname
+              : item.url;
+          const isExternal = !url.startsWith('/');
+          return isExternal ? (
+            <a
+              href={url}
+              key={item.id}
+              className="hover:underline"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {item.title}
+            </a>
+          ) : (
+            <NavLink
+              end
+              key={item.id}
+              className="hover:underline"
+              to={url}
+            >
+              {item.title}
+            </NavLink>
+          );
+        })}
+      </nav>
+      <div className="social-icons flex justify-center md:justify-start space-x-4">
+        <a href="https://facebook.com" className="hover:text-gray-300" aria-label="Facebook">
+          <FaFacebook />
+        </a>
+        <a href="https://twitter.com" className="hover:text-gray-300" aria-label="Twitter">
+          <FaTwitter />
+        </a>
+        <a href="https://instagram.com" className="hover:text-gray-300" aria-label="Instagram">
+          <FaInstagram />
+        </a>
+      </div>
+    </div>
   );
 }
+
 const FALLBACK_FOOTER_MENU = {
   id: 'gid://shopify/Menu/199655620664',
   items: [

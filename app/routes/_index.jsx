@@ -16,9 +16,9 @@ import image1 from '../assets/hero1.jpg';  // import image1
 import image2 from '../assets/hero2.jpg';  // import image2
 import image3 from '../assets/outfiter.webp';
 import image4 from '../assets/hero3.webp';
-import video1 from '../assets/video1.mp4';
-import video2 from '../assets/video2.mp4';
-import video3 from '../assets/video3.mp4';
+import bottom1 from '../assets/bottom_1.png';
+import bottom2 from '../assets/bottom_2.png'
+import bottom3 from '../assets/bottom_3.png'
 import { Footer } from '~/components/Footer';
 /**
  * @type {MetaFunction}
@@ -116,27 +116,29 @@ export default function Homepage() {
         </Swiper>
       </div>
       <div className="section mt-6">
-  <div className="container mx-auto p-4 flex justify-center items-center">
-    <div className="flex w-3/4 justify-between gap-6">
-      <div className="flex flex-col w-2/10">
-        <div className="flex items-end">
+      <div className="container mx-auto p-4 flex justify-center items-center">
+  <div className="flex flex-col sm:flex-row w-3/4 justify-between gap-6">
+    <div className="flex w-auto justify-center ">
+      <div className="flex items-end">
         <div className="bg-purple-500 w-1 h-full mr-1"></div>
-<div className="bg-purple-500 w-1 h-3/4 mr-1"></div>
-<div className="bg-purple-500 w-1 h-1/3 mr-1"></div>
+        <div className="bg-purple-500 w-1 h-3/4 mr-1"></div>
+        <div className="bg-purple-500 w-1 h-1/3 mr-1"></div>
 
-          <h2 className="text-3xl font-bold leading-none flex flex-col">
-            <span>Best</span>
-            <span>Selling</span>
-            <span>Product</span>
-          </h2>
-        </div>
-      </div>
-      <div className="parallelogram bg-white mt-4 w-full">
-        <h2 className="text-center text-2xl underline decoration-gray-500">What our customer think about us?</h2>
+        <h2 className="text-3xl font-bold leading-none flex flex-col">
+          <span>Best</span>
+          <span>Selling</span>
+          <span>Product</span>
+        </h2>
       </div>
     </div>
-    
+    <div className="parallelogram bg-white w-full ">
+      <h2 className="text-center text-2xl underline decoration-gray-500">
+        What our customer think about us?
+      </h2>
+    </div>
   </div>
+</div>
+
   <div className="container mx-auto p-4 flex justify-center items-center">
   <div className="grid grid-cols-[40%_60%] gap-4 w-3/4">
   <div className="flex justify-center h-full items-center rounded-lg shadow-lg">
@@ -243,7 +245,23 @@ export default function Homepage() {
 </div>
   </div>
 </div>
-
+<div className="container mx-auto p-4 justify-center w-3/4 items-center mb-16">
+  <div className="w-1/2 text-left mb-8 ">
+    <h2 className="text-3xl md:text-5xl font-bold text-white">Hot Selling</h2>
+  </div>
+  <div className="grid grid-cols-2 gap-6">
+    
+      
+      <img src={bottom1} alt="Image 1" className="w-full h-auto rounded-xl"/>
+    
+    <div className=" grid grid-rows-2 items-stretch gap-6 ">
+     
+      <img src={bottom2}  alt="Image 2" className="w-full h-auto rounded-xl"/>
+   
+      <img src={bottom3}  alt="Image 3" className="w-full h-auto rounded-xl"/>
+    </div>
+  </div>
+</div>
 </div>
 
 

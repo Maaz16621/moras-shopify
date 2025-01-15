@@ -139,36 +139,35 @@ export default function Homepage() {
   </div>
 </div>
 
-  <div className="container mx-auto p-4 flex justify-center items-center">
-  <div className="grid grid-cols-[40%_60%] gap-4 w-3/4">
-  <div className="flex justify-center h-full items-center rounded-lg shadow-lg">
-    <img src={image1} className="h-full object-cover rounded-lg" alt="Dummy Image" />
-  </div>
-  <div className="grid grid-rows-[auto_1fr] gap-4 h-full">
-    <div className="flex justify-center items-center p-4 h-fit rounded-lg shadow-lg" style={{ backgroundColor: '#1D1C1C96' }}>
-      <p className="text-white">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      </p>
+ <div className="container mx-auto p-4 flex justify-center items-center">
+  <div className="grid grid-cols-1 md:grid-cols-[40%_60%] gap-4 w-3/4">
+    <div className="flex justify-center h-full items-center rounded-lg shadow-lg">
+      <img src={image1} className="h-full object-cover rounded-lg w-full md:w-auto" alt="Dummy Image" />
     </div>
-    <div className="grid grid-cols-2 gap-4 flex-grow min-h-0">
-      <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
-        <img src={image2} className="rounded-lg" alt="Dummy Image" />
+    <div className="grid grid-rows-[auto_1fr] gap-4 h-full">
+      <div className="flex justify-center items-center p-4 h-fit rounded-lg shadow-lg bg-opacity-60" style={{ backgroundColor: '#1D1C1C' }}>
+        <p className="text-white">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        </p>
       </div>
-      <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
-        <img src={image2} className="rounded-lg" alt="Dummy Image" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow min-h-0">
+        <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
+          <img src={image2} className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
+        </div>
+        <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
+          <img src={image2} className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-</div>
 <div className="container mx-auto p-4 flex flex-col md:flex-row justify-between items-center w-3/4 mt-6">
-
   <div className="text-left mb-8 md:mb-0">
     <h2 className="text-3xl md:text-5xl font-bold text-white">Shop by Category</h2>
   </div>
   
-  <div className="flex flex-wrap justify-center md:justify-end gap-4  w-full md:w-auto">
+  <div className="flex flex-wrap justify-start md:justify-end gap-4 w-full md:w-auto">
     <button className="border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition duration-300 ease-in-out hover:shadow-lg hover:bg-gray-900">
       Electronics
     </button>
@@ -184,6 +183,7 @@ export default function Homepage() {
     <a href="#" className="text-blue-500 hover:underline mt-2 md:mt-0">See all</a>
   </div>
 </div>
+
 
 <div className="container mx-auto p-4  justify-center w-3/4 mt-6 ">
   <h2 className="text-3xl font-bold text-center mb-8">New Arrivals</h2>
@@ -246,22 +246,18 @@ export default function Homepage() {
   </div>
 </div>
 <div className="container mx-auto p-4 justify-center w-3/4 items-center mb-16">
-  <div className="w-1/2 text-left mb-8 ">
+  <div className="w-full md:w-1/2 text-left mb-8">
     <h2 className="text-3xl md:text-5xl font-bold text-white">Hot Selling</h2>
   </div>
-  <div className="grid grid-cols-2 gap-6">
-    
-      
-      <img src={bottom1} alt="Image 1" className="w-full h-auto rounded-xl"/>
-    
-    <div className=" grid grid-rows-2 items-stretch gap-6 ">
-     
-      <img src={bottom2}  alt="Image 2" className="w-full h-auto rounded-xl"/>
-   
-      <img src={bottom3}  alt="Image 3" className="w-full h-auto rounded-xl"/>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <img src={bottom1} alt="Image 1" className="w-full h-auto rounded-xl"/>
+    <div className="grid grid-rows-2 items-stretch gap-6">
+      <img src={bottom2} alt="Image 2" className="w-full h-auto rounded-xl"/>
+      <img src={bottom3} alt="Image 3" className="w-full h-auto rounded-xl"/>
     </div>
   </div>
 </div>
+
 </div>
 
 

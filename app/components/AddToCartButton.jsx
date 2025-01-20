@@ -33,7 +33,8 @@ import {CartForm} from '@shopify/hydrogen';
               color: "#fff", // White text color
               padding: "10px 20px", // Button padding
               border: "none", // No border
-              borderRadius: "0", // No border radius
+              
+              borderRadius: "15px", // No border radius
               cursor: disabled ? "not-allowed" : "pointer", // Pointer for enabled, not-allowed for disabled
               textTransform: "uppercase", // Optional: text in uppercase
             }}

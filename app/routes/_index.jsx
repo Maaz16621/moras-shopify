@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/mousewheel';
 import 'swiper/css/effect-creative';
+import { useState, useEffect } from 'react';
 
 
 // import required modules
@@ -20,6 +21,7 @@ import bottom1 from '../assets/bottom_1.png';
 import bottom2 from '../assets/bottom_2.png'
 import bottom3 from '../assets/bottom_3.png'
 import { Footer } from '~/components/Footer';
+import { AddToCartButton } from '~/components/AddToCartButton';
 /**
  * @type {MetaFunction}
  */
@@ -78,43 +80,97 @@ function loadDeferredData({context}) {
 
 export default function Homepage() {
   const data = useLoaderData();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [showModels, setShowModels] = useState(true);
+  const [models, setModels] = useState([
+    
+    { id: 1, image: 'model1.png', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
+    { id: 2, image: 'model2.png',  text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
+    { id: 3, image: 'model3.png', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
+  ]);
 
+  const handleButtonClick = () => {
+    setShowModels(false);
+    setActiveIndex((prevIndex) => (prevIndex + 1) % models.length);
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % models.length);
+    }, 5000);
+    return () => clearInterval(intervalId);
+  }, [models]);
   return (
     <div className="home">
-      <div className="slider-container">
-        {/* Full-Screen Horizontal Slider */}
-        <Swiper
-          className="mySwiper swiper-h"
-          spaceBetween={0}
-          slidesPerView={1}
-          navigation={true}
-          loop={true} // Looping enabled for horizontal slider
-          modules={[EffectCreative]}
-          effect={'creative'}
-          creativeEffect={{
-            prev: {
-              shadow: true,
-              translate: [0, 0, -400],
-            },
-            next: {
-              translate: ['100%', 0, 0],
-            },
-          }}
-        >
-            <SwiperSlide>
-              <img src={image4} alt="Slide 2" />
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <img src={image1} alt="Slide 2" />
-              </SwiperSlide>
-
-          
+   <div className="slider-container">
+      <div className="hero-bg" />
+      <div className="hero-logo" />
+      {showModels ? (
+        <div className="models-container">
+          {models.map((model, index) => (
+            <div
+              key={model.id}
+              className={`model-${index + 1} ${activeIndex === index ? 'active' : ''}`}
+            >
+              <img src={model.image} alt={model.text} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className={`models-container ${showModels ? '' : 'slide-left'}`}>
+        <div
+        className="background-image"
+        style={{
+        backgroundImage: `url(${models[activeIndex].image})`,
+        opacity: 0.3, /* Apply opacity to the background image */
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        zIndex: -1, /* Ensure the background stays behind the content */
+        }}
+        ></div>
         
-
-         
-        </Swiper>
+        {/* Content */}
+        <div
+        className={`model`}
+        >
+        <img 
+  key={models[activeIndex].image} 
+  src={models[activeIndex].image} 
+  alt={models[activeIndex].text} 
+  style={{
+    animation: 'fadeIn 1s ease-in-out'
+  }} 
+/>
+        </div>
+        <div className="text-container slide-in">
+        <div className={`text-${activeIndex + 1} active-text`}>
+        <h2 className='text-4xl text-white text-uppercase'>{models[activeIndex].text}</h2>
+        <p className='text-xl text-white'>Stuff: {models[activeIndex].stuff}</p>
+        <p className='text-xl text-white'>Sizes: {models[activeIndex].size}</p>
+        <div className='flex gap-4 mt-6'>
+        <button className='view-btn'>View</button>
+        <AddToCartButton> Add to Cart</AddToCartButton>
+        </div>
+        </div>
+        </div>
+        </div>
+        
+      
+      )}
+      <div className="right-button" onClick={handleButtonClick}>
+        <div className="circle">
+          <svg width="24" height="24" viewBox="0 0 32 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M14 5l7 7-7 7" />
+          </svg>
+        </div>
       </div>
+    </div>
       <div className="section mt-6">
       <div className="container mx-auto p-4 flex justify-center items-center">
   <div className="flex flex-col sm:flex-row w-3/4 justify-between gap-6">

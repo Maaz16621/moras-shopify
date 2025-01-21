@@ -89,17 +89,16 @@ export default function Homepage() {
     { id: 3, image: 'model3.png', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
   ]);
 
-  const handleButtonClick = () => {
+  const handleRightButtonClick = () => {
     setShowModels(false);
     setActiveIndex((prevIndex) => (prevIndex + 1) % models.length);
   };
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % models.length);
-    }, 5000);
-    return () => clearInterval(intervalId);
-  }, [models]);
+  const handleLeftButtonClick = () => {
+    setShowModels(false);
+    setActiveIndex((prevIndex) => (prevIndex - 1 + models.length) % models.length);
+  };
+
   return (
     <div className="home">
    <div className="slider-container">
@@ -119,19 +118,10 @@ export default function Homepage() {
       ) : (
         <div className={`models-container ${showModels ? '' : 'slide-left'}`}>
         <div
-        className="background-image"
+        className="model-bg"
         style={{
         backgroundImage: `url(${models[activeIndex].image})`,
-        opacity: 0.3, /* Apply opacity to the background image */
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundSize: 'contain',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        zIndex: -1, /* Ensure the background stays behind the content */
+      
         }}
         ></div>
         
@@ -163,10 +153,17 @@ export default function Homepage() {
         
       
       )}
-      <div className="right-button" onClick={handleButtonClick}>
+      <div className="right-button" onClick={handleRightButtonClick}>
         <div className="circle">
           <svg width="24" height="24" viewBox="0 0 32 24" fill="none" stroke="white" stroke-width="2">
             <path d="M14 5l7 7-7 7" />
+          </svg>
+        </div>
+      </div>
+      <div className="left-button" onClick={handleLeftButtonClick}>
+        <div className="circle">
+          <svg width="24" height="24" viewBox="0 0 32 24" fill="none" stroke="white" stroke-width="2">
+          <path d="M18 5l-7 7 7 7" />
           </svg>
         </div>
       </div>

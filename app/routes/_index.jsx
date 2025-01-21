@@ -8,7 +8,6 @@ import 'swiper/css/mousewheel';
 import 'swiper/css/effect-creative';
 import { useState, useEffect } from 'react';
 
-
 // import required modules
 import { EffectCreative } from 'swiper/modules';
 
@@ -141,7 +140,7 @@ const [lastModel, setLastModel] = useState(false);
               className={`model-${index + 1} ${activeIndex === index ? 'active' : ''}`}
               oxygen-cache-control="public, max-age=31536000" // cache for 1 year
             >
-              <img src={model.image} alt={model.text} />
+              <Image src={model.image} alt={model.text} />
             </div>
           ))}
         </div>
@@ -159,7 +158,7 @@ const [lastModel, setLastModel] = useState(false);
         <div
         className={`model`}
         >
-        <img 
+        <Image 
   key={models[activeIndex].image} 
   src={models[activeIndex].image} 
   alt={models[activeIndex].text} 

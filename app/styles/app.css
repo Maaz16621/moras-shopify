@@ -1629,6 +1629,15 @@ border-bottom-right-radius: 12px;
   width: auto;
   border-radius: 10px;
   overflow: hidden;
+  animation: fadeIn 1s ease-in-out;
+  align-items: flex-end;
+  display: flex;
+}
+.model {
+  position: relative;
+  width: auto;
+  border-radius: 10px;
+  overflow: hidden;
   animation: fadeIn 2s ease-in-out;
   align-items: flex-end;
   display: flex;

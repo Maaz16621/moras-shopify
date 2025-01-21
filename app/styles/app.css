@@ -1819,7 +1819,6 @@ border-bottom-right-radius: 12px;
 
 @media (max-width: 498px) {
   .model-bg{
-    background-size: contain !important;
     background-position: bottom;
     height: 100% !important;
     top: 10%;

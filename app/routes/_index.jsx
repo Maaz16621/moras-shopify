@@ -84,9 +84,9 @@ export default function Homepage() {
   const [showModels, setShowModels] = useState(true);
   const [models, setModels] = useState([
     
-    { id: 1, image: 'model1.png', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
-    { id: 2, image: 'model2.png',  text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
-    { id: 3, image: 'model3.png', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
+    { id: 1, image: 'https://cdn.shopify.com/s/files/1/0726/8538/8018/files/model1.png?v=1737479259', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
+    { id: 2, image: 'https://cdn.shopify.com/s/files/1/0726/8538/8018/files/model2.png?v=1737479262',  text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
+    { id: 3, image: 'https://cdn.shopify.com/s/files/1/0726/8538/8018/files/model3.png?v=1737479259', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
   ]);
 const [lastModel, setLastModel] = useState(false);
   const handleRightButtonClick = () => {

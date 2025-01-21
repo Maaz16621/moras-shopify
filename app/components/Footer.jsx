@@ -19,8 +19,8 @@ import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Import i
             "
             style={{ minHeight: '16rem' }}
           >
-    <h2 className="
-  text-[4rem] md:text-[12rem] lg:text-[16rem] xl:text-[18rem]
+    <h2  style={{fontSize:'20vw'}} className="
+ 
   font-bold
   gradient-text
 ">

@@ -88,22 +88,49 @@ export default function Homepage() {
     { id: 2, image: 'model2.png',  text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
     { id: 3, image: 'model3.png', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
   ]);
-
+const [lastModel, setLastModel] = useState(false);
   const handleRightButtonClick = () => {
-    setShowModels(false);
-    setActiveIndex((prevIndex) => (prevIndex + 1) % models.length);
+    
+   
+   if (activeIndex === 0) {
+      setShowModels(false);
+      setActiveIndex(1);
+    } else if(activeIndex === 1){
+      setShowModels(false);
+      setActiveIndex(2);
+    } else if(activeIndex === 2){
+      setShowModels(false);
+      
+      setLastModel(true);
+      setActiveIndex(0);
+    }
   };
-
   const handleLeftButtonClick = () => {
-    setShowModels(false);
-    setActiveIndex((prevIndex) => (prevIndex - 1 + models.length) % models.length);
+    if (activeIndex === 0) {
+      setLastModel(false);
+      setShowModels(false);
+      setActiveIndex(2);
+    } else if (activeIndex === 1) {
+      setShowModels(true);
+      setActiveIndex(0);
+    } else if (activeIndex === 2) {
+      setShowModels(false);
+      setActiveIndex(1);
+    }
   };
-
   return (
     <div className="home">
-   <div className="slider-container">
-      <div className="hero-bg" />
-      <div className="hero-logo" />
+<div className="slider-container">
+  <div className="hero-bg" />
+  <div className={`hero-logo ${showModels ? '' : 'hidden'}`}>
+    <span className="letter white" >M</span>
+    <span className="letter black" style={{  marginLeft: '-8%'}}>O</span>
+    <span className="letter white" style={{  marginLeft: '-8%'}}>R</span>
+    <span className="letter black" style={{  marginLeft: '-8%'}}>U</span>
+    <span className="letter white" style={{  marginLeft: '-8%'}}>S</span>
+  </div>
+
+
       {showModels ? (
         <div className="models-container">
           {models.map((model, index) => (
@@ -153,20 +180,24 @@ export default function Homepage() {
         
       
       )}
-      <div className="right-button" onClick={handleRightButtonClick}>
-        <div className="circle">
-          <svg width="24" height="24" viewBox="0 0 32 24" fill="none" stroke="white" stroke-width="2">
-            <path d="M14 5l7 7-7 7" />
-          </svg>
+    {activeIndex < 3 && lastModel == false && (
+        <div className="right-button" onClick={handleRightButtonClick}>
+          <div className="circle">
+            <svg width="24" height="24" viewBox="0 0 32 24" fill="none" stroke="white" strokeWidth="2">
+              <path d="M14 5l7 7-7 7" />
+            </svg>
+          </div>
         </div>
-      </div>
-      <div className="left-button" onClick={handleLeftButtonClick}>
-        <div className="circle">
-          <svg width="24" height="24" viewBox="0 0 32 24" fill="none" stroke="white" stroke-width="2">
-          <path d="M18 5l-7 7 7 7" />
-          </svg>
-        </div>
-      </div>
+      )}
+     {activeIndex >= 0 && showModels === false && (
+  <div className="left-button" onClick={handleLeftButtonClick}>
+    <div className="circle">
+      <svg width="24" height="24" viewBox="0 0 32 24" fill="none" stroke="white" strokeWidth="2">
+        <path d="M18 5l-7 7 7 7" />
+      </svg>
+    </div>
+  </div>
+)}
     </div>
       <div className="section mt-6">
       <div className="container mx-auto p-4 flex justify-center items-center">

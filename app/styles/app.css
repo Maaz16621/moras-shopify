@@ -21,11 +21,12 @@ img {
 * --------------------------------------------------
 */
 aside {
-  background: var(--color-light);
+  background: rgba(0, 0, 0, 0.5); /* Add background opacity */
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
   height: 100vh;
   max-width: var(--aside-width);
   min-width: var(--aside-width);
+  color: white;
   position: fixed;
   right: calc(-1 * var(--aside-width));
   top: 0;
@@ -42,6 +43,7 @@ aside header {
 
 aside header h3 {
   margin: 0;
+  color: white
 }
 
 aside header .close {
@@ -460,7 +462,6 @@ header .cta-icons > * {
 }
 
 .predictive-search-form {
-  background: var(--color-light);
   position: sticky;
   top: 0;
   display: flex;
@@ -468,6 +469,9 @@ header .cta-icons > * {
 
 .predictive-search-result {
   margin-bottom: 2rem;
+}
+.predictive-search-result hr{
+  color:white;
 }
 
 .predictive-search-result h5 {
@@ -1099,14 +1103,17 @@ button.close-outside {
   padding: 10px 14px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.5);
   font-size: 1rem;
+  color: white;
   transition: border-color 0.3s;
 }
 
 .predictive-search input[type='search']:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+  border-color: #ffffff;
+  box-shadow: 0px 0px 5px rgba(114, 114, 114, 0.5);
+  color: white;
 }
 
 .predictive-search button {
@@ -1161,9 +1168,8 @@ button.close-outside {
   align-items: center;
   gap: 12px;
   padding: 12px;
-  background: white;
   border-radius: 8px;
-  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
+  color: white;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
@@ -1726,6 +1732,7 @@ border-bottom-right-radius: 12px;
 
 .hero-logo .black {
   color: black;
+  z-index: -1;
 }
 
 

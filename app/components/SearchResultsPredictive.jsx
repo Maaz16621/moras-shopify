@@ -182,6 +182,7 @@ function SearchResultsPredictiveProducts({term, products, closeSearch}) {
 
           const image = product?.variants?.nodes?.[0].image;
           return (
+            <>
             <li className="predictive-search-result-item" key={product.id}>
               <Link to={productUrl} onClick={closeSearch}>
                 {image && (
@@ -201,7 +202,11 @@ function SearchResultsPredictiveProducts({term, products, closeSearch}) {
                   </small>
                 </div>
               </Link>
+            
             </li>
+            <hr style={{ borderColor: 'white', borderWidth: '1px', borderStyle: 'solid', height: '0', margin: '0' }} />
+
+              </>
           );
         })}
       </ul>

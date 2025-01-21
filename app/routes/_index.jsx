@@ -251,16 +251,16 @@ const [lastModel, setLastModel] = useState(false);
   </div>
   
   <div className="flex flex-wrap justify-start md:justify-end gap-4 w-full md:w-auto">
-    <button className="border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition duration-300 ease-in-out hover:shadow-lg hover:bg-gray-900">
+    <button className="border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition duration-300 ease-in-out hover:shadow-lg hover:bg-red-900">
       Electronics
     </button>
-    <button className="border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition duration-300 ease-in-out hover:shadow-lg hover:bg-gray-900">
+    <button className="border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition duration-300 ease-in-out hover:shadow-lg hover:bg-red-900">
       Fashion
     </button>
-    <button className="border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition duration-300 ease-in-out hover:shadow-lg hover:bg-gray-900">
+    <button className="border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition duration-300 ease-in-out hover:shadow-lg hover:bg-red-900">
       Home & Garden
     </button>
-    <button className="border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition duration-300 ease-in-out hover:shadow-lg hover:bg-gray-900">
+    <button className="border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition duration-300 ease-in-out hover:shadow-lg hover:bg-red-900">
       Sports
     </button>
     <a href="#" className="text-blue-500 hover:underline mt-2 md:mt-0">See all</a>

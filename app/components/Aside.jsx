@@ -53,7 +53,7 @@ export function Aside({children, heading, type}) {
     fontSize: '2rem', // Increase the font size
     padding: '10px 15px', // Add padding for better accessibility
     backgroundColor: 'transparent', // Keep the background transparent
-    color: '#333', // Use a visible color
+    color: 'white', // Use a visible color
     border: 'none', // Remove border
     borderRadius: '50%', // Add rounded corners for aesthetic
     cursor: 'pointer', // Change cursor to pointer on hover

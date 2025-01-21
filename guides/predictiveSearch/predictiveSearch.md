@@ -382,6 +382,7 @@ SearchResultsPredictive.Products = function ({
                 </div>
               </Link>
             </li>
+          
           );
         })}
       </ul>

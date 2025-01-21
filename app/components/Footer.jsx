@@ -1,6 +1,7 @@
 import {Suspense} from 'react';
 import {Await, NavLink} from '@remix-run/react';
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Import icons from react-icons
+import { FaFacebook, FaTwitter, FaInstagram, FaWhatsapp } from 'react-icons/fa'; // Import icons from react-icons
+import { FaX } from 'react-icons/fa6';
 
 /**
  * @param {FooterProps}
@@ -60,7 +61,7 @@ function FooterMenu({ menu, primaryDomainUrl, publicStoreDomain }) {
             <a
               href={url}
               key={item.id}
-              className="hover:underline"
+             
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -70,7 +71,7 @@ function FooterMenu({ menu, primaryDomainUrl, publicStoreDomain }) {
             <NavLink
               end
               key={item.id}
-              className="hover:underline"
+             
               to={url}
             >
               {item.title}
@@ -82,11 +83,15 @@ function FooterMenu({ menu, primaryDomainUrl, publicStoreDomain }) {
         <a href="https://facebook.com" className="hover:text-gray-300" aria-label="Facebook">
           <FaFacebook />
         </a>
-        <a href="https://twitter.com" className="hover:text-gray-300" aria-label="Twitter">
-          <FaTwitter />
-        </a>
+       
         <a href="https://instagram.com" className="hover:text-gray-300" aria-label="Instagram">
           <FaInstagram />
+        </a>
+        <a href="https://whatsapp.com" className="hover:text-gray-300" aria-label="Instagram">
+          <FaWhatsapp />
+        </a>
+        <a href="https://twitter.com" className="hover:text-gray-300" aria-label="Twitter">
+          <FaX />
         </a>
       </div>
     </div>

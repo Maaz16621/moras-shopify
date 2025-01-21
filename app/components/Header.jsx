@@ -182,7 +182,7 @@ function CartToggle({ cart }) {
   return (
     <Suspense fallback={<CartBadge count={null} />}>
       <Await resolve={cart}>
-        <div className="header-menu-item">
+        <div className="">
           <CartBanner />
         </div>
       </Await>

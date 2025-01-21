@@ -333,16 +333,31 @@ header .cta-icons > * {
 .header-menu-item {
   margin-right: 20px;
 }
-
 .header-menu-item a {
-  color: #fff !important;
+  position: relative;
+  color: #fff; /* Initial text color */
   text-decoration: none;
-  transition: color 0.3s ease-in-out; /* add transition effect */
+}
+
+.header-menu-item a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #000; /* Color of the underline */
+  transition: width 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  transform: translateX(-50%);
 }
 
 .header-menu-item a:hover {
-  color: #000 !important; /* change text color to black on hover */
-  font-weight: bold !important;
+  color: #000 !important ; /* Change text color to black on hover */
+}
+
+.header-menu-item a:hover::after {
+  width: 100%; /* Full width on hover */
+  transform: translateX(-50%); /* Keep centered while expanding */
 }
 
 .header-left {
@@ -1844,4 +1859,33 @@ border-bottom-right-radius: 12px;
     height: 100% !important;
     top: 10%;
   }
+}
+
+.footer-menu .menu-items a {
+  position: relative;
+  display: inline-block;
+  color: #fff; /* Initial text color */
+  text-decoration: none;
+  padding-bottom: 5px; /* Space for the underline */
+}
+
+.footer-menu .menu-items a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #000; /* Color of the underline */
+  transition: width 0.3s ease, transform 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.footer-menu .menu-items a:hover {
+  color: #000; /* Change text color to black on hover */
+}
+
+.footer-menu .menu-items a:hover::after {
+  width: 100%; /* Full width on hover */
+  transform: translateX(-50%); /* Keep centered while expanding */
 }

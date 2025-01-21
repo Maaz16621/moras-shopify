@@ -231,8 +231,7 @@ const [lastModel, setLastModel] = useState(false);
     <div className="grid grid-rows-[auto_1fr] gap-4 h-full">
       <div className="flex justify-center items-center p-4 h-fit rounded-lg shadow-lg bg-opacity-60" style={{ backgroundColor: '#1D1C1C' }}>
         <p className="text-white">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        </p>
+        MORUS crafts fashion with meticulous care, ensuring 100% deliverance on excellence. Our collection showcases stunning designs, exceptional craftsmanship, and innovative style, blending aesthetics and functionality. Rooted in men's classic style, we pursue perfection, quality, and unique designs with unparalleled customer service.</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow min-h-0">
         <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
@@ -291,7 +290,7 @@ const [lastModel, setLastModel] = useState(false);
   </div>
   <div className="flex justify-between items-center">
     <h3 className="text-lg font-semibold">Product Name</h3>
-    <p className="text-xs text-blue-500 text-right ">Stock Available</p>
+    <p className="text-xs text-green-500 text-right ">Stock Available</p>
   </div>
 </div>
 <div className="rounded-lg ">
@@ -302,7 +301,7 @@ const [lastModel, setLastModel] = useState(false);
   </div>
   <div className="flex justify-between items-center">
     <h3 className="text-lg font-semibold">Product Name</h3>
-    <p className="text-xs text-blue-500 text-right ">Stock Available</p>
+    <p className="text-xs text-green-500 text-right ">Stock Available</p>
   </div>
 </div>
 <div className="rounded-lg ">
@@ -313,7 +312,7 @@ const [lastModel, setLastModel] = useState(false);
   </div>
   <div className="flex justify-between items-center">
     <h3 className="text-lg font-semibold">Product Name</h3>
-    <p className="text-xs text-blue-500 text-right ">Stock Available</p>
+    <p className="text-xs text-green-500 text-right ">Stock Available</p>
   </div>
 </div>
 <div className="rounded-lg ">
@@ -324,7 +323,7 @@ const [lastModel, setLastModel] = useState(false);
   </div>
   <div className="flex justify-between items-center">
     <h3 className="text-lg font-semibold">Product Name</h3>
-    <p className="text-xs text-blue-500 text-right ">Stock Available</p>
+    <p className="text-xs text-green-500 text-right ">Stock Available</p>
   </div>
 </div>
   </div>

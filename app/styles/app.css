@@ -1742,15 +1742,22 @@ border-bottom-right-radius: 12px;
 .text-container.slide-in {
   opacity: 1;
 }
-.view-btn{
-  background-color: #000; 
+.view-btn {
+  background-color: #000;
   color: #fff;
   padding: 10px 20px;
   border: none;
-  
   border-radius: 15px;
-  cursor:  pointer;
+  cursor: pointer;
   text-transform: uppercase;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.view-btn:hover {
+  background-color: #fff;
+  color: #000;
+  transform: scale(1.1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 .model-bg{
   opacity: 0.3; /* Apply opacity to the background image */

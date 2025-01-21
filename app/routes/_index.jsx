@@ -26,7 +26,7 @@ import { AddToCartButton } from '~/components/AddToCartButton';
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: 'Hydrogen | Home'}];
+  return [{title: 'MORUS'}];
 };
 
 /**

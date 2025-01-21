@@ -1763,6 +1763,10 @@ border-bottom-right-radius: 12px;
   background-position: bottom;
   background-repeat: no-repeat;
   z-index: -1; /* Ensure the background stays behind the content */
+  transition: background-size 0.5s ease-in-out, 
+              background-position 0.5s ease-in-out, 
+              height 0.5s ease-in-out, 
+              top 0.5s ease-in-out;
 }
 
 @media (max-width: 768px) {

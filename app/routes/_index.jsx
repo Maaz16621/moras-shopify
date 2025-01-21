@@ -79,6 +79,7 @@ function loadDeferredData({context}) {
 }
 
 export default function Homepage() {
+
   const data = useLoaderData();
   const [activeIndex, setActiveIndex] = useState(0);
   const [showModels, setShowModels] = useState(true);
@@ -118,6 +119,7 @@ const [lastModel, setLastModel] = useState(false);
       setActiveIndex(1);
     }
   };
+  
   return (
     <div className="home">
 <div className="slider-container">
@@ -137,6 +139,7 @@ const [lastModel, setLastModel] = useState(false);
             <div
               key={model.id}
               className={`model-${index + 1} ${activeIndex === index ? 'active' : ''}`}
+              oxygen-cache-control="public, max-age=31536000" // cache for 1 year
             >
               <img src={model.image} alt={model.text} />
             </div>

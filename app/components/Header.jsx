@@ -155,23 +155,29 @@ function CartBadge({ count }) {
 
   return (
     <a
-      href="/cart"
-      onClick={(e) => {
-        e.preventDefault();
-        open('cart');
-        publish('cart_viewed', {
-          cart,
-          prevCart,
-          shop,
-          url: window.location.href || '',
-        });
-      }}
-    >
-      <FaShoppingCart size={16} /> {/* Cart Icon */}
-      {count !== null && count > 0 && (
-        <span className="cart-count">{count}</span> // Show count if available
-      )}
-    </a>
+    href="/cart"
+    onClick={(e) => {
+      e.preventDefault();
+      open('cart');
+      publish('cart_viewed', {
+        cart,
+        prevCart,
+        shop,
+        url: window.location.href || '',
+      });
+    }}
+    className="relative" // To position the cart count relative to the icon
+  >
+    <FaShoppingCart size={16} /> {/* Cart Icon */}
+    
+    {/* Cart Count */}
+    {count !== null && count > 0 && (
+      <span className="absolute top-0 right-0 flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-black rounded-full translate-x-1/2 -translate-y-1/2">
+        {count}
+      </span>
+    )}
+  </a>
+  
   );
 }
 

@@ -1,4 +1,4 @@
-import {Suspense, useState} from 'react';
+import {Suspense, useState, useEffect} from 'react';
 import {defer, redirect} from '@shopify/remix-oxygen';
 import { Link } from '@remix-run/react';
 import {Await, useLoaderData} from '@remix-run/react';
@@ -9,6 +9,7 @@ import {
   Analytics,
   useOptimisticVariant,
 } from '@shopify/hydrogen';
+import { FaShoppingBag, FaShoppingCart } from "react-icons/fa";
 import {getVariantUrl} from '~/lib/variants';
 import {ProductPrice} from '~/components/ProductPrice';
 import {ProductImage} from '~/components/ProductImage';
@@ -133,318 +134,205 @@ function redirectToFirstVariant({product, request}) {
       status: 302,
     },
   );
-}
-
-export default function Product() {
-  const { product, relatedProducts, variants} = useLoaderData();
-  console.log(useLoaderData());
+}export default function Product() {
+  const { product, relatedProducts } = useLoaderData();
   const selectedVariant = product.selectedVariant;
   const { title, descriptionHtml } = product;
-  
+
   const [mainImage, setMainImage] = useState(
     product.media.edges[0]?.node.previewImage.url
   );
+  const [fade, setFade] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState(null);
   const variantImages = product.media.edges.map((edge) => edge.node.previewImage);
 
-  // Handle increase and decrease of quantity
+  const sizeOption = product.options.find((option) => option.name === "Size");
+  const sizes = sizeOption ? sizeOption.optionValues.map((size) => size.name) : [];
+
   const handleQuantityChange = (type) => {
     setQuantity((prev) => (type === "increase" ? prev + 1 : Math.max(1, prev - 1)));
   };
-  const sizeOption = product.options.find(option => option.name === 'Size');
-  const sizes = sizeOption ? sizeOption.optionValues.map(size => size.name) : [];
-  // Handle add to cart action
-  const handleAddToCart = () => {
-    console.log("Adding to cart:", {
-      productId: product.id,
-      quantity,
-      variantId: selectedVariant.id,
-    });
-    alert("Product added to cart!");
+
+  const handleImageChange = (imageUrl) => {
+    setFade(true); // Trigger fade animation
+    setTimeout(() => {
+      setMainImage(imageUrl);
+      setFade(false); // Reset animation after the transition
+    }, 200); // Match this timeout to the CSS animation duration
   };
 
+  useEffect(() => {
+    document.body.style.background = "linear-gradient(180deg, #A80202 30%, #7A0202 66%)";
+
+    return () => {
+      document.body.style.background = null;
+    };
+  }, []);
+
   return (
-    <div
-      style={{
-        padding: "20px",
-        maxWidth: "1200px",
-        margin: "100px auto",
-      }}
-    >
-      {/* Main Product Section */}
+    <div className="px-5 max-w-5xl mx-auto mt-24">
+  {/* Main Product Section */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-white">
+    {/* Left Section: Product Images */}
+    <div className="space-y-4">
+      {/* Main Image with Fade Animation */}
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 2fr",
-          gap: "40px",
-          backgroundColor: "#fff",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-          borderRadius: "10px",
-          padding: "20px",
-          color: "#333",
-        }}
+        className={`w-full h-102 overflow-hidden rounded-lg bg-gray-200 transition-opacity duration-300 ${
+          fade ? "opacity-0" : "opacity-100"
+        }`}
       >
-        {/* Left Section: Product Images */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "20px",
-          }}
-        >
-          {/* Variant Images */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-            }}
-          >
-            {variantImages.map((image, index) => (
-              <img
-                key={index}
-                src={image.url}
-                alt={image.altText || `Image ${index + 1}`}
-                style={{
-                  width: "60px",
-                  height: "60px",
-                  objectFit: "contain",
-                  borderRadius: "8px",
-                  border: mainImage === image.url ? "2px solid #000" : "1px solid #ccc",
-                  cursor: "pointer",
-                }}
-                onClick={() => setMainImage(image.url)}
-              />
-            ))}
-          </div>
-  
-          {/* Main Image */}
-          <div
-            style={{
-              width: "100%",
-              height: "500px",
-              borderRadius: "10px",
-              overflow: "hidden",
-            }}
-          >
-            <img
-              src={mainImage}
-              alt={title}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-                borderRadius: "10px",
-              }}
-            />
-          </div>
-        </div>
-  
-        {/* Right Section: Product Details */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "2.5rem",
-              margin: 0,
-            }}
-          >
-            {title}
-          </h1>
-          <ProductPrice
-            price={selectedVariant?.price}
-            compareAtPrice={selectedVariant?.compareAtPrice}
-          />
-          <h3>Description</h3>
-          <div
-            dangerouslySetInnerHTML={{ __html: descriptionHtml }}
-            style={{
-              textAlign: "justify",
-            }}
-          />
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-              marginBottom: "20px",
-            }}
-          >
-            {sizes.length > 0 && (
-              <div>
-                <span>Size:</span>
-                {sizes.map((size, index) => (
-                  <button
-                    key={index}
-                    style={{
-                      padding: "10px",
-                      borderRadius: "5px",
-                      backgroundColor: selectedSize === size ? "#000" : "#fff",
-                      color: selectedSize === size ? "#fff" : "#333",
-                      border: "1px solid #ccc",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setSelectedSize(size)}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-  
-          {/* Quantity Selector */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
-            <span>Quantity:</span>
-            <div
-              style={{
-                display: "flex",
-                gap: "5px",
-                alignItems: "center",
-              }}
-            >
-              <button
-                onClick={() => handleQuantityChange("decrease")}
-                style={{
-                  width: "30px",
-                  height: "30px",
-                  backgroundColor: "#000",
-                  color: "#fff",
-                  border: "1px solid #000",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                }}
-              >
-                -
-              </button>
-              <input
-                type="number"
-                value={quantity}
-                readOnly
-                style={{
-                  width: "50px",
-                  backgroundColor: "#f9f9f9",
-                  color: "#333",
-                }}
-              />
-              <button
-                onClick={() => handleQuantityChange("increase")}
-                style={{
-                  width: "30px",
-                  height: "30px",
-                  backgroundColor: "#000",
-                  color: "#fff",
-                  border: "1px solid #000",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                }}
-              >
-                +
-              </button>
-            </div>
-          </div>
-  
-          {/* Add to Cart Button */}
-          <AddToCartButton
-            disabled={!selectedVariant || !selectedVariant.availableForSale}
-            lines={
-              selectedVariant
-                ? [
-                    {
-                      merchandiseId: selectedVariant.id,
-                      quantity: quantity,
-                      selectedVariant,
-                    },
-                  ]
-                : []
-            }
-          >
-            {selectedVariant?.availableForSale ? "Add to cart" : "Sold out"}
-          </AddToCartButton>
-        </div>
+        <img
+          src={mainImage}
+          alt={title}
+          className="w-full h-full object-contain"
+        />
       </div>
-      <RelatedProducts relatedProducts={relatedProducts} />
-      {/* Related Products Section */}
+      <div className="flex justify-center gap-2 mt-2">
+        {variantImages.map((_, index) => (
+          <div
+            key={index}
+            className={`w-3 h-3 rounded-full cursor-pointer ${
+              mainImage === variantImages[index].url
+                ? "bg-black"
+                : "bg-gray-400"
+            }`}
+            onClick={() => handleImageChange(variantImages[index].url)}
+          />
+        ))}
+      </div>
+      {/* Variant Images */}
+      <div className="flex  justify-center  gap-2">
+        {variantImages.map((image, index) => (
+          <img
+            key={index}
+            src={image.url}
+            alt={image.altText || `Image ${index + 1}`}
+            className={`w-16 h-16 object-contain rounded-md cursor-pointer ${
+              mainImage === image.url ? "border-2 border-black" : ""
+            }`}
+            onClick={() => handleImageChange(image.url)}
+          />
+        ))}
+      </div>
+
+      {/* Image Dots for Main Image */}
      
     </div>
+
+    {/* Right Section: Product Details */}
+    <div className="flex flex-col space-y-6">
+      <h1 className="text-4xl font-bold">{title}</h1>
+      <ProductPrice
+        price={selectedVariant?.price}
+        compareAtPrice={selectedVariant?.compareAtPrice}
+      />
+      <h3 className="text-xl font-semibold">Description</h3>
+      <div
+        dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+        className="text-justify"
+      />
+
+      {/* Size Selector */}
+      {sizes.length > 0 && (
+        <div className="flex items-center gap-2">
+          <span className="font-medium">Size:</span>
+          {sizes.map((size, index) => (
+            <button
+              key={index}
+              className={`px-4 py-2 rounded-md border ${
+                selectedSize === size
+                  ? "bg-black text-white"
+                  : "bg-white text-black border-gray-300"
+              }`}
+              onClick={() => setSelectedSize(size)}
+            >
+              {size}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Quantity Selector */}
+      <div className="flex items-center gap-4">
+        <span className="font-medium">Quantity:</span>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => handleQuantityChange("decrease")}
+            className="w-8 h-8 bg-black text-white rounded-md flex items-center justify-center"
+          >
+            -
+          </button>
+          <input
+            type="number"
+            value={quantity}
+            readOnly
+            className="w-12 h-8 text-center bg-gray-100 text-black 
+              border border-gray-300 rounded-md"
+          />
+          <button
+            onClick={() => handleQuantityChange("increase")}
+            className="w-8 h-8 bg-black text-white rounded-md flex items-center justify-center"
+          >
+            +
+          </button>
+        </div>
+      </div>
+
+      {/* Add to Cart Button */}
+      <AddToCartButton
+        className="flex items-center w-48 justify-center gap-2 px-4 py-3 border-[1px] border-black bg-[#A80202] text-white rounded-md hover:bg-black hover:text-white transition-all"
+        disabled={!selectedVariant || !selectedVariant.availableForSale}
+        lines={
+          selectedVariant
+            ? [
+                {
+                  merchandiseId: selectedVariant.id,
+                  quantity: quantity,
+                  selectedVariant,
+                },
+              ]
+            : []
+        }
+      >
+        {selectedVariant?.availableForSale ? "Add to cart" : "Sold out"}
+        <FaShoppingBag />
+      </AddToCartButton>
+    </div>
+  </div>
+
+  {/* Related Products Section */}
+  <RelatedProducts relatedProducts={relatedProducts} />
+</div>
+
   );
-  
-         
-  
 }
-
-
 export function RelatedProducts({ relatedProducts }) {
   console.log('relatedProducts:', relatedProducts);
 
   return (
-    <div style={{ marginTop: '50px' }}>
-      <h2 style={{ marginBottom: '20px' }}>Related Products</h2>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)', // 4 cards for desktop
-          gap: '20px',
-          transition: 'grid-template-columns 0.3s ease',
-        }}
-      >
+    <div className="mt-12 mb-12">
+      <h2 className="mb-5 text-2xl font-bold">Related Products</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 transition-all">
         {relatedProducts && relatedProducts.length > 0 ? (
           relatedProducts.map((product) => (
             <div
               key={product.id}
-              style={{
-                backgroundColor: '#fff',
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                borderRadius: '10px',
-                padding: '10px',
-                textAlign: 'center',
-                color: '#333',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease', // Animation for hover
-              }}
-              className="product-card"
+              className="bg-white shadow-lg rounded-lg p-4 text-center text-gray-800 transition-transform duration-300 hover:transform hover:translate-y-[-10px] hover:shadow-xl"
             >
               <img
                 src={product.images.edges[0]?.node?.url || 'https://via.placeholder.com/150'}
                 alt={product.title}
-                style={{
-                  width: '100%',
-                  height: '150px',
-                  objectFit: 'cover',
-                  borderRadius: '8px',
-                  transition: 'transform 0.3s ease', // Image hover animation
-                }}
+                className="w-auto mx-auto h-48 object-cover rounded-lg transition-transform duration-300 hover:scale-105"
               />
-              <h4>
+              <h4 className="mt-4 text-lg font-semibold">
                 <Link to={`/products/${product.handle}`}>{product.title}</Link>
               </h4>
-              <p>
-                PKR {product.priceRange?.minVariantPrice.amount} 
+              <p className="mt-2 text-lg font-medium">
+                PKR {product.priceRange?.minVariantPrice.amount}
               </p>
-              <button
-                style={{
-                  padding: '10px',
-                  borderRadius: '5px',
-                  backgroundColor: '#000',
-                  color: '#fff',
-                  cursor: 'pointer',
-                  border: '1px solid #000',
-                  transition: 'background-color 0.3s ease',
-                }}
-              >
-                <Link
-                  to={`/products/${product.handle}`}
-                  style={{ color: 'inherit', textDecoration: 'none' }}
-                >
+              <button className="mt-4 px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-all">
+                <Link to={`/products/${product.handle}`} className="text-white">
                   View Product
                 </Link>
               </button>
@@ -454,30 +342,6 @@ export function RelatedProducts({ relatedProducts }) {
           <p>No related products found.</p>
         )}
       </div>
-      <style>
-        {`
-          .product-card:hover {
-            transform: translateY(-10px); /* Move card up on hover */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
-          }
-
-          .product-card:hover img {
-            transform: scale(1.05); /* Scale image on hover */
-          }
-
-          @media (max-width: 1024px) {
-            .product-card {
-              grid-template-columns: repeat(2, 1fr); /* 2 cards for tablets */
-            }
-          }
-
-          @media (max-width: 600px) {
-            .product-card {
-              grid-template-columns: 1fr; /* 1 card for mobile */
-            }
-          }
-        `}
-      </style>
     </div>
   );
 }

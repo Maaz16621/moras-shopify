@@ -12,9 +12,9 @@ import { useState, useEffect } from 'react';
 import { EffectCreative } from 'swiper/modules';
 
 import {   Mousewheel, Autoplay, Pagination } from 'swiper/modules';
-import image1 from '../assets/hero1.jpg';  // import image1
-import image2 from '../assets/hero2.jpg';  // import image2
-import image3 from '../assets/outfiter.webp';
+import image1 from '../assets/mid1.jpg';  // import image1
+import image2 from '../assets/mid2.jpg';  // import image2
+import image3 from '../assets/mid3.jpg';
 import image4 from '../assets/hero3.webp';
 import bottom1 from '../assets/bottom_1.png';
 import bottom2 from '../assets/bottom_2.png'
@@ -237,7 +237,7 @@ const [lastModel, setLastModel] = useState(false);
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow min-h-0">
         <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
-          <img src={image2} className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
+          <img src={image3} className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
         </div>
         <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
           <img src={image2} className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />

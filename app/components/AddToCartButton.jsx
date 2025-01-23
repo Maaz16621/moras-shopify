@@ -1,4 +1,4 @@
-import {CartForm} from '@shopify/hydrogen';
+import { CartForm } from "@shopify/hydrogen";
 
 /**
  * @param {{
@@ -7,16 +7,25 @@ import {CartForm} from '@shopify/hydrogen';
  *   disabled?: boolean;
  *   lines: Array<OptimisticCartLineInput>;
  *   onClick?: () => void;
+ *   style?: React.CSSProperties;
+ *   className?: string;
  * }}
- */export function AddToCartButton({
+ */
+export function AddToCartButton({
   analytics,
   children,
   disabled,
   lines,
   onClick,
+  style = {}, // Allow passing custom inline styles
+  className = "", // Allow passing custom class names
 }) {
   return (
-    <CartForm route="/cart" inputs={{ lines }} action={CartForm.ACTIONS.LinesAdd}>
+    <CartForm
+      route="/cart"
+      inputs={{ lines }}
+      action={CartForm.ACTIONS.LinesAdd}
+    >
       {(fetcher) => (
         <>
           <input
@@ -28,16 +37,8 @@ import {CartForm} from '@shopify/hydrogen';
             type="submit"
             onClick={onClick}
             disabled={disabled ?? fetcher.state !== "idle"}
-            style={{
-              backgroundColor: "#000", // Black background
-              color: "#fff", // White text color
-              padding: "10px 20px", // Button padding
-              border: "none", // No border
-              
-              borderRadius: "15px", // No border radius
-              cursor: disabled ? "not-allowed" : "pointer", // Pointer for enabled, not-allowed for disabled
-              textTransform: "uppercase", // Optional: text in uppercase
-            }}
+            className={className}
+           
           >
             {children}
           </button>

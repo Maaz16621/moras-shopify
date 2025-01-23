@@ -8,7 +8,7 @@ import {
 } from '@shopify/hydrogen';
 import {useVariantUrl} from '~/lib/variants';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
-
+import { useEffect } from 'react';
 /**
  * @type {MetaFunction<typeof loader>}
  */
@@ -76,7 +76,13 @@ function loadDeferredData({context}) {
 export default function Collection() {
   /** @type {LoaderReturnData} */
   const {collection} = useLoaderData();
+  useEffect(() => {
+    document.body.style.background = "linear-gradient(180deg, #A80202 30%, #7A0202 66%)";
 
+    return () => {
+      document.body.style.background = null;
+    };
+  }, []);
   return (
     <div className="collection">
       <h1>{collection.title}</h1>

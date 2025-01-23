@@ -76,7 +76,7 @@ export function HeaderMenu({ menu, primaryDomainUrl, viewport, publicStoreDomain
             end
             prefetch="intent"
             style={activeLinkStyle}
-            to={'/collections/2025'}
+            to={'/collections/collection-2025'}
           >
             Collection 2025
           </NavLink>

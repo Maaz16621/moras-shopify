@@ -174,7 +174,8 @@ const [lastModel, setLastModel] = useState(false);
         <p className='text-xl text-white'>Sizes: {models[activeIndex].size}</p>
         <div className='flex gap-4 mt-6'>
         <button className='view-btn'>View</button>
-        <AddToCartButton> Add to Cart</AddToCartButton>
+        <AddToCartButton   className="px-6 py-2 bg-white text-black border-2 border-black rounded-md transition-all duration-300 transform hover:bg-black hover:text-white hover:scale-105"
+    > Add to Cart</AddToCartButton>
         </div>
         </div>
         </div>
@@ -272,7 +273,7 @@ const [lastModel, setLastModel] = useState(false);
 
 <div className="container mx-auto p-4  justify-center w-3/4 mt-6 ">
   <h2 className="text-3xl font-bold text-center mb-8">New Arrivals</h2>
-  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 text-white ">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-white ">
     
  
   <div className="group rounded-lg overflow-hidden">

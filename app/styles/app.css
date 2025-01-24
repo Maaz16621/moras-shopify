@@ -1797,7 +1797,7 @@ border-bottom-right-radius: 12px;
 .view-btn {
   background-color: #000;
   color: #fff;
-  padding: 10px 20px;
+  padding:17px 20px;
   border: none;
   border-radius: 15px;
   cursor: pointer;
@@ -1846,7 +1846,7 @@ border-bottom-right-radius: 12px;
 
   .text-container {
   
-    top: 20%;
+    top: 20vh;
     right: auto;
     margin-left: 5px;
   

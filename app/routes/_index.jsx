@@ -84,9 +84,9 @@ export default function Homepage() {
   const [showModels, setShowModels] = useState(true);
   const [models, setModels] = useState([
     
-    { id: 1, image: 'model1.webp', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
-    { id: 2, image: 'model2.webp',  text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
-    { id: 3, image: 'model3.webp', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge"},
+    { id: 1, image: 'model1.webp', text: 'Brown Jacket for Men' , stuff:"Leather", size:"Medium, Large, XLarge", url:"/products/jacket-for-men"},
+    { id: 2, image: 'model2.webp',  text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge",url:""},
+    { id: 3, image: 'model3.webp', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge",url:""},
   ]);
 const [lastModel, setLastModel] = useState(false);
   const handleRightButtonClick = () => {
@@ -169,13 +169,23 @@ const [lastModel, setLastModel] = useState(false);
         </div>
         <div className="text-container slide-in">
         <div className={`text-${activeIndex + 1} active-text`}>
-        <h2 className='text-4xl text-white text-uppercase'>{models[activeIndex].text}</h2>
-        <p className='text-xl text-white'>Stuff: {models[activeIndex].stuff}</p>
-        <p className='text-xl text-white'>Sizes: {models[activeIndex].size}</p>
-        <div className='flex gap-4 mt-6'>
-        <button className='view-btn'>View</button>
-        <AddToCartButton   className="px-6 py-4 bg-white text-black  border-black rounded-[15px] transition-all duration-300 transform hover:bg-black hover:text-white hover:scale-110"
-    > Add to Cart</AddToCartButton>
+        <h2 className='text-2xl sm:text-2xl md:text-4xl  text-white text-uppercase'>{models[activeIndex].text}</h2>
+        <p className='text-md text-white sm:text-md md:text-lg lg:text-xl'>Stuff: {models[activeIndex].stuff}</p>
+        <p className='text-md text-white sm:text-md md:text-lg lg:text-xl'>Sizes: {models[activeIndex].size}</p>
+        <div className='flex gap-4 sm:mt-3 md:mt-6'>
+        <Link
+  className="bg-black text-white px-4 py-3 sm:px-6 sm:py-4 rounded-[15px] uppercase transition-all duration-300 ease-in-out transform hover:bg-white hover:text-black hover:scale-110 hover:shadow-lg"
+  to={models[activeIndex].url}
+>
+  View
+</Link>
+
+<AddToCartButton
+  className="px-4 py-3 sm:px-6 sm:py-4 bg-white text-black border-black rounded-[15px] transition-all duration-300 transform hover:bg-black hover:text-white hover:scale-110"
+>
+  Add to Cart
+</AddToCartButton>
+
         </div>
         </div>
         </div>

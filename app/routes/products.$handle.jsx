@@ -20,7 +20,7 @@ import 'swiper/css';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
+  return [{title: `Moras | ${data?.product.title ?? ''}`}];
 };
 
 /**

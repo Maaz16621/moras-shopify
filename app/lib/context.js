@@ -14,7 +14,7 @@ export async function createAppLoadContext(request, env, executionContext) {
    * Open a cache instance in the worker and a custom session instance.
    */
   const sessionSecret = env?.SESSION_SECRET || 'development_secret';
-  if (env?.SESSION_SECRET) {
+  if (!env?.SESSION_SECRET) {
     throw new Error('SESSION_SECRET environment variable is not set');
   }
   const waitUntil = executionContext.waitUntil.bind(executionContext);

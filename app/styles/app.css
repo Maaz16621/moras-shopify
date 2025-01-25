@@ -241,7 +241,7 @@ header .cta-icons > * {
 }
 
 .header-menu-mobile .header-menu-item  a {
-  color: black !important;
+  color: rgb(255, 255, 255) !important;
 }
 
 .header-menu-item a {
@@ -291,7 +291,7 @@ header .cta-icons > * {
   }
 
   .header-menu-item a {
-    color: #000 !important;
+    color: #ffffff !important;
   }
   .header-left {
     margin-top: 10px;

@@ -85,7 +85,7 @@ export default function Collection() {
   }, []);
   return (
     <div className="collection">
-      <h1>{collection.title}</h1>
+      <h1 className='text-white text-4xl text-center mb-6'>{collection.title}</h1>
       <p className="collection-description">{collection.description}</p>
       <PaginatedResourceSection
         connection={collection.products}
@@ -117,6 +117,7 @@ export default function Collection() {
  *   loading?: 'eager' | 'lazy';
  * }}
  */
+
 function ProductItem({product, loading}) {
   const variant = product.variants.nodes[0];
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
@@ -130,7 +131,7 @@ function ProductItem({product, loading}) {
       {product.featuredImage && (
         <Image
           alt={product.featuredImage.altText || product.title}
-          aspectRatio="1/1"
+          aspectRatio="1/1.3"
           data={product.featuredImage}
           loading={loading}
           sizes="(min-width: 45em) 400px, 100vw"
@@ -140,6 +141,7 @@ function ProductItem({product, loading}) {
       <small>
         <Money data={product.priceRange.minVariantPrice} />
       </small>
+
     </Link>
   );
 }

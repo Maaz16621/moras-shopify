@@ -291,7 +291,7 @@ const [lastModel, setLastModel] = useState(false);
 
 <div className="container mx-auto p-4  justify-center w-3/4 mt-6 ">
   <h2 className="text-3xl font-bold text-center mb-8">New Arrivals</h2>
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-white ">
+  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 text-white ">
     
  
   <div className="group rounded-lg overflow-hidden">
@@ -304,47 +304,70 @@ const [lastModel, setLastModel] = useState(false);
       </div>
     </div>
   </div>
+  <div className="flex flex-col justify-between items-center md:flex-row">
+    <h3 className="text-md md:text-xl font-semibold  md:mb-0">Product Name</h3>
+    <p className="text-xs text-green-500 text-right md:ml-2">Stock Available</p>
+  </div>
+  <div className="flex flex-col justify-between items-center md:flex-row">
+    <h3 className="text-sm mb-2 md:mb-0 hidden md:block">Category</h3>
+    <p className="text-md md:ml-2">PKR3000/-</p>
+  </div>
+</div>
+<div className="group rounded-lg overflow-hidden">
+  <div className="relative">
+    <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
 
-   <div className="flex justify-between items-center">
-    <h3 className="text-sm">Product Name</h3>
-    <p className="text-md">PKR3000/-</p>
+    <div className="absolute top-0  rounded-lg left-0 w-full h-full bg-transparent group-hover:bg-black group-hover:opacity-50 transition-all duration-300">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <p className="text-2xl font-semibold">View</p>
+      </div>
+    </div>
   </div>
-  <div className="flex justify-between items-center">
-    <h3 className="text-lg font-semibold">Product Name</h3>
-    <p className="text-xs text-green-500 text-right ">Stock Available</p>
+  <div className="flex flex-col justify-between items-center md:flex-row">
+    <h3 className="text-md md:text-xl font-semibold  md:mb-0">Product Name</h3>
+    <p className="text-xs text-green-500 text-right md:ml-2">Stock Available</p>
   </div>
-</div>
-<div className="rounded-lg ">
-  <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
-  <div className="flex justify-between items-center">
-    <h3 className="text-sm">Product Name</h3>
-    <p className="text-md">PKR3000/-</p>
-  </div>
-  <div className="flex justify-between items-center">
-    <h3 className="text-lg font-semibold">Product Name</h3>
-    <p className="text-xs text-green-500 text-right ">Stock Available</p>
+  <div className="flex flex-col justify-between items-center md:flex-row">
+    <h3 className="text-sm mb-2 md:mb-0 hidden md:block">Category</h3>
+    <p className="text-md md:ml-2">PKR3000/-</p>
   </div>
 </div>
-<div className="rounded-lg ">
-  <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
-  <div className="flex justify-between items-center">
-    <h3 className="text-sm">Product Name</h3>
-    <p className="text-md">PKR3000/-</p>
+<div className="group rounded-lg overflow-hidden">
+  <div className="relative">
+    <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
+
+    <div className="absolute top-0  rounded-lg left-0 w-full h-full bg-transparent group-hover:bg-black group-hover:opacity-50 transition-all duration-300">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <p className="text-2xl font-semibold">View</p>
+      </div>
+    </div>
   </div>
-  <div className="flex justify-between items-center">
-    <h3 className="text-lg font-semibold">Product Name</h3>
-    <p className="text-xs text-green-500 text-right ">Stock Available</p>
+  <div className="flex flex-col justify-between items-center md:flex-row">
+    <h3 className="text-md md:text-xl font-semibold  md:mb-0">Product Name</h3>
+    <p className="text-xs text-green-500 text-right md:ml-2">Stock Available</p>
+  </div>
+  <div className="flex flex-col justify-between items-center md:flex-row">
+    <h3 className="text-sm mb-2 md:mb-0 hidden md:block">Category</h3>
+    <p className="text-md md:ml-2">PKR3000/-</p>
   </div>
 </div>
-<div className="rounded-lg ">
-  <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
-  <div className="flex justify-between items-center">
-    <h3 className="text-sm">Product Name</h3>
-    <p className="text-md">PKR3000/-</p>
+<div className="group rounded-lg overflow-hidden">
+  <div className="relative">
+    <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
+
+    <div className="absolute top-0  rounded-lg left-0 w-full h-full bg-transparent group-hover:bg-black group-hover:opacity-50 transition-all duration-300">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <p className="text-2xl font-semibold">View</p>
+      </div>
+    </div>
   </div>
-  <div className="flex justify-between items-center">
-    <h3 className="text-lg font-semibold">Product Name</h3>
-    <p className="text-xs text-green-500 text-right ">Stock Available</p>
+  <div className="flex flex-col justify-between items-center md:flex-row">
+    <h3 className="text-md md:text-xl font-semibold  md:mb-0">Product Name</h3>
+    <p className="text-xs text-green-500 text-right md:ml-2">Stock Available</p>
+  </div>
+  <div className="flex flex-col justify-between items-center md:flex-row">
+    <h3 className="text-sm mb-2 md:mb-0 hidden md:block">Category</h3>
+    <p className="text-md md:ml-2">PKR3000/-</p>
   </div>
 </div>
   </div>

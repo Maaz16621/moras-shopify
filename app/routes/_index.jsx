@@ -237,25 +237,33 @@ const [lastModel, setLastModel] = useState(false);
 </div>
 
  <div className="container mx-auto p-4 flex justify-center items-center">
-  <div className="grid grid-cols-1 md:grid-cols-[40%_60%] gap-4 w-3/4">
-    <div className="flex justify-center h-full items-center rounded-lg shadow-lg">
-      <img src={image1} className="h-full object-cover rounded-lg w-full md:w-auto" alt="Dummy Image" />
+ <div className="grid grid-cols-1 md:grid-cols-[40%_60%] gap-4 w-3/4">
+  {/* Text Box */}
+  <div className="order-1 md:order-2 grid grid-rows-[auto_1fr] gap-4 h-full">
+    <div
+      className="flex justify-center items-center p-4 h-fit rounded-lg shadow-lg bg-opacity-60"
+      style={{ backgroundColor: '#1D1C1C' }}
+    >
+      <p className="text-white">
+        MORUS crafts fashion with meticulous care, ensuring 100% deliverance on excellence. Our collection showcases stunning designs, exceptional craftsmanship, and innovative style, blending aesthetics and functionality. Rooted in men's classic style, we pursue perfection, quality, and unique designs with unparalleled customer service.
+      </p>
     </div>
-    <div className="grid grid-rows-[auto_1fr] gap-4 h-full">
-      <div className="flex justify-center items-center p-4 h-fit rounded-lg shadow-lg bg-opacity-60" style={{ backgroundColor: '#1D1C1C' }}>
-        <p className="text-white">
-        MORUS crafts fashion with meticulous care, ensuring 100% deliverance on excellence. Our collection showcases stunning designs, exceptional craftsmanship, and innovative style, blending aesthetics and functionality. Rooted in men's classic style, we pursue perfection, quality, and unique designs with unparalleled customer service.</p>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow min-h-0">
+      <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
+        <img src={image3} className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow min-h-0">
-        <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
-          <img src={image3} className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
-        </div>
-        <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
-          <img src={image2} className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
-        </div>
+      <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
+        <img src={image2} className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
       </div>
     </div>
   </div>
+
+  {/* Image */}
+  <div className="order-2 md:order-1 flex justify-center h-full items-center rounded-lg shadow-lg">
+    <img src={image1} className="h-full object-cover rounded-lg w-full md:w-auto" alt="Dummy Image" />
+  </div>
+</div>
+
 </div>
 
 <div className="container mx-auto p-4 flex flex-col md:flex-row justify-between items-center w-3/4 mt-6">

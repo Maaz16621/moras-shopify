@@ -1839,7 +1839,7 @@ border-bottom-right-radius: 12px;
 .model-1 img,
 .model-2 img,
 .model-3 img {
-  height: 70%;
+  height: 60vh;
   object-fit: cover;
 }
 
@@ -1872,8 +1872,8 @@ border-bottom-right-radius: 12px;
 @media (max-width: 498px) {
   .model-bg{
     background-position: bottom;
-    height: 100% !important;
-    top: 10%;
+    height: 80% !important;
+    top: 20%;
   }
 }
 

@@ -213,7 +213,7 @@ const [lastModel, setLastModel] = useState(false);
 )}
     </div>
       <div className="section ">
-      <div className="w-full overflow-hidden bg-gray-800 py-2 mb-6">
+      <div className="w-full overflow-hidden py-2 bg-gradient-to-r to-[#A80202] from-black">
   <div
     className="flex animate-marquee whitespace-nowrap"
     style={{
@@ -249,8 +249,8 @@ const [lastModel, setLastModel] = useState(false);
     </span>
   </div>
 </div>
-      <div className="container mx-auto p-4 flex justify-center items-center">
-  <div className="flex flex-col sm:flex-row w-3/4 justify-between gap-6">
+      <div className="container mx-auto p-4 flex justify-center items-center mt-6">
+  <div className="flex flex-col sm:flex-row  gap-6 mx-auto">
     <div className="flex w-auto justify-center ">
       <div className="flex items-end">
         <div className="bg-purple-500 w-1 h-full mr-1"></div>
@@ -258,17 +258,12 @@ const [lastModel, setLastModel] = useState(false);
         <div className="bg-purple-500 w-1 h-1/3 mr-1"></div>
 
         <h2 className="text-3xl font-bold leading-none flex flex-col">
-          <span>Best</span>
-          <span>Selling</span>
-          <span>Product</span>
+          <span>Best Selling Product</span>
+         
         </h2>
       </div>
     </div>
-    <div className="parallelogram bg-white w-full ">
-      <h2 className="text-center text-2xl underline decoration-gray-500">
-        What our customer think about us?
-      </h2>
-    </div>
+   
   </div>
 </div>
 
@@ -420,7 +415,43 @@ const [lastModel, setLastModel] = useState(false);
     </div>
   </div>
 </div>
+<div className="w-full overflow-hidden py-2 bg-gradient-to-r to-[#A80202] from-black">
 
+  <div
+    className="flex animate-marquee whitespace-nowrap"
+    style={{
+      animation: "scroll 20s linear infinite",
+    }}
+  >
+    {/* Original Content */}
+    <span className="text-white text-lg px-4">
+      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+    </span>
+    <span className="text-white text-lg px-4">
+      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+    </span>
+    <span className="text-white text-lg px-4">
+      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+    </span>
+    <span className="text-white text-lg px-4">
+      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+    </span>
+
+    {/* Duplicate Content for Seamless Loop */}
+    <span className="text-white text-lg px-4">
+      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+    </span>
+    <span className="text-white text-lg px-4">
+      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+    </span>
+    <span className="text-white text-lg px-4">
+      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+    </span>
+    <span className="text-white text-lg px-4">
+      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+    </span>
+  </div>
+</div>
 </div>
 
 

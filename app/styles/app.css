@@ -1905,3 +1905,18 @@ border-bottom-right-radius: 12px;
   width: 100%; /* Full width on hover */
   transform: translateX(-50%); /* Keep centered while expanding */
 }
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee-start {
+  display: inline-block;
+  animation: scroll 20s linear infinite;
+  will-change: transform;
+}
+

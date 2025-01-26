@@ -321,7 +321,7 @@ const [lastModel, setLastModel] = useState(false);
 
 
 <div className="container mx-auto justify-center w-[85%] mt-6 ">
-  <h2 className="text-3xl font-bold text-center mb-8">New Arrivals</h2>
+  <h2 className="text-3xl font-bold text-center text-white mb-8">New Arrivals</h2>
   <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 text-white ">
     
  
@@ -403,9 +403,9 @@ const [lastModel, setLastModel] = useState(false);
 </div>
   </div>
 </div>
-<div className="container mx-auto p-4 justify-center w-3/4 items-center mb-16">
-  <div className="w-full md:w-1/2 text-left mb-8">
-    <h2 className="text-3xl md:text-5xl font-bold text-white">Hot Selling</h2>
+<div className="container mx-auto p-4 justify-center w-3/4 items-center mb-16 mt-8">
+  <div className="w-full mb-8">
+    <h2 className="text-3xl md:text-5xl font-bold text-white text-center">Hot Selling</h2>
   </div>
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
     <img src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/Image_1.png?v=1737723429" alt="bottom image 1" className="w-full h-auto rounded-xl"/>

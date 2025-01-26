@@ -171,7 +171,7 @@ function redirectToFirstVariant({product, request}) {
   }, []);
 
   return (
-    <div className="px-5 max-w-5xl mx-auto mt-24">
+    <div className="px-5 max-w-[75%] mx-auto mt-24">
   {/* Main Product Section */}
   <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-white">
     {/* Left Section: Product Images */}

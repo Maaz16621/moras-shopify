@@ -2,7 +2,7 @@ import {useLoaderData, Link} from '@remix-run/react';
 import {defer} from '@shopify/remix-oxygen';
 import {getPaginationVariables, Image} from '@shopify/hydrogen';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
-
+import { useEffect } from 'react';
 /**
  * @param {LoaderFunctionArgs} args
  */
@@ -45,19 +45,24 @@ async function loadCriticalData({context, request}) {
 function loadDeferredData({context}) {
   return {};
 }
-
 export default function Collections() {
   /** @type {LoaderReturnData} */
-  const {collections} = useLoaderData();
+  const { collections } = useLoaderData();
+ useEffect(() => {
+    document.body.style.background = "linear-gradient(180deg, #412C2C 30%, #130202 66%)";
 
+    return () => {
+      document.body.style.background = null;
+    };
+  }, []);
   return (
-    <div className="collections">
-      <h1>Collections</h1>
+    <div className="collections-container p-4 mt-20 max-w-6xl mx-auto">
+      <h1 className="text-3xl font-bold text-center mb-6 ">Collections</h1>
       <PaginatedResourceSection
         connection={collections}
-        resourcesClassName="collections-grid"
+        resourcesClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
-        {({node: collection, index}) => (
+        {({ node: collection, index }) => (
           <CollectionItem
             key={collection.id}
             collection={collection}

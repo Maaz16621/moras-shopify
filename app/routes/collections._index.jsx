@@ -56,7 +56,7 @@ export default function Collections() {
     };
   }, []);
   return (
-    <div className="collections-container p-4 mt-20 max-w-6xl mx-auto">
+    <div className="collections-container p-4 mt-20 max-w-[80%] mx-auto">
       <h1 className="text-3xl font-bold text-center mb-6 ">Collections</h1>
       <PaginatedResourceSection
         connection={collections}

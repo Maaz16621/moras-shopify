@@ -77,7 +77,7 @@ export default function Collection() {
   /** @type {LoaderReturnData} */
   const {collection} = useLoaderData();
   useEffect(() => {
-    document.body.style.background = "linear-gradient(180deg, #A80202 30%, #7A0202 66%)";
+    document.body.style.background = "linear-gradient(180deg, #412C2C 30%, #130202 66%)";
 
     return () => {
       document.body.style.background = null;

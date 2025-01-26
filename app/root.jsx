@@ -1,5 +1,6 @@
 import {useNonce, getShopAnalytics, Analytics} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
+import { useEffect } from 'react';
 import {
   Links,
   Meta,
@@ -139,12 +140,28 @@ export function Layout({children}) {
   const nonce = useNonce();
   /** @type {RootLoader} */
   const data = useRouteLoaderData('root');
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-5NHHBLFMLQ';
+    script.async = true;
+    document.head.appendChild(script);
 
+    script.onload = () => {
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-5NHHBLFMLQ');
+    };
+  }, []);
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="google-site-verification" content="eT0x8zYVCw6COAwu5KyJKCGNAVsQsFSGHdCes11-ElE" />
+       
         <Meta />
         <Links />
       </head>

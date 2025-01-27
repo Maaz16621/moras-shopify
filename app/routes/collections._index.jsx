@@ -56,11 +56,11 @@ export default function Collections() {
     };
   }, []);
   return (
-    <div className="collections-container p-4 mt-20 max-w-[80%] mx-auto text-white">
+    <div className="collections-container mt-[6rem] mx-auto text-white mb-6">
       <h1 className="text-3xl font-bold text-center mb-6 ">Collections</h1>
       <PaginatedResourceSection
         connection={collections}
-        resourcesClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        resourcesClassName="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         {({ node: collection, index }) => (
           <CollectionItem
@@ -83,18 +83,29 @@ export default function Collections() {
 function CollectionItem({collection, index}) {
   return (
     <Link
-      className="collection-item text-center"
+      className="collection-item text-center border border-white"
       key={collection.id}
       to={`/collections/${collection.handle}`}
       prefetch="intent"
     >
       {collection?.image && (
-        <Image
-          alt={collection.image.altText || collection.title}
-          aspectRatio="1/1"
-          data={collection.image}
-          loading={index < 3 ? 'eager' : undefined}
-        />
+   <Image
+   alt={collection.image.altText || collection.title}
+   data={{
+     ...collection.image,
+     url: collection.image.url.replace(/&crop=center/g, ""), // Remove the crop parameter
+   }}
+   style={{
+     borderRadius: "0",
+     objectFit: "contain", // Ensures the image fits within the container without cropping
+     width: "100%", // Full width of the container
+     height: "auto", // Maintain aspect ratio
+     
+   }}
+   loading={index < 3 ? 'eager' : undefined}
+ />
+ 
+   
       )}
       <h5>{collection.title}</h5>
     </Link>

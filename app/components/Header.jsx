@@ -61,14 +61,14 @@ export function HeaderMenu({ menu, primaryDomainUrl, viewport, publicStoreDomain
 
     
       <div className="header-menu-items">
-        <div className="header-menu-item">
+      <div className="header-menu-item">
           <NavLink
             end
             prefetch="intent"
             style={activeLinkStyle}
-            to={'/about-us'}
+            to={'/'}
           >
-            About Us
+            Home
           </NavLink>
         </div>
         <div className="header-menu-item">
@@ -86,11 +86,13 @@ export function HeaderMenu({ menu, primaryDomainUrl, viewport, publicStoreDomain
             end
             prefetch="intent"
             style={activeLinkStyle}
-            to={'/showrooms'}
+            to={'/about-us'}
           >
-            Showrooms
+            About Us
           </NavLink>
         </div>
+      
+       
         <div className="header-menu-item">
           <NavLink
             end

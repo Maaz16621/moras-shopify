@@ -185,6 +185,8 @@ function redirectToFirstVariant({product, request}) {
         <img
           src={mainImage}
           alt={title}
+          style={{boxShadow: "0px 1px 4px 0px #00000042"
+          }}
           className="w-full h-full object-contain"
         />
       </div>

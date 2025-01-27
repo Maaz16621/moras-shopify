@@ -84,9 +84,9 @@ export default function Collection() {
     };
   }, []);
   return (
-    <div className="collection">
-      <h1 className='text-white text-4xl text-center mb-6'>{collection.title}</h1>
-      <p className="collection-description">{collection.description}</p>
+    <div className="collection text-white">
+      <h1 className=' text-4xl text-center mb-2'>{collection.title}</h1>
+      <p className=" text-center mb-4">{collection.description}</p>
       <PaginatedResourceSection
         connection={collection.products}
         resourcesClassName="products-grid"
@@ -117,10 +117,38 @@ export default function Collection() {
  *   loading?: 'eager' | 'lazy';
  * }}
  */
+function ProductItem({ product, loading }) {
+  const variantUrl = useVariantUrl(
+    product.handle,
+    product.variants.nodes[0]?.selectedOptions || []
+  );
 
-function ProductItem({product, loading}) {
-  const variant = product.variants.nodes[0];
-  const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
+  // Extract unique colors and sizes from the variants
+  const colors = [
+    ...new Set(
+      product.variants.nodes
+        .flatMap(variant =>
+          variant.selectedOptions
+            .filter(option => option.name === "Color")
+            .map(option => option.value)
+        )
+    ),
+  ];
+  const sizes = [
+    ...new Set(
+      product.variants.nodes
+        .flatMap(variant =>
+          variant.selectedOptions
+            .filter(option => option.name === "Size")
+            .map(option => option.value)
+        )
+    ),
+  ];
+
+  // Join the first available color and up to 2 sizes
+  const displayColor = colors[0] || "N/A";
+  const displaySizes = sizes.join(" ") || "N/A";
+
   return (
     <Link
       className="product-item"
@@ -134,14 +162,20 @@ function ProductItem({product, loading}) {
           aspectRatio="1/1.3"
           data={product.featuredImage}
           loading={loading}
+          style={{ borderRadius: "0", border: "#fff 1px solid" }}
           sizes="(min-width: 45em) 400px, 100vw"
         />
       )}
-      <h4>{product.title}</h4>
-      <small>
+      <h4 className="mt-4 uppercase px-2">{product.title}</h4>
+
+      {/* Display color and sizes */}
+      <p className="text-sm text-gray-600 px-2">
+        {displayColor} | {displaySizes}
+      </p>
+
+      <small className="mb-4 px-2">
         <Money data={product.priceRange.minVariantPrice} />
       </small>
-
     </Link>
   );
 }
@@ -170,7 +204,7 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
         ...MoneyProductItem
       }
     }
-    variants(first: 1) {
+    variants(first: 10) {
       nodes {
         selectedOptions {
           name

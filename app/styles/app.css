@@ -575,14 +575,12 @@ header .cta-icons > * {
 
 .products-grid {
   display: grid;
-  grid-gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-width), 1fr));
   margin-bottom: 2rem;
 }
 
 .product-item img {
   height: auto;
-  width: 80% !important;
 }
 
 /*
@@ -1214,16 +1212,14 @@ button.close-outside {
   color: #007bff;
 }
 .collection {
-  max-width: 1200px;
   margin: 0 auto;
   margin-top: 100px;
-  padding: 20px;
 }
 
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  
 }
 
 .product-item {
@@ -1342,7 +1338,6 @@ button.close-outside {
 
 .product-item {
   display: flex;
-  border-radius: 8px;
   width: -moz-fit-content;
   width: fit-content;
   text-align: center;
@@ -1351,6 +1346,7 @@ button.close-outside {
   color: white;
   flex-direction: column;
   align-items: center;
+  border: #ffffff 1px solid;
 }
 
 .product-item:hover {
@@ -1644,7 +1640,7 @@ border-bottom-right-radius: 12px;
   animation: fadeIn 2s ease-in-out;
   align-items: flex-end;
   display: flex;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .model img,

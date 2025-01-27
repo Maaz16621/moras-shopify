@@ -110,7 +110,9 @@ function SearchResultsPages({term, pages}) {
                       <Image
                         data={product.variants.nodes[0].image}
                         alt={product.title}
-                        aspectRatio="1/1"
+                           aspectRatio="1/1.3"
+                           style={{ borderRadius: "0", border: "#fff 1px solid" }}
+                           sizes="(min-width: 45em) 400px, 100vw"
                       />
                     </div>
                   )}
@@ -132,7 +134,7 @@ function SearchResultsPages({term, pages}) {
                   {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
                 </PreviousLink>
               </div>
-              <div className="product-list">{ItemsMarkup}</div>
+              <div className="products-grid">{ItemsMarkup}</div>
               <div>
                 <NextLink>
                   {isLoading ? 'Loading...' : <span>Load more ↓</span>}
@@ -146,6 +148,7 @@ function SearchResultsPages({term, pages}) {
     </div>
   );
 }
+
 
 
 function SearchResultsEmpty() {

@@ -37,7 +37,7 @@ import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
           publicStoreDomain={publicStoreDomain}
         />
       )}
-      <main>{children}</main>
+      <main >{children}</main>
       {!isIndexPage && <Footer />}
     </Aside.Provider>
   );

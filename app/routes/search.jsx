@@ -4,12 +4,12 @@ import {getPaginationVariables, Analytics} from '@shopify/hydrogen';
 import {SearchForm} from '~/components/SearchForm';
 import {SearchResults} from '~/components/SearchResults';
 import {getEmptyPredictiveSearchResult} from '~/lib/search';
-
+import { useEffect } from 'react';
 /**
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: `Hydrogen | Search`}];
+  return [{title: `Morus | Search`}];
 };
 
 /**
@@ -36,10 +36,17 @@ export async function loader({request, context}) {
 export default function SearchPage() {
   /** @type {LoaderReturnData} */
   const { type, term, result, error } = useLoaderData();
+    useEffect(() => {
+      document.body.style.background = "linear-gradient(180deg, #412C2C 30%, #130202 66%)";
+  
+      return () => {
+        document.body.style.background = null;
+      };
+    }, []);
   if (type === 'predictive') return null;
 
   return (
-    <div className="search-page-container">
+    <div className="search-page-container text-white ">
       <h1 className="search-page-title">Search</h1>
 
       <div className="search-form-container">

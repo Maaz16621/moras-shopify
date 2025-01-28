@@ -1603,6 +1603,7 @@ border-bottom-right-radius: 12px;
 
 }
 /* styles/slider.css */
+
 .slider-container {
   position: relative;
   width: 100%;
@@ -1850,7 +1851,7 @@ border-bottom-right-radius: 12px;
 
   .text-container {
   
-    top: 20vh;
+    top: 9rem;
     right: auto;
     margin-left: 5px;
   

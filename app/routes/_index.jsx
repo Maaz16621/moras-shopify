@@ -174,14 +174,14 @@ const [lastModel, setLastModel] = useState(false);
         <p className='text-md text-white sm:text-md md:text-lg lg:text-xl'>Sizes: {models[activeIndex].size}</p>
         <div className='flex gap-4 sm:mt-3 md:mt-6'>
         <Link
-  className="bg-black text-white px-4 py-3 sm:px-6 sm:py-4 rounded-[15px] uppercase transition-all duration-300 ease-in-out transform hover:bg-white hover:text-black hover:scale-110 hover:shadow-lg"
+  className="bg-black text-white  text-sm sm:text-md px-2 py-2 sm:px-6 sm:py-4 rounded-[15px] uppercase transition-all duration-300 ease-in-out transform hover:bg-white hover:text-black hover:scale-110 hover:shadow-lg"
   to={models[activeIndex].url}
 >
   View
 </Link>
 
 <AddToCartButton
-  className="px-4 py-3 sm:px-6 sm:py-4 bg-white text-black border-black rounded-[15px] transition-all duration-300 transform hover:bg-black hover:text-white hover:scale-110"
+  className=" px-2 py-2 text-sm sm:text-md sm:px-6 sm:py-4 bg-white text-black border-black rounded-[15px] transition-all duration-300 transform hover:bg-black hover:text-white hover:scale-110"
 >
   Add to Cart
 </AddToCartButton>

@@ -1631,6 +1631,7 @@ border-bottom-right-radius: 12px;
   position: relative;
   width: auto;
   border-radius: 10px;
+  overflow: hidden;
   animation: fadeIn 1s ease-in-out;
   align-items: flex-end;
   display: flex;
@@ -1639,6 +1640,7 @@ border-bottom-right-radius: 12px;
   position: relative;
   width: auto;
   border-radius: 10px;
+  overflow: hidden;
   animation: fadeIn 2s ease-in-out;
   align-items: flex-end;
   display: flex;
@@ -1691,7 +1693,7 @@ border-bottom-right-radius: 12px;
 }
 
 .active-text {
-  display: block;
+  display: hidden;
   animation: fadeIn 4s ease-in-out;
 }
 

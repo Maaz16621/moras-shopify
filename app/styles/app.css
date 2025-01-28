@@ -1844,7 +1844,7 @@ border-bottom-right-radius: 12px;
 .model-1 img,
 .model-2 img,
 .model-3 img {
-  height: 50vh;
+  height: 60vh;
   object-fit: contain;
 }
 

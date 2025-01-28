@@ -1,4 +1,4 @@
-import {Suspense, useState, useEffect} from 'react';
+import {Suspense, useState, useEffect, useRef} from 'react';
 import {defer, redirect} from '@shopify/remix-oxygen';
 import { Link } from '@remix-run/react';
 import {Await, useLoaderData} from '@remix-run/react';
@@ -134,10 +134,13 @@ function redirectToFirstVariant({product, request}) {
       status: 302,
     },
   );
-}export default function Product() {
+}
+export default function Product() {
   const { product, relatedProducts } = useLoaderData();
   const selectedVariant = product.selectedVariant;
   const { title, descriptionHtml } = product;
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
 
   const [mainImage, setMainImage] = useState(
     product.media.edges[0]?.node.previewImage.url
@@ -169,6 +172,73 @@ function redirectToFirstVariant({product, request}) {
       document.body.style.background = null;
     };
   }, []);
+  const [touchPosition, setTouchPosition] = useState(null);
+  const imageRef = useRef(null);
+
+  const handleTouchStart = (e) => {
+    setTouchPosition(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    if (touchPosition) {
+      const currentPosition = e.targetTouches[0].clientX;
+      if (currentPosition - touchPosition > 30) {
+        handlePrevImage();
+      } else if (touchPosition - currentPosition >30) {
+        handleNextImage();
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setTouchPosition(null);
+  };
+
+  const handleMouseDown = (e) => {
+    setTouchPosition(e.clientX);
+  };
+
+  const handleMouseMove = (e) => {
+    if (touchPosition) {
+      const currentPosition = e.clientX;
+      if (currentPosition - touchPosition > 30) {
+        handlePrevImage();
+      } else if (touchPosition - currentPosition > 30) {
+        handleNextImage();
+      }
+    }
+  };
+
+  const handleMouseUp = () => {
+    setTouchPosition(null);
+  };
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % variantImages.length);
+  };
+
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + variantImages.length) % variantImages.length);
+  };
+
+  useEffect(() => {
+    const imageElement = imageRef.current;
+    imageElement.addEventListener('touchstart', handleTouchStart);
+    imageElement.addEventListener('touchmove', handleTouchMove);
+    imageElement.addEventListener('touchend', handleTouchEnd);
+    imageElement.addEventListener('mousedown', handleMouseDown);
+    imageElement.addEventListener('mousemove', handleMouseMove);
+    imageElement.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      imageElement.removeEventListener('touchstart', handleTouchStart);
+      imageElement.removeEventListener('touchmove', handleTouchMove);
+      imageElement.removeEventListener('touchend', handleTouchEnd);
+      imageElement.removeEventListener('mousedown', handleMouseDown);
+      imageElement.removeEventListener('mousemove', handleMouseMove);
+      imageElement.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, []);
 
   return (
     <div className="px-5 max-w-[75%] mx-auto mt-24">
@@ -177,46 +247,54 @@ function redirectToFirstVariant({product, request}) {
     {/* Left Section: Product Images */}
     <div className="space-y-4">
       {/* Main Image with Fade Animation */}
-      <div
-        className={`w-full h-102 overflow-hidden rounded-lg bg-gray-200 transition-opacity duration-300 ${
-          fade ? "opacity-0" : "opacity-100"
-        }`}
-      >
-        <img
-          src={mainImage}
-          alt={title}
-          style={{boxShadow: "0px 1px 4px 0px #00000042"
-          }}
-          className="w-full h-full object-contain"
-        />
-      </div>
-      <div className="flex justify-center gap-2 mt-2">
-        {variantImages.map((_, index) => (
+   
+
+          {/* Main Image with Fade Animation */}
           <div
-            key={index}
-            className={`w-3 h-3 rounded-full cursor-pointer ${
-              mainImage === variantImages[index].url
-                ? "bg-black"
-                : "bg-gray-400"
-            }`}
-            onClick={() => handleImageChange(variantImages[index].url)}
+            ref={imageRef}
+            className="relative w-full h-102 overflow-hidden rounded-lg bg-gray-200"
+          >
+               <div
+            className="absolute top-0 left-0 w-1/3 h-full cursor-pointer"
+            onClick={handlePrevImage}
           />
-        ))}
-      </div>
-      {/* Variant Images */}
-      <div className="flex  justify-center  gap-2">
-        {variantImages.map((image, index) => (
-          <img
-            key={index}
-            src={image.url}
-            alt={image.altText || `Image ${index + 1}`}
-            className={`w-16 h-16 object-contain rounded-md cursor-pointer ${
-              mainImage === image.url ? "border-2 border-black" : ""
-            }`}
-            onClick={() => handleImageChange(image.url)}
+          <div
+            className="absolute top-0 right-0 w-1/3 h-full cursor-pointer"
+            onClick={handleNextImage}
           />
-        ))}
-      </div>
+            <img
+              src={variantImages[currentImageIndex].url}
+              alt={title}
+              style={{ boxShadow: "0px 1px 4px 0px #00000042" }}
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <div className="flex justify-center gap-2 mt-2">
+            {variantImages.map((_, index) => (
+              <div
+                key={index}
+                className={`w-3 h-3 rounded-full cursor-pointer ${
+                  currentImageIndex === index ? "bg-black" : "bg-gray-400"
+                }`}
+                onClick={() => setCurrentImageIndex(index)}
+              />
+            ))}
+          </div>
+          {/* Variant Images */}
+          <div className="flex justify-center gap-2">
+            {variantImages.map((image, index) => (
+              <img
+                key={index}
+                src={image.url}
+                alt={image.altText || `Image ${index + 1}`}
+                className={`w-16 h-16 object-contain rounded-md cursor-pointer ${
+                  currentImageIndex === index ? "border-2 border-black" : ""
+                }`}
+                onClick={() => setCurrentImageIndex(index)}
+              />
+            ))}
+          </div>
+
 
       {/* Image Dots for Main Image */}
      

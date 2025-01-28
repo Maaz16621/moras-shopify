@@ -1693,7 +1693,7 @@ border-bottom-right-radius: 12px;
 }
 
 .active-text {
-  display: hidden;
+  display: block;
   animation: fadeIn 4s ease-in-out;
 }
 
@@ -1844,8 +1844,8 @@ border-bottom-right-radius: 12px;
 .model-1 img,
 .model-2 img,
 .model-3 img {
-  height: 60vh;
-  object-fit: cover;
+  height: 50vh;
+  object-fit: contain;
 }
 
 

@@ -84,9 +84,9 @@ export default function Homepage() {
   const [showModels, setShowModels] = useState(true);
   const [models, setModels] = useState([
     
-    { id: 1, image: 'model1.webp', text: 'Brown Jacket for Men' , stuff:"Leather", size:"Medium, Large, XLarge", url:"/products/jacket-for-men"},
-    { id: 2, image: 'model2.webp',  text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge",url:""},
-    { id: 3, image: 'model3.webp', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge",url:""},
+    { id: 1, image: 'https://cdn.shopify.com/s/files/1/0726/8538/8018/files/model1.webp?v=1738156377', text: 'Brown Jacket for Men' , stuff:"Leather", size:"Medium, Large, XLarge", url:"/products/jacket-for-men"},
+    { id: 2, image: 'https://cdn.shopify.com/s/files/1/0726/8538/8018/files/model2.webp?v=1738156377',  text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge",url:""},
+    { id: 3, image: 'https://cdn.shopify.com/s/files/1/0726/8538/8018/files/model3.webp?v=1738156377', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge",url:""},
   ]);
 const [lastModel, setLastModel] = useState(false);
   const handleRightButtonClick = () => {

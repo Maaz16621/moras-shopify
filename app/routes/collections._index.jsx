@@ -100,14 +100,14 @@ function CollectionItem({collection, index}) {
      objectFit: "contain", // Ensures the image fits within the container without cropping
      width: "100%", // Full width of the container
      height: "auto", // Maintain aspect ratio
-     
+     borderBottom: "1px solid #fff"
    }}
    loading={index < 3 ? 'eager' : undefined}
  />
  
    
       )}
-      <h5>{collection.title}</h5>
+      <h5 className='mx-auto my-4'>{collection.title}</h5>
     </Link>
   );
 }

@@ -90,7 +90,7 @@ export default function Homepage() {
     { id: 3, image: 'https://cdn.shopify.com/s/files/1/0726/8538/8018/files/model3.webp?v=1738156377', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge",url:""},
   ]);
   const categories = [
-    { name: "Collection 2025", link: "/collections/collection-2025" },
+    { name: "Casual Shirt", link: "/collections/casual-shirt" },
     { name: "Jackets", link: "/collections/jackets" },
     { name: "Hoodies", link: "/collections/hoodies" },
     { name: "Sweat Shirts", link: "/collections/sweat-shirts" },

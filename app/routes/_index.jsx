@@ -121,7 +121,7 @@ const [lastModel, setLastModel] = useState(false);
       setShowModels(true);
       setActiveIndex(0);
     } else if (activeIndex === 2) {
-      setShowModels(false);
+      setShowModels(false);rel="preload"
       setActiveIndex(1);
     }
   };
@@ -266,7 +266,7 @@ const [lastModel, setLastModel] = useState(false);
         <div className="bg-purple-500 w-1 h-1/3 mr-1"></div>
 
         <h2 className="text-3xl font-bold leading-none flex flex-col">
-          <span>Best Selling Product</span>
+          <span className='text-white'>Best Selling Product</span>
          
         </h2>
       </div>

@@ -546,6 +546,7 @@ const VARIANTS_QUERY = `#graphql
     }
   }
 `;
+
 const RELATED_PRODUCTS_QUERY = `#graphql
 query RelatedProducts($handle: String!) {
   product(handle: $handle) {

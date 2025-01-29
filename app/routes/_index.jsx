@@ -60,7 +60,7 @@ function loadDeferredData({context}) {
   const recommendedProducts = context.storefront
     .query(RECOMMENDED_PRODUCTS_QUERY)
     .catch((error) => {
-      // Log query errors, but don't throw them so the page can still render
+     
       console.error(error);
       return null;
     });
@@ -279,13 +279,22 @@ const [lastModel, setLastModel] = useState(false);
       </p>
     </div>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow min-h-0">
-      <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
-        <Image src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/mid3.webp?v=1738156612" className="rounded-lg w-full sm:w-auto"  alt="Dummy Image" />
-      </div>
-      <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
-        <Image src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/mid2.webp?v=1738156613" className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
-      </div>
-    </div>
+  <div className="w-full flex justify-center items-center rounded-lg shadow-lg h-[250px] sm:h-auto">
+    <Image 
+      src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/mid3.webp?v=1738156612"
+      className="rounded-lg w-full h-full object-cover object-top"
+      alt="Dummy Image"
+    />
+  </div>
+  <div className="w-full flex justify-center items-center rounded-lg shadow-lg h-[250px] sm:h-auto">
+    <Image 
+      src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/mid2.webp?v=1738156613"
+      className="rounded-lg w-full h-full object-cover  object-top"
+      alt="Dummy Image"
+    />
+  </div>
+</div>
+
   </div>
 
   {/* Image */}
@@ -550,7 +559,6 @@ const FEATURED_COLLECTION_QUERY = `#graphql
     }
   }
 `;
-
 const RECOMMENDED_PRODUCTS_QUERY = `#graphql
   fragment RecommendedProduct on Product {
     id
@@ -574,13 +582,14 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
   }
   query RecommendedProducts ($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
-    products(first: 4, sortKey: UPDATED_AT, reverse: true) {
+    products(first: 10, sortKey: UPDATED_AT, reverse: true) {
       nodes {
         ...RecommendedProduct
       }
     }
   }
 `;
+
 
 /** @typedef {import('@shopify/remix-oxygen').LoaderFunctionArgs} LoaderFunctionArgs */
 /** @template T @typedef {import('@remix-run/react').MetaFunction<T>} MetaFunction */

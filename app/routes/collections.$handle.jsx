@@ -168,7 +168,7 @@ function ProductItem({ product, loading }) {
     />
   )}
   
-  <div className='relative'>
+  <div className='relative w-full'>
   <div className="absolute inset-0 bg-[#7A0202] transition-all duration-300 ease-in-out group-hover:w-full w-0 group-hover:text-white group-hover:z-10 z-0" />
 
   <h4 className="mt-4 uppercase px-2 relative z-10">
@@ -180,13 +180,12 @@ function ProductItem({ product, loading }) {
     {displayColor} | {displaySizes}
   </p>
 
-  <small className="mb-4 px-2 relative z-10">
-    
-    <ProductPrice
-      price={product.priceRange.minVariantPrice}
-      compareAtPrice={product.priceRange.maxVariantPrice}
-    />
-  </small>
+  <small className="mb-4 px-2 relative z-10 text-center flex justify-center items-center" >
+  <ProductPrice
+    price={product.priceRange.minVariantPrice}
+    compareAtPrice={product.priceRange.maxVariantPrice}
+  />
+</small>
 </div>
   {/* Background transition effect */}
  </Link>

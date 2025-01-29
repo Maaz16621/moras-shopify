@@ -23,7 +23,7 @@ export async function loader(args) {
  */
 async function loadCriticalData({context, request}) {
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 4,
+    pageBy: 40,
   });
 
   const [{collections}] = await Promise.all([

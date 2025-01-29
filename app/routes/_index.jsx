@@ -17,6 +17,7 @@ import { AddToCartButton } from '~/components/AddToCartButton';
 /**
  * @type {MetaFunction}
  */
+
 export const meta = () => {
   return [{title: 'MORUS'}];
 };
@@ -40,39 +41,46 @@ export async function loader(args) {
  * @param {LoaderFunctionArgs}
  */
 async function loadCriticalData({context}) {
-  const [{collections}] = await Promise.all([
+  const [{collections}, recommendedProducts] = await Promise.all([
     context.storefront.query(FEATURED_COLLECTION_QUERY),
-    // Add other queries here, so that they are loaded in parallel
+    context.storefront.query(RECOMMENDED_PRODUCTS_QUERY).catch((error) => {
+      console.error(error);
+      return null;
+    }),
   ]);
 
   return {
     featuredCollection: collections.nodes[0],
+    recommendedProducts: recommendedProducts,
   };
 }
-
 /**
  * Load data for rendering content below the fold. This data is deferred and will be
  * fetched after the initial page load. If it's unavailable, the page should still 200.
  * Make sure to not throw any errors here, as it will cause the page to 500.
  * @param {LoaderFunctionArgs}
  */
+
 function loadDeferredData({context}) {
   const recommendedProducts = context.storefront
     .query(RECOMMENDED_PRODUCTS_QUERY)
     .catch((error) => {
-     
+      // Log query errors, but don't throw them so the page can still render
       console.error(error);
       return null;
     });
 
+    console.log('relatedProducts:', JSON.stringify(recommendedProducts, null, 2));
   return {
     recommendedProducts,
   };
 }
 
 export default function Homepage() {
-
   const data = useLoaderData();
+
+
+  console.log('relatedProducts:', JSON.stringify(data, null, 2));
   const [activeIndex, setActiveIndex] = useState(0);
   const [showModels, setShowModels] = useState(true);
   const [models, setModels] = useState([
@@ -328,89 +336,36 @@ const [lastModel, setLastModel] = useState(false);
 </div>
 
 
-<div className="container mx-auto justify-center w-[85%] mt-6 p-4 ">
+<div className="container mx-auto justify-center w-[85%] mt-6 p-4">
   <h2 className="text-3xl font-bold text-center text-white mb-8">New Arrivals</h2>
-  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 text-white ">
-    
- 
-  <div className="group rounded-lg overflow-hidden">
-  <div className="relative">
-    <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
+  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 text-white">
+  {data.recommendedProducts.products.nodes.slice(0, 4).map((product, index) => (
+        <div key={product.id} className="group rounded-lg overflow-hidden">
+          <div className="relative">
+            <img 
+              src={product.images.nodes[0].url} 
+              alt={product.images.nodes[0].altText || "Product image"} 
+              className="w-full h-auto mb-4 rounded-lg" 
+            />
+            <div className="absolute top-0  rounded-lg left-0 w-full h-full bg-transparent group-hover:bg-black group-hover:opacity-50 transition-all duration-300">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <p className="text-2xl font-semibold">View</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col justify-between items-center md:flex-row">
+            <h3 className="text-md md:text-xl font-semibold md:mb-0">{product.title}</h3>
+            
+          </div>
+         
+        </div>
+      ))
 
-    <div className="absolute top-0  rounded-lg left-0 w-full h-full bg-transparent group-hover:bg-black group-hover:opacity-50 transition-all duration-300">
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <p className="text-2xl font-semibold">View</p>
-      </div>
-    </div>
-  </div>
-  <div className="flex flex-col justify-between items-center md:flex-row">
-    <h3 className="text-md md:text-xl font-semibold  md:mb-0">Product Name</h3>
-    <p className="text-xs text-green-500 text-right md:ml-2">Stock Available</p>
-  </div>
-  <div className="flex flex-col justify-between items-center md:flex-row">
-    <h3 className="text-sm mb-2 md:mb-0 hidden md:block">Category</h3>
-    <p className="text-md md:ml-2">PKR3000/-</p>
+    }
   </div>
 </div>
-<div className="group rounded-lg overflow-hidden">
-  <div className="relative">
-    <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
 
-    <div className="absolute top-0  rounded-lg left-0 w-full h-full bg-transparent group-hover:bg-black group-hover:opacity-50 transition-all duration-300">
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <p className="text-2xl font-semibold">View</p>
-      </div>
-    </div>
-  </div>
-  <div className="flex flex-col justify-between items-center md:flex-row">
-    <h3 className="text-md md:text-xl font-semibold  md:mb-0">Product Name</h3>
-    <p className="text-xs text-green-500 text-right md:ml-2">Stock Available</p>
-  </div>
-  <div className="flex flex-col justify-between items-center md:flex-row">
-    <h3 className="text-sm mb-2 md:mb-0 hidden md:block">Category</h3>
-    <p className="text-md md:ml-2">PKR3000/-</p>
-  </div>
-</div>
-<div className="group rounded-lg overflow-hidden">
-  <div className="relative">
-    <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
 
-    <div className="absolute top-0  rounded-lg left-0 w-full h-full bg-transparent group-hover:bg-black group-hover:opacity-50 transition-all duration-300">
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <p className="text-2xl font-semibold">View</p>
-      </div>
-    </div>
-  </div>
-  <div className="flex flex-col justify-between items-center md:flex-row">
-    <h3 className="text-md md:text-xl font-semibold  md:mb-0">Product Name</h3>
-    <p className="text-xs text-green-500 text-right md:ml-2">Stock Available</p>
-  </div>
-  <div className="flex flex-col justify-between items-center md:flex-row">
-    <h3 className="text-sm mb-2 md:mb-0 hidden md:block">Category</h3>
-    <p className="text-md md:ml-2">PKR3000/-</p>
-  </div>
-</div>
-<div className="group rounded-lg overflow-hidden">
-  <div className="relative">
-    <img src={image2} alt="Product 4" className="w-full h-auto mb-4 rounded-lg" />
-
-    <div className="absolute top-0  rounded-lg left-0 w-full h-full bg-transparent group-hover:bg-black group-hover:opacity-50 transition-all duration-300">
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <p className="text-2xl font-semibold">View</p>
-      </div>
-    </div>
-  </div>
-  <div className="flex flex-col justify-between items-center md:flex-row">
-    <h3 className="text-md md:text-xl font-semibold  md:mb-0">Product Name</h3>
-    <p className="text-xs text-green-500 text-right md:ml-2">Stock Available</p>
-  </div>
-  <div className="flex flex-col justify-between items-center md:flex-row">
-    <h3 className="text-sm mb-2 md:mb-0 hidden md:block">Category</h3>
-    <p className="text-md md:ml-2">PKR3000/-</p>
-  </div>
-</div>
-  </div>
-</div>
 <div className="container mx-auto p-4 justify-center w-[85%] items-center mb-16 mt-8">
   <div className="w-full mb-8">
     <h2 className="text-3xl md:text-5xl font-bold text-white text-center">Hot Selling</h2>

@@ -18,6 +18,7 @@ import {ProductForm} from '~/components/ProductForm';
 /**
  * @type {MetaFunction<typeof loader>}
  */
+
 export const meta = ({data}) => {
   return [{title: `Moras | ${data?.product.title ?? ''}`}];
 };

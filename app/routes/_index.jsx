@@ -280,10 +280,10 @@ const [lastModel, setLastModel] = useState(false);
     </div>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow min-h-0">
       <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
-        <Image src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/mid3.webp?v=1738156612" className="rounded-lg w-full sm:w-auto" style={{height: "-webkit-fill-available"}} alt="Dummy Image" />
+        <Image src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/mid3.webp?v=1738156612" className="rounded-lg w-full sm:w-auto"  alt="Dummy Image" />
       </div>
       <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
-        <Image src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/mid2.webp?v=1738156613" className="rounded-lg w-full sm:w-auto" style={{height: "-webkit-fill-available"}}  alt="Dummy Image" />
+        <Image src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/mid2.webp?v=1738156613" className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
       </div>
     </div>
   </div>

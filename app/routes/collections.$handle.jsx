@@ -78,7 +78,7 @@ export default function Collection() {
   /** @type {LoaderReturnData} */
   const {collection} = useLoaderData();
   useEffect(() => {
-    document.body.style.background = "linear-gradient(180deg, #412C2C 30%, #130202 66%)";
+    document.body.style.background = "linear-gradient(180deg, #412C2C 20%, #130202 80%)";
 
     return () => {
       document.body.style.background = null;
@@ -152,35 +152,45 @@ function ProductItem({ product, loading }) {
 
   return (
     <Link
-      className="product-item"
-      key={product.id}
-      prefetch="intent"
-      to={variantUrl}
-    >
-      {product.featuredImage && (
-        <Image
-          alt={product.featuredImage.altText || product.title}
-          aspectRatio="1/1.3"
-          data={product.featuredImage}
-          loading={loading}
-          style={{ borderRadius: "0", border: "#fff 1px solid" }}
-          sizes="(min-width: 45em) 400px, 100vw"
-        />
-      )}
-      <h4 className="mt-4 uppercase px-2">{product.title}</h4>
+  className="product-item relative group"
+  key={product.id}
+  prefetch="intent"
+  to={variantUrl}
+>
+  {product.featuredImage && (
+    <Image
+      alt={product.featuredImage.altText || product.title}
+      aspectRatio="1/1.3"
+      data={product.featuredImage}
+      loading={loading}
+      style={{ borderRadius: "0", border: "#fff 1px solid" }}
+      sizes="(min-width: 45em) 400px, 100vw"
+    />
+  )}
+  
+  <div className='relative'>
+  <div className="absolute inset-0 bg-[#7A0202] transition-all duration-300 ease-in-out group-hover:w-full w-0 group-hover:text-white group-hover:z-10 z-0" />
 
-      {/* Display color and sizes */}
-      <p className="text-sm text-gray-600 px-2">
-        {displayColor} | {displaySizes}
-      </p>
+  <h4 className="mt-4 uppercase px-2 relative z-10">
+    {product.title}
+  </h4>
 
-      <small className="mb-4 px-2">
-         <ProductPrice
-                price={product.priceRange.minVariantPrice}
-                compareAtPrice={product.priceRange.maxVariantPrice}
-              />
-      </small>
-    </Link>
+  {/* Display color and sizes */}
+  <p className="text-sm text-gray-600 px-2 relative z-10">
+    {displayColor} | {displaySizes}
+  </p>
+
+  <small className="mb-4 px-2 relative z-10">
+    
+    <ProductPrice
+      price={product.priceRange.minVariantPrice}
+      compareAtPrice={product.priceRange.maxVariantPrice}
+    />
+  </small>
+</div>
+  {/* Background transition effect */}
+ </Link>
+
   );
 }
 

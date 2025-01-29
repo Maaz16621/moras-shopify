@@ -241,7 +241,7 @@ export default function Product() {
   }, []);
 
   return (
-    <div className="px-5 max-w-[75%] mx-auto mt-24">
+    <div className="px-5 md:max-w-[75%] mx-auto mt-24">
   {/* Main Product Section */}
   <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-white">
     {/* Left Section: Product Images */}
@@ -250,10 +250,7 @@ export default function Product() {
    
 
           {/* Main Image with Fade Animation */}
-          <div
-            ref={imageRef}
-            className="relative w-full h-102 overflow-hidden rounded-lg bg-gray-200"
-          >
+          <div ref={imageRef} className="relative h-102 overflow-hidden rounded-lg w-max-content mx-auto" style={{width: "max-content"}} >
                <div
             className="absolute top-0 left-0 w-1/3 h-full cursor-pointer"
             onClick={handlePrevImage}
@@ -392,7 +389,7 @@ export function RelatedProducts({ relatedProducts }) {
 
   return (
     <div className="mt-12 mb-12">
-      <h2 className="mb-5 text-2xl font-bold">Related Products</h2>
+      <h2 className="mb-5 text-2xl font-bold text-white">Related Products</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 transition-all">
         {relatedProducts && relatedProducts.length > 0 ? (
           relatedProducts.map((product) => (

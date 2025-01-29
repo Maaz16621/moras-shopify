@@ -84,7 +84,7 @@ function FooterMenu({ menu, primaryDomainUrl, publicStoreDomain }) {
           <FaFacebook />
         </a>
        
-        <a href="https://instagram.com" className="hover:text-gray-300" aria-label="Instagram">
+        <a href="https://www.instagram.com/morus._.clothing/" className="hover:text-gray-300" aria-label="Instagram">
           <FaInstagram />
         </a>
         <a href="https://whatsapp.com" className="hover:text-gray-300" aria-label="Instagram">

@@ -281,17 +281,17 @@ const [lastModel, setLastModel] = useState(false);
     </div>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow min-h-0">
       <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
-        <img src={image3} className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
+        <Image src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/mid3.webp?v=1738156612" className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
       </div>
       <div className="w-full flex justify-center items-center rounded-lg shadow-lg">
-        <img src={image2} className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
+        <Image src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/mid2.webp?v=1738156613" className="rounded-lg w-full sm:w-auto" alt="Dummy Image" />
       </div>
     </div>
   </div>
 
   {/* Image */}
   <div className="order-2 md:order-1 flex justify-center h-full items-center rounded-lg shadow-lg">
-    <img src={image1} className="h-full object-cover rounded-lg w-full md:w-auto" alt="Dummy Image" />
+    <Image src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/mid1.webp?v=1738156613" className="h-full object-cover rounded-lg w-full md:w-auto" alt="Dummy Image" />
   </div>
 </div>
 

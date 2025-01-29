@@ -341,6 +341,7 @@ const [lastModel, setLastModel] = useState(false);
   <h2 className="text-3xl font-bold text-center text-white mb-8">New Arrivals</h2>
   <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 text-white">
   {data.recommendedProducts.products.nodes.slice(0, 4).map((product, index) => (
+        <Link to={`/products/${product.handle}`}>
         <div key={product.id} className="group rounded-lg overflow-hidden">
           <div className="relative">
             <img 
@@ -358,8 +359,8 @@ const [lastModel, setLastModel] = useState(false);
             <h3 className="text-md md:text-xl font-semibold md:mb-0">{product.title}</h3>
             
           </div>
-         
         </div>
+      </Link>
       ))
 
     }

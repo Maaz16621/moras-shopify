@@ -26,7 +26,7 @@ export default defineConfig({
   },
   ssr: {
     ssr: {
-      noExternal: ['swiper/react', 'swiper/modules'],
+      noExternal: [],
     },
     optimizeDeps
     : {

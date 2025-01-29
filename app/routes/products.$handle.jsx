@@ -14,8 +14,7 @@ import {getVariantUrl} from '~/lib/variants';
 import {ProductPrice} from '~/components/ProductPrice';
 import {ProductImage} from '~/components/ProductImage';
 import {ProductForm} from '~/components/ProductForm';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+
 /**
  * @type {MetaFunction<typeof loader>}
  */

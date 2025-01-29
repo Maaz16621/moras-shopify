@@ -2,16 +2,9 @@ import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/mousewheel';
-import 'swiper/css/effect-creative';
+
 import { useState, useEffect } from 'react';
 
-// import required modules
-import { EffectCreative } from 'swiper/modules';
-
-import {   Mousewheel, Autoplay, Pagination } from 'swiper/modules';
 import image1 from '../assets/mid1.jpg';  // import image1
 import image2 from '../assets/mid2.jpg';  // import image2
 import image3 from '../assets/mid3.jpg';

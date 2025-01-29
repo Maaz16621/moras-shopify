@@ -82,7 +82,8 @@ export default function Collection() {
  *   product: ProductItemFragment;
  *   loading?: 'eager' | 'lazy';
  * }}
- */function ProductItem({product, loading}) {
+ */
+function ProductItem({product, loading}) {
   const variant = product.variants.nodes[0];
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
   return (

@@ -84,12 +84,12 @@ export default function Collection() {
     };
   }, []);
   return (
-    <div className="collection text-white">
+    <div className="collection text-white mb-6">
       <h1 className=' text-4xl text-center mb-2'>{collection.title}</h1>
       <p className=" text-center mb-4">{collection.description}</p>
       <PaginatedResourceSection
         connection={collection.products}
-        resourcesClassName="products-grid"
+        resourcesClassName="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         {({node: product, index}) => (
           <ProductItem

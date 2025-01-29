@@ -147,7 +147,7 @@ const [lastModel, setLastModel] = useState(false);
               className={`model-${index + 1} ${activeIndex === index ? 'active' : ''}`}
               oxygen-cache-control="public, max-age=31536000" // cache for 1 year
             >
-              <Image src={model.image} alt={model.text} />
+              <Image rel="preload" src={model.image} alt={model.text} />
             </div>
           ))}
         </div>
@@ -169,6 +169,7 @@ const [lastModel, setLastModel] = useState(false);
   key={models[activeIndex].image} 
   src={models[activeIndex].image} 
   alt={models[activeIndex].text} 
+  rel="preload"
   style={{
     animation: 'fadeIn 1s ease-in-out'
   }} 

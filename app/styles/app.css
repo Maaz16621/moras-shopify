@@ -1340,8 +1340,6 @@ button.close-outside {
 
 .product-item {
   display: flex;
-  width: -moz-fit-content;
-  width: fit-content;
   text-align: center;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;

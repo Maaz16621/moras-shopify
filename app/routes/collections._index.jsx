@@ -60,7 +60,7 @@ export default function Collections() {
       <h1 className="text-3xl font-bold text-center mb-6 ">Collections</h1>
       <PaginatedResourceSection
         connection={collections}
-        resourcesClassName="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        resourcesClassName="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mb-6"
       >
         {({ node: collection, index }) => (
           <CollectionItem

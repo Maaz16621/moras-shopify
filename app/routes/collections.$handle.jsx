@@ -9,11 +9,12 @@ import {
 import {useVariantUrl} from '~/lib/variants';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
 import { useEffect } from 'react';
+import { ProductPrice } from '~/components/ProductPrice';
 /**
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Hydrogen | ${data?.collection.title ?? ''} Collection`}];
+  return [{title: `Morus | ${data?.collection.title ?? ''} Collection`}];
 };
 
 /**
@@ -89,7 +90,7 @@ export default function Collection() {
       <p className=" text-center mb-4">{collection.description}</p>
       <PaginatedResourceSection
         connection={collection.products}
-        resourcesClassName="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        resourcesClassName="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mb-6"
       >
         {({node: product, index}) => (
           <ProductItem
@@ -174,7 +175,10 @@ function ProductItem({ product, loading }) {
       </p>
 
       <small className="mb-4 px-2">
-        <Money data={product.priceRange.minVariantPrice} />
+         <ProductPrice
+                price={product.priceRange.minVariantPrice}
+                compareAtPrice={product.priceRange.maxVariantPrice}
+              />
       </small>
     </Link>
   );
@@ -203,7 +207,9 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
       maxVariantPrice {
         ...MoneyProductItem
       }
+   
     }
+  
     variants(first: 10) {
       nodes {
         selectedOptions {

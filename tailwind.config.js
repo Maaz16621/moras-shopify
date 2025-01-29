@@ -18,6 +18,11 @@ export default {
           "100%": { opacity: 1 },
         },
       },
+      screens: {
+        '2xl': '1536px', // Default Tailwind 2xl
+        '3xl': '1800px', // Custom large screen
+        '4xl': '2200px', // Extra large screen
+      },
     },
   },
   plugins: [],

@@ -81,6 +81,12 @@ export default function Homepage() {
     { id: 2, image: 'https://cdn.shopify.com/s/files/1/0726/8538/8018/files/model2.webp?v=1738156377',  text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge",url:""},
     { id: 3, image: 'https://cdn.shopify.com/s/files/1/0726/8538/8018/files/model3.webp?v=1738156377', text: 'Black T-Shirt  for Men' , stuff:"Leather", size:"Medium, Large, XLarge",url:""},
   ]);
+  const categories = [
+    { name: "Collection 2025", link: "/collections/collection-2025" },
+    { name: "Jackets", link: "/collections/jackets" },
+    { name: "Hoodies", link: "/collections/hoodies" },
+    { name: "Sweat Shirts", link: "/collections/sweat-shirts" },
+  ];
 const [lastModel, setLastModel] = useState(false);
   const handleRightButtonClick = () => {
     
@@ -296,21 +302,19 @@ const [lastModel, setLastModel] = useState(false);
   </div>
   
   <div className="flex flex-wrap justify-start md:justify-end gap-4 w-full md:w-auto">
-  {["Collection 2025", "Jackets", "Hoodies", "Sweat Shirts"].map((category) => (
-    <button
-      key={category}
-      className="relative overflow-hidden border border-white text-white py-3 px-6 text-base md:text-lg rounded shadow-md transition-all duration-300 ease-in-out before:absolute before:inset-0 before:bg-[#7A0202] before:w-0 before:h-full before:transition-all before:duration-300 before:ease-in-out hover:before:w-full hover:text-white"
-    >
-      <span className="relative z-10">{category}</span>
-    </button>
-  ))}
-  <a
-    href="/collections"
-    className="mt-2 md:mt-0 px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#7A0202] to-[#A80202] rounded-lg shadow-md transition-all duration-300 ease-in-out hover:from-red-500 hover:to-[#7A0202] hover:shadow-lg"
-  >
-    See All
-  </a>
-</div>
+      {categories.map(({ name, link }) => (
+        <Link key={name} href={link} className='mt-4 '>
+          <a className="relative overflow-hidden border  border-white text-white py-3 mt-4 px-6 text-base md:text-lg rounded shadow-md transition-all duration-300 ease-in-out before:absolute before:inset-0 before:bg-[#7A0202] before:w-0 before:h-full before:transition-all before:duration-300 before:ease-in-out hover:before:w-full hover:text-white">
+            <span className="relative z-10">{name}</span>
+          </a>
+        </Link>
+      ))}
+      <Link href="/collections" className='mt-4'>
+        <a className="  px-6 py-3 text-lg font-semibold text-white   bg-gradient-to-r from-[#7A0202] to-red-500 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:from-red-500 hover:to-[#7A0202] hover:shadow-lg">
+          See All
+        </a>
+      </Link>
+    </div>
 
 </div>
 

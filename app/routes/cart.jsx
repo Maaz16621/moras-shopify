@@ -8,7 +8,7 @@ import {CartMain} from '~/components/CartMain';
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: `Hydrogen | Cart`}];
+  return [{title: `Mours | Cart`}];
 };
 
 /**
@@ -101,8 +101,9 @@ export default function Cart() {
   if (!rootData) return null;
 
   return (
-    <div className="cart">
-      <h1>Cart</h1>
+    <div className="cart  mt-[6rem] mx-auto text-white mb-6 w-[85%]">
+      <h1 className="text-3xl font-bold text-center mb-6 ">Cart</h1>
+  
       <Suspense fallback={<p>Loading cart ...</p>}>
         <Await
           resolve={rootData.cart}

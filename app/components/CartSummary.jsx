@@ -12,10 +12,12 @@ export function CartSummary({cart, layout}) {
   return (
     <div aria-labelledby="cart-summary" className={className}>
       <h4>Totals</h4>
-      <dl className="cart-subtotal">
-        <dt>Subtotal</dt>
+      <dl className="cart-subtotal mb-2">
+        <dt>Subtotal - {" "} </dt>
         <dd>
+        
           {cart.cost?.subtotalAmount?.amount ? (
+            
             <Money data={cart.cost?.subtotalAmount} />
           ) : (
             '-'

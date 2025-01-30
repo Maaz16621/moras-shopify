@@ -3,7 +3,7 @@ body {
    ;
   margin: 0;
   padding: 0;
-  background: radial-gradient(50% 50% at 50% 50%, #727272 0%, #353535 100%);
+  background:linear-gradient(180deg, #412C2C 20%, #130202 80%) !important;
 
 
 }

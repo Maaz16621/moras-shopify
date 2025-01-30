@@ -230,30 +230,30 @@ const [lastModel, setLastModel] = useState(false);
   >
     {/* Original Content */}
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
 
     {/* Duplicate Content for Seamless Loop */}
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
   </div>
 </div>
@@ -390,30 +390,30 @@ const [lastModel, setLastModel] = useState(false);
   >
     {/* Original Content */}
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
 
     {/* Duplicate Content for Seamless Loop */}
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
     <span className="text-white text-lg px-4">
-      FLAT 50% OFF ON ALL PRODUCTS - SHOP NOW
+      FLAT 65% OFF ON ALL PRODUCTS - SHOP NOW
     </span>
   </div>
 </div>

@@ -676,6 +676,7 @@ header .cta-icons > * {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  background:  radial-gradient(50% 50% at 50% 50%, #727272 0%, #353535 100%) !important; 
 }
 /* Make the slider container full screen */
 .slider-container {
@@ -1921,3 +1922,141 @@ border-bottom-right-radius: 12px;
   will-change: transform;
 }
 
+.policy-content h1 {
+  @apply text-3xl font-bold text-center mb-4 border-b pb-2;
+}
+
+.policy-content h2 {
+  @apply text-2xl font-semibold mt-6 mb-3;
+}
+
+.policy-content p {
+  @apply text-base leading-relaxed mb-4;
+}
+
+.policy-content ul {
+  @apply list-disc pl-6 mb-4;
+}
+
+.policy-content ol {
+  @apply list-decimal pl-6 mb-4;
+}
+
+.policy-content li {
+  @apply mb-2;
+}
+
+.policy-content hr {
+  @apply border-t border-gray-500 my-6;
+}
+
+
+/* Contact Section */
+.contact-section {
+  padding: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ z-index: 10;
+}
+
+.contact-container {
+  gap: 30px;
+  max-width: 1000px;
+  background-color: #fff;
+  padding: 20px;
+  min-width: 80vw;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info {
+  background:linear-gradient(180deg, #412C2C 20%, #130202 80%) !important;
+  border-radius: 10px;
+  padding: 30px;
+  color: #fff;
+}
+
+.contact-info h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.contact-info p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.contact-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-info li {
+  margin-bottom: 10px;
+}
+
+.contact-info li strong {
+  font-weight: bold;
+}
+
+/* Contact Form */
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  color: black;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #7A0202;
+  outline: none;
+}
+
+.btn-submit {
+  padding: 15px;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+/* Contact Header */
+.contact-header {
+  text-align: center;
+}
+
+.contact-header h1 {
+  font-size: 36px;
+  color: #ffffff;
+}
+
+.contact-header p {
+  font-size: 18px;
+  color: #ffffff;
+  line-height: 1.6;
+}

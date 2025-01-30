@@ -80,19 +80,17 @@ function FooterMenu({ menu, primaryDomainUrl, publicStoreDomain }) {
         })}
       </nav>
       <div className="social-icons flex justify-center md:justify-start space-x-4">
-        <a href="https://facebook.com" className="hover:text-gray-300" aria-label="Facebook">
+        <a href="https://www.facebook.com/people/Morus/61569867427731/ " className="hover:text-gray-300" aria-label="Facebook">
           <FaFacebook />
         </a>
        
         <a href="https://www.instagram.com/morus._.clothing/" className="hover:text-gray-300" aria-label="Instagram">
           <FaInstagram />
         </a>
-        <a href="https://whatsapp.com" className="hover:text-gray-300" aria-label="Instagram">
-          <FaWhatsapp />
-        </a>
-        <a href="https://twitter.com" className="hover:text-gray-300" aria-label="Twitter">
-          <FaX />
-        </a>
+        <a href="https://wa.me/923295884381" className="hover:text-gray-300" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+  <FaWhatsapp />
+</a>
+
       </div>
     </div>
   );

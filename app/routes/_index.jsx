@@ -349,7 +349,7 @@ const [lastModel, setLastModel] = useState(false);
         <Link to={`/products/${product.handle}`}>
         <div key={product.id} className="group rounded-lg overflow-hidden">
           <div className="relative">
-            <img 
+            <Image 
               src={product.images.nodes[0].url} 
               alt={product.images.nodes[0].altText || "Product image"} 
               className="w-full h-auto mb-4 rounded-lg" 
@@ -378,10 +378,10 @@ const [lastModel, setLastModel] = useState(false);
     <h2 className="text-3xl md:text-5xl font-bold text-white text-center">Hot Selling</h2>
   </div>
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <img src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/Image_1.png?v=1737723429" alt="bottom image 1" className="w-full h-auto rounded-xl"/>
+    <Image src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/Image_1.png?v=1737723429" alt="bottom image 1" className="w-full h-auto rounded-xl"/>
     <div className="grid grid-rows-2 items-stretch gap-6">
-      <img src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/Image_2.png?v=1737723428" alt="Image 2" className="w-full h-auto rounded-xl"/>
-      <img src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/Where_every_garment_is_a_masterpiece_crafted_with_love._1_1.png?v=1737723428" alt="Image 3" className="w-full h-auto rounded-xl"/>
+      <Image src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/Image_2.png?v=1737723428" alt="Image 2" className="w-full h-auto rounded-xl"/>
+      <Image src="https://cdn.shopify.com/s/files/1/0726/8538/8018/files/Where_every_garment_is_a_masterpiece_crafted_with_love._1_1.png?v=1737723428" alt="Image 3" className="w-full h-auto rounded-xl"/>
     </div>
   </div>
 </div>

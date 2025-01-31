@@ -55,22 +55,19 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
 
 export function HeaderMenu({ menu, primaryDomainUrl, viewport, publicStoreDomain, isLoggedIn, cart }) {
   const className = `header-menu-${viewport}`;
+  const categories = [
+    { name: "Casual Shirt", link: "/collections/casual-shirt" },
+    { name: "Jackets", link: "/collections/jackets" },
+    { name: "Hoodies", link: "/collections/hoodies" },
+    { name: "Sweat Shirts", link: "/collections/sweat-shirts" },
+  ];
   return (
     <nav className={className} role="navigation">
      
 
     
       <div className="header-menu-items">
-      <div className="header-menu-item">
-          <NavLink
-            end
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={'/'}
-          >
-            Home
-          </NavLink>
-        </div>
+     
         <div className="header-menu-item">
           <NavLink
             end
@@ -81,28 +78,21 @@ export function HeaderMenu({ menu, primaryDomainUrl, viewport, publicStoreDomain
             Collections
           </NavLink>
         </div>
-        <div className="header-menu-item">
-          <NavLink
-            end
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={'/about-us'}
-          >
-            About Us
-          </NavLink>
-        </div>
+        {categories.map((category, index) => (
+          <div key={index} className="header-menu-item">
+            <NavLink
+              end
+              prefetch="intent"
+              style={activeLinkStyle}
+              to={category.link}
+            >
+              {category.name}
+            </NavLink>
+          </div>
+        ))}
       
        
-        <div className="header-menu-item">
-          <NavLink
-            end
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={'/contact'}
-          >
-            Contact
-          </NavLink>
-        </div>
+     
       </div>
    
     </nav>

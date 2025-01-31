@@ -183,7 +183,7 @@ function ProductItem({ product, loading }) {
   <small className="mb-4 px-2 relative z-10 text-center flex justify-center items-center" >
   <ProductPrice
     price={product.priceRange.minVariantPrice}
-    compareAtPrice={product.priceRange.maxVariantPrice}
+    compareAtPrice={product.compareAtPriceRange.maxVariantPrice}
   />
 </small>
 </div>
@@ -192,7 +192,6 @@ function ProductItem({ product, loading }) {
 
   );
 }
-
 const PRODUCT_ITEM_FRAGMENT = `#graphql
   fragment MoneyProductItem on MoneyV2 {
     amount
@@ -216,9 +215,15 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
       maxVariantPrice {
         ...MoneyProductItem
       }
-   
     }
-  
+    compareAtPriceRange {
+      minVariantPrice {
+        ...MoneyProductItem
+      }
+      maxVariantPrice {
+        ...MoneyProductItem
+      }
+    }
     variants(first: 10) {
       nodes {
         selectedOptions {
@@ -229,7 +234,6 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
     }
   }
 `;
-
 // NOTE: https://shopify.dev/docs/api/storefront/2022-04/objects/collection
 const COLLECTION_QUERY = `#graphql
   ${PRODUCT_ITEM_FRAGMENT}

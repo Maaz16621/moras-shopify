@@ -358,23 +358,26 @@ export default function Product() {
 
       {/* Add to Cart Button */}
       <AddToCartButton
-        className="flex items-center w-48 justify-center gap-2 px-4 py-3 border-[1px] border-black bg-[#A80202] text-white rounded-md hover:bg-black hover:text-white transition-all"
-        disabled={!selectedVariant || !selectedVariant.availableForSale}
-        lines={
-          selectedVariant
-            ? [
-                {
-                  merchandiseId: selectedVariant.id,
-                  quantity: quantity,
-                  selectedVariant,
-                },
-              ]
-            : []
-        }
-      >
-        {selectedVariant?.availableForSale ? "Add to cart" : "Sold out"}
-        <FaShoppingBag />
-      </AddToCartButton>
+            className="flex items-center w-48 justify-center gap-2 px-4 py-3 border-[1px] border-black bg-[#A80202] text-white rounded-md hover:bg-black hover:text-white transition-all"
+            disabled={!selectedVariant || !selectedVariant.availableForSale}
+            lines={
+              selectedVariant
+                ? [
+                    {
+                      merchandiseId: selectedVariant.id,
+                      quantity: quantity,
+                      selectedVariant,
+                    },
+                  ]
+                : []
+            }
+          >
+            {selectedVariant?.availableForSale ? "Add to cart" : "Sold out"}
+            <FaShoppingBag />
+          </AddToCartButton>
+
+          {/* Buy it Now Button */}
+         
     </div>
   </div>
 

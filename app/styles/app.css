@@ -1638,7 +1638,6 @@ border-bottom-right-radius: 12px;
   width: auto;
   border-radius: 10px;
   overflow: hidden;
-  animation: fadeIn 2s ease-in-out;
   align-items: flex-end;
   display: flex;
   z-index: 1000;
@@ -2059,4 +2058,9 @@ border-bottom-right-radius: 12px;
   font-size: 18px;
   color: #ffffff;
   line-height: 1.6;
+}
+@media only screen and (max-width: 768px) {
+  .model, .model-1, .model-2, .model-3 {
+    animation: none;
+  }
 }

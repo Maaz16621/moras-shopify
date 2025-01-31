@@ -321,13 +321,13 @@ const [lastModel, setLastModel] = useState(false);
   
   <div className="flex flex-wrap justify-start md:justify-end gap-4 w-full md:w-auto">
       {categories.map(({ name, link }) => (
-        <Link key={name} href={link} className='mt-4 '>
+        <Link key={name} to={link} className='mt-4 '>
           <a className="relative overflow-hidden border  border-white text-white py-3 mt-4 px-6 text-base md:text-lg rounded shadow-md transition-all duration-300 ease-in-out before:absolute before:inset-0 before:bg-[#7A0202] before:w-0 before:h-full before:transition-all before:duration-300 before:ease-in-out hover:before:w-full hover:text-white">
             <span className="relative z-10">{name}</span>
           </a>
         </Link>
       ))}
-      <Link href="/collections" className='mt-4'>
+      <Link to="/collections" className='mt-4'>
         <a className="  px-6 py-3 text-lg font-semibold text-white   bg-gradient-to-r from-[#7A0202] to-red-500 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:from-red-500 hover:to-[#7A0202] hover:shadow-lg">
           See All
         </a>

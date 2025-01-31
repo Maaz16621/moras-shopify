@@ -147,7 +147,12 @@ const [lastModel, setLastModel] = useState(false);
               className={`model-${index + 1} ${activeIndex === index ? 'active' : ''}`}
               oxygen-cache-control="public, max-age=31536000" // cache for 1 year
             >
-              <Image rel="preload" src={model.image} alt={model.text} />
+            <Image 
+  rel="preload" 
+  src={model.image} 
+  alt={model.text} 
+  loading="eager" 
+/>
             </div>
           ))}
         </div>

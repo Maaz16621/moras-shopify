@@ -64,6 +64,7 @@ export async function loader(args) {
 
   const {storefront, env} = args.context;
 console.log('env.PUBLIC_CHECKOUT_DOMAIN:', env.PUBLIC_CHECKOUT_DOMAIN);
+console.log('env.PUBLIC_CHECKOUT_DOMAIN:', env.PUBLIC_CHECKOUT_DOMAIN);
   return defer({
     ...deferredData,
     ...criticalData,

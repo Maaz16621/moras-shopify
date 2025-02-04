@@ -4,6 +4,7 @@ import { Link } from '@remix-run/react';
 import {Await, useLoaderData} from '@remix-run/react';
 import { CartForm } from '@shopify/hydrogen';
 import { AddToCartButton } from '~/components/AddToCartButton';
+import { BuyItButton } from '~/components/BuyItButton';
 import {
   getSelectedProductOptions,
   Analytics,
@@ -377,7 +378,24 @@ export default function Product() {
           </AddToCartButton>
 
           {/* Buy it Now Button */}
-         
+          <BuyItButton
+            className="flex items-center w-48 justify-center gap-2 px-4 py-3 border-[1px] border-black bg-[#FF0000] text-white rounded-md hover:bg-black hover:text-white transition-all"
+            disabled={!selectedVariant || !selectedVariant.availableForSale}
+            lines={
+              selectedVariant
+                ? [
+                    {
+                      merchandiseId: selectedVariant.id,
+                      quantity: quantity,
+                      selectedVariant,
+                    },
+                  ]
+                : []
+            }
+            buyIt={true}
+          >
+            Buy it Now
+          </BuyItButton>
     </div>
   </div>
 

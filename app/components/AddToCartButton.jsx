@@ -49,10 +49,9 @@ export function AddToCartButton({
           <button
             type="submit"
             onClick={(e) => {
-              e.preventDefault();
+              onClick;
               handleAddToCart(); // Trigger the custom alert
-              fetcher.submit();
-              if (onClick) onClick(); // Call the passed onClick handler if any
+              
             }}
             disabled={disabled ?? fetcher.state !== "idle"}
             className={className}

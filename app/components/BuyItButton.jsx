@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { CartForm } from "@shopify/hydrogen";
-
+import { useRouteLoaderData } from '@remix-run/react';
 /**
  * @param {{
  *   analytics?: unknown;
@@ -12,25 +12,24 @@ import { CartForm } from "@shopify/hydrogen";
  *   className?: string;
  * }}
  */
-export function AddToCartButton({
+export function BuyItButton({
   analytics,
   children,
   disabled,
   lines,
   onClick,
-  style = {}, // Allow passing custom inline styles
-  className = "", // Allow passing custom class names
+  style = {}, // Allow custom inline styles
+  className = "", // Allow custom class names
 }) {
   const [alertVisible, setAlertVisible] = useState(false);
-
-  const handleAddToCart = () => {
-    // Custom alert logic
+  const data = useRouteLoaderData('root');
+  console.log(data);
+  const checkoutUrl = data.consent.checkoutDomain;
+  console.log(checkoutUrl);
+  const handleBuyNow = () => {
     setAlertVisible(true);
-
-    // Hide the alert after 2 seconds
-    setTimeout(() => {
-      setAlertVisible(false);
-    }, 2000);
+    setTimeout(() => setAlertVisible(false), 2000);
+    window.location.href = checkoutURL;
   };
 
   return (
@@ -49,19 +48,18 @@ export function AddToCartButton({
           <button
             type="submit"
             onClick={(e) => {
-              e.preventDefault();
-              handleAddToCart(); // Trigger the custom alert
-              fetcher.submit();
-              if (onClick) onClick(); // Call the passed onClick handler if any
+              onClick;
+              handleBuyNow();
+             
             }}
             disabled={disabled ?? fetcher.state !== "idle"}
-            className={className}
+            className={`bg-black text-white px-6 py-3 rounded-lg font-bold ${className}`}
             style={style}
           >
             {children}
           </button>
 
-          {/* Custom Alert with Fade Animation */}
+          {/* Custom Alert */}
           {alertVisible && (
             <div
               className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 mt-10 bg-[#7A0202] text-white py-2 px-4 rounded shadow-lg text-center w-full max-w-xs transition-opacity opacity-100 duration-300 ease-in-out"
@@ -69,7 +67,7 @@ export function AddToCartButton({
                 animation: "fadeIn 0.5s, fadeOut 1s 1.5s forwards",
               }}
             >
-              Item added to cart!
+              Redirecting to checkout...
             </div>
           )}
         </>
@@ -78,5 +76,4 @@ export function AddToCartButton({
   );
 }
 
-/** @typedef {import('@remix-run/react').FetcherWithComponents} FetcherWithComponents */
 /** @typedef {import('@shopify/hydrogen').OptimisticCartLineInput} OptimisticCartLineInput */

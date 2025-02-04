@@ -75,13 +75,15 @@ export async function action({request, context}) {
   const cartId = result?.cart?.id;
   const headers = cartId ? cart.setCartId(result.cart.id) : new Headers();
   const {cart: cartResult, errors, warnings} = result;
-
   const redirectTo = formData.get('redirectTo') ?? null;
   if (typeof redirectTo === 'string') {
     status = 303;
     headers.set('Location', redirectTo);
   }
-
+  if (inputs.redirectToCheckout === true ) {
+    status = 303;
+    headers.set('Location', result.cart.checkoutUrl)
+  }
   return json(
     {
       cart: cartResult,

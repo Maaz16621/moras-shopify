@@ -14,7 +14,7 @@ import {getVariantUrl} from '~/lib/variants';
 import {ProductPrice} from '~/components/ProductPrice';
 import {ProductImage} from '~/components/ProductImage';
 import {ProductForm} from '~/components/ProductForm';
-
+import { BuyItNowButton } from '~/components/BuyItNowButton';
 /**
  * @type {MetaFunction<typeof loader>}
  */
@@ -355,7 +355,7 @@ export default function Product() {
           </button>
         </div>
       </div>
-
+      <div className='flex flex-wrap gap-4 sm:flex-row'>
       {/* Add to Cart Button */}
       <AddToCartButton
             className="flex items-center w-48 justify-center gap-2 px-4 py-3 border-[1px] border-black bg-[#A80202] text-white rounded-md hover:bg-black hover:text-white transition-all"
@@ -377,7 +377,25 @@ export default function Product() {
           </AddToCartButton>
 
           {/* Buy it Now Button */}
-         
+          <BuyItNowButton
+            className="flex items-center w-48 justify-center gap-2 px-4 py-3 border-[1px] border-black bg-[#FF0000] text-white rounded-md hover:bg-black hover:text-white transition-all"
+            disabled={!selectedVariant || !selectedVariant.availableForSale}
+            lines={
+              selectedVariant
+                ? [
+                    {
+                      merchandiseId: selectedVariant.id,
+                      quantity: quantity,
+                      selectedVariant,
+                    },
+                  ]
+                : []
+            }
+            buyIt={selectedVariant.id}
+          >
+            Buy it Now
+          </BuyItNowButton>
+          </div>
     </div>
   </div>
 

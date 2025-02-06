@@ -278,7 +278,7 @@ export default function Product() {
             ))}
           </div>
           {/* Variant Images */}
-          <div className="flex justify-center gap-2">
+          <div className="flex flex-wrap justify-center gap-2">
             {variantImages.map((image, index) => (
               <img
                 key={index}
